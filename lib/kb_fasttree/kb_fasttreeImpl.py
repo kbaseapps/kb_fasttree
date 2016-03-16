@@ -8,7 +8,10 @@ class kb_fasttree:
     kb_fasttree
 
     Module Description:
-    A KBase module: kb_fasttree
+    ** A KBase module: kb_fasttree
+**
+** This module runs FastTree to make Trees for either DNA or PROTEIN MSAs
+**
     '''
 
     ######## WARNING FOR GEVENT USERS #######
@@ -26,3 +29,16 @@ class kb_fasttree:
         #BEGIN_CONSTRUCTOR
         #END_CONSTRUCTOR
         pass
+
+    def run_FastTree(self, ctx, params):
+        # ctx is the context object
+        # return variables are: returnVal
+        #BEGIN run_FastTree
+        #END run_FastTree
+
+        # At some point might do deeper type checking...
+        if not isinstance(returnVal, dict):
+            raise ValueError('Method run_FastTree return value ' +
+                             'returnVal is not type dict as required.')
+        # return the results
+        return [returnVal]

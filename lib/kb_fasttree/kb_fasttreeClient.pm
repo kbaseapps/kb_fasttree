@@ -12,6 +12,7 @@ eval {
     $get_time = sub { Time::HiRes::gettimeofday() };
 };
 
+use Bio::KBase::AuthToken;
 
 # Client version should match Impl version
 # This is a Semantic Version number,
@@ -25,7 +26,10 @@ kb_fasttree::kb_fasttreeClient
 =head1 DESCRIPTION
 
 
-A KBase module: kb_fasttree
+** A KBase module: kb_fasttree
+**
+** This module runs FastTree to make Trees for either DNA or PROTEIN MSAs
+**
 
 
 =cut
@@ -74,6 +78,28 @@ sub new
 	push(@{$self->{headers}}, 'Kbrpc-Errordest', $self->{kbrpc_error_dest});
     }
 
+    #
+    # This module requires authentication.
+    #
+    # We create an auth token, passing through the arguments that we were (hopefully) given.
+
+    {
+	my $token = Bio::KBase::AuthToken->new(@args);
+	
+	if (!$token->error_message)
+	{
+	    $self->{token} = $token->token;
+	    $self->{client}->{token} = $token->token;
+	}
+        else
+        {
+	    #
+	    # All methods in this module require authentication. In this case, if we
+	    # don't have a token, we can't continue.
+	    #
+	    die "Authentication failed: " . $token->error_message;
+	}
+    }
 
     my $ua = $self->{client}->ua;	 
     my $timeout = $ENV{CDMI_TIMEOUT} || (30 * 60);	 
@@ -84,12 +110,138 @@ sub new
 }
 
 
+
+
+=head2 run_FastTree
+
+  $return = $obj->run_FastTree($params)
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+$params is a kb_fasttree.FastTree_Params
+$return is a kb_fasttree.FastTree_Output
+FastTree_Params is a reference to a hash where the following keys are defined:
+	workspace_name has a value which is a kb_fasttree.workspace_name
+	desc has a value which is a string
+	input_name has a value which is a kb_fasttree.data_obj_name
+	output_name has a value which is a kb_fasttree.data_obj_name
+	intree has a value which is a kb_fasttree.data_obj_name
+	fastest has a value which is an int
+	pseudo has a value which is an int
+	gtr has a value which is an int
+	wag has a value which is an int
+	noml has a value which is an int
+	nome has a value which is an int
+	cat has a value which is an int
+	nocat has a value which is an int
+	gamma has a value which is an int
+workspace_name is a string
+data_obj_name is a string
+FastTree_Output is a reference to a hash where the following keys are defined:
+	report_name has a value which is a kb_fasttree.data_obj_name
+	report_ref has a value which is a kb_fasttree.data_obj_ref
+data_obj_ref is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+$params is a kb_fasttree.FastTree_Params
+$return is a kb_fasttree.FastTree_Output
+FastTree_Params is a reference to a hash where the following keys are defined:
+	workspace_name has a value which is a kb_fasttree.workspace_name
+	desc has a value which is a string
+	input_name has a value which is a kb_fasttree.data_obj_name
+	output_name has a value which is a kb_fasttree.data_obj_name
+	intree has a value which is a kb_fasttree.data_obj_name
+	fastest has a value which is an int
+	pseudo has a value which is an int
+	gtr has a value which is an int
+	wag has a value which is an int
+	noml has a value which is an int
+	nome has a value which is an int
+	cat has a value which is an int
+	nocat has a value which is an int
+	gamma has a value which is an int
+workspace_name is a string
+data_obj_name is a string
+FastTree_Output is a reference to a hash where the following keys are defined:
+	report_name has a value which is a kb_fasttree.data_obj_name
+	report_ref has a value which is a kb_fasttree.data_obj_ref
+data_obj_ref is a string
+
+
+=end text
+
+=item Description
+
+Method for Tree building of either DNA or PROTEIN sequences
+**
+**        input_type: MSA
+**        output_type: Tree
+
+=back
+
+=cut
+
+ sub run_FastTree
+{
+    my($self, @args) = @_;
+
+# Authentication: required
+
+    if ((my $n = @args) != 1)
+    {
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error =>
+							       "Invalid argument count for function run_FastTree (received $n, expecting 1)");
+    }
+    {
+	my($params) = @args;
+
+	my @_bad_arguments;
+        (ref($params) eq 'HASH') or push(@_bad_arguments, "Invalid type for argument 1 \"params\" (value was \"$params\")");
+        if (@_bad_arguments) {
+	    my $msg = "Invalid arguments passed to run_FastTree:\n" . join("", map { "\t$_\n" } @_bad_arguments);
+	    Bio::KBase::Exceptions::ArgumentValidationError->throw(error => $msg,
+								   method_name => 'run_FastTree');
+	}
+    }
+
+    my $result = $self->{client}->call($self->{url}, $self->{headers}, {
+	method => "kb_fasttree.run_FastTree",
+	params => \@args,
+    });
+    if ($result) {
+	if ($result->is_error) {
+	    Bio::KBase::Exceptions::JSONRPC->throw(error => $result->error_message,
+					       code => $result->content->{error}->{code},
+					       method_name => 'run_FastTree',
+					       data => $result->content->{error}->{error} # JSON::RPC::ReturnObject only supports JSONRPC 1.1 or 1.O
+					      );
+	} else {
+	    return wantarray ? @{$result->result} : $result->result->[0];
+	}
+    } else {
+        Bio::KBase::Exceptions::HTTP->throw(error => "Error invoking method run_FastTree",
+					    status_line => $self->{client}->status_line,
+					    method_name => 'run_FastTree',
+				       );
+    }
+}
+ 
   
 
 sub version {
     my ($self) = @_;
     my $result = $self->{client}->call($self->{url}, $self->{headers}, {
-        method => "${last_module.module_name}.version",
+        method => "kb_fasttree.version",
         params => [],
     });
     if ($result) {
@@ -97,16 +249,16 @@ sub version {
             Bio::KBase::Exceptions::JSONRPC->throw(
                 error => $result->error_message,
                 code => $result->content->{code},
-                method_name => '${last_method.name}',
+                method_name => 'run_FastTree',
             );
         } else {
             return wantarray ? @{$result->result} : $result->result->[0];
         }
     } else {
         Bio::KBase::Exceptions::HTTP->throw(
-            error => "Error invoking method ${last_method.name}",
+            error => "Error invoking method run_FastTree",
             status_line => $self->{client}->status_line,
-            method_name => '${last_method.name}',
+            method_name => 'run_FastTree',
         );
     }
 }
@@ -140,6 +292,193 @@ sub _validate_version {
 }
 
 =head1 TYPES
+
+
+
+=head2 workspace_name
+
+=over 4
+
+
+
+=item Description
+
+** The workspace object refs are of form:
+**
+**    objects = ws.get_objects([{'ref': params['workspace_id']+'/'+params['obj_name']}])
+**
+** "ref" means the entire name combining the workspace id and the object name
+** "id" is a numerical identifier of the workspace or object, and should just be used for workspace
+** "name" is a string identifier of a workspace or object.  This is received from Narrative.
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a string
+</pre>
+
+=end html
+
+=begin text
+
+a string
+
+=end text
+
+=back
+
+
+
+=head2 data_obj_name
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a string
+</pre>
+
+=end html
+
+=begin text
+
+a string
+
+=end text
+
+=back
+
+
+
+=head2 data_obj_ref
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a string
+</pre>
+
+=end html
+
+=begin text
+
+a string
+
+=end text
+
+=back
+
+
+
+=head2 FastTree_Params
+
+=over 4
+
+
+
+=item Description
+
+FastTree Input Params
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+workspace_name has a value which is a kb_fasttree.workspace_name
+desc has a value which is a string
+input_name has a value which is a kb_fasttree.data_obj_name
+output_name has a value which is a kb_fasttree.data_obj_name
+intree has a value which is a kb_fasttree.data_obj_name
+fastest has a value which is an int
+pseudo has a value which is an int
+gtr has a value which is an int
+wag has a value which is an int
+noml has a value which is an int
+nome has a value which is an int
+cat has a value which is an int
+nocat has a value which is an int
+gamma has a value which is an int
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+workspace_name has a value which is a kb_fasttree.workspace_name
+desc has a value which is a string
+input_name has a value which is a kb_fasttree.data_obj_name
+output_name has a value which is a kb_fasttree.data_obj_name
+intree has a value which is a kb_fasttree.data_obj_name
+fastest has a value which is an int
+pseudo has a value which is an int
+gtr has a value which is an int
+wag has a value which is an int
+noml has a value which is an int
+nome has a value which is an int
+cat has a value which is an int
+nocat has a value which is an int
+gamma has a value which is an int
+
+
+=end text
+
+=back
+
+
+
+=head2 FastTree_Output
+
+=over 4
+
+
+
+=item Description
+
+FastTree Output
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+report_name has a value which is a kb_fasttree.data_obj_name
+report_ref has a value which is a kb_fasttree.data_obj_ref
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+report_name has a value which is a kb_fasttree.data_obj_name
+report_ref has a value which is a kb_fasttree.data_obj_ref
+
+
+=end text
+
+=back
 
 
 
