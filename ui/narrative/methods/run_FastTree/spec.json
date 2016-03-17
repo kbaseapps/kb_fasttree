@@ -169,8 +169,8 @@
     "behavior": {
         "service-mapping": {
             "url": "",
-            "name": "kb_muscle",
-            "method": "MUSCLE_nuc",
+            "name": "kb_fasttree",
+            "method": "run_FastTree",
             "input_mapping": [
                 {
                     "narrative_system_variable": "workspace",
