@@ -64,7 +64,7 @@
             "default_values": [ "" ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checkbox_value": "1",
+		"checked_value": "1",
 		"unchecked_value": "0"
             }
         },
@@ -76,7 +76,7 @@
             "default_values": [ "" ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checkbox_value": "1",
+		"checked_value": "1",
 		"unchecked_value": "0"
             }
         },
@@ -88,7 +88,7 @@
             "default_values": [ "" ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checkbox_value": "1",
+		"checked_value": "1",
 		"unchecked_value": "0"
             }
         },
@@ -100,7 +100,7 @@
             "default_values": [ "" ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checkbox_value": "1",
+		"checked_value": "1",
 		"unchecked_value": "0"
             }
         },
@@ -112,7 +112,7 @@
             "default_values": [ "" ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checkbox_value": "1",
+		"checked_value": "1",
 		"unchecked_value": "0"
             }
         },
@@ -124,7 +124,7 @@
             "default_values": [ "" ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checkbox_value": "1",
+		"checked_value": "1",
 		"unchecked_value": "0"
             }
         },
@@ -148,7 +148,7 @@
             "default_values": [ "" ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checkbox_value": "1",
+		"checked_value": "1",
 		"unchecked_value": "0"
             }
         },
@@ -160,7 +160,7 @@
             "default_values": [ "" ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checkbox_value": "1",
+		"checked_value": "1",
 		"unchecked_value": "0"
             }
         }

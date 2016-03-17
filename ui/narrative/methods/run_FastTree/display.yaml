@@ -44,6 +44,11 @@ parameters :
             Output Tree
         short-hint : |
             Phylogenetic Tree output.  Data type is Tree.
+    intree:
+        ui-name : |
+            Starting Tree
+        short-hint : |
+            Initial Tree Topology
     fastest:
         ui-name : |
             Fastest?
@@ -78,7 +83,7 @@ parameters :
         ui-name : |
             Num Rate Catgories (CAT)
         short-hint : |
-	    number of rate categories of sites (default 20)
+            number of rate categories of sites (default 20)
     nocat:
         ui-name : |
             No Cat?
