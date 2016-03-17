@@ -1,0 +1,253 @@
+{
+    "ver": "0.0.1",
+    "authors": [
+        "dylan"
+    ],
+    "contact": "help@kbase.us",
+    "visible": true,
+    "categories": ["active","comparative_genomics"],
+    "widgets": {
+        "input": null,
+        "output": "kbaseReportView"
+    },
+    "parameters": [ 
+        {
+            "id": "desc",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+	    "text_options": {
+	        "is_output_name": true
+	    }
+        },
+        {
+            "id": "input_name",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ "KBaseTrees.MSA" ]
+            }
+        },
+        {
+            "id": "output_name",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ "KBaseTrees.Tree" ],
+		"is_output_name": true		  
+            }
+        },
+        {
+            "id": "intree",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ "KBaseTrees.Tree" ]
+            }
+        },
+        {
+            "id": "fastest",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+		"checkbox_value": "1",
+		"unchecked_value": "0"
+            }
+        },
+        {
+            "id": "pseudo",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+		"checkbox_value": "1",
+		"unchecked_value": "0"
+            }
+        },
+        {
+            "id": "gtr",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+		"checkbox_value": "1",
+		"unchecked_value": "0"
+            }
+        },
+        {
+            "id": "wag",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+		"checkbox_value": "1",
+		"unchecked_value": "0"
+            }
+        },
+        {
+            "id": "noml",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+		"checkbox_value": "1",
+		"unchecked_value": "0"
+            }
+        },
+        {
+            "id": "nome",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+		"checkbox_value": "1",
+		"unchecked_value": "0"
+            }
+        },
+        {
+            "id": "cat",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "20" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "int",
+		"min_integer" : 1
+            }
+        },
+        {
+            "id": "nocat",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+		"checkbox_value": "1",
+		"unchecked_value": "0"
+            }
+        },
+        {
+            "id": "gamma",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+		"checkbox_value": "1",
+		"unchecked_value": "0"
+            }
+        }
+
+    ],
+    "behavior": {
+        "service-mapping": {
+            "url": "",
+            "name": "kb_muscle",
+            "method": "MUSCLE_nuc",
+            "input_mapping": [
+                {
+                    "narrative_system_variable": "workspace",
+                    "target_property": "workspace_name"
+                },
+                {
+                    "input_parameter": "desc",
+                    "target_property": "desc"
+                },
+                {
+                    "input_parameter": "input_name",
+                    "target_property": "input_name"
+                },
+                {
+                    "input_parameter": "output_name",
+                    "target_property": "output_name"
+                },
+                {
+                    "input_parameter": "intree",
+                    "target_property": "intree"
+                },
+                {
+                    "input_parameter": "fastest",
+                    "target_property": "fastest"
+                },
+                {
+                    "input_parameter": "pseudo",
+                    "target_property": "pseudo"
+                },
+                {
+                    "input_parameter": "gtr",
+                    "target_property": "gtr"
+                },
+                {
+                    "input_parameter": "wag",
+                    "target_property": "wag"
+                },
+                {
+                    "input_parameter": "noml",
+                    "target_property": "noml"
+                },
+                {
+                    "input_parameter": "nome",
+                    "target_property": "nome"
+                },
+                {
+                    "input_parameter": "cat",
+                    "target_property": "cat"
+                },
+                {
+                    "input_parameter": "nocat",
+                    "target_property": "nocat"
+                },
+                {
+                    "input_parameter": "gamma",
+                    "target_property": "gamma"
+                }
+            ],
+            "output_mapping": [
+                {
+                    "narrative_system_variable": "workspace",
+                    "target_property": "workspace_name"
+                },
+                {
+                    "service_method_output_path": [0, "report_name"],
+                    "target_property": "report_name"
+                },
+                {
+                    "service_method_output_path": [0, "report_ref"],
+                    "target_property": "report_ref"
+                },
+                {
+		    "constant_value": "16",
+                    "target_property": "report_window_line_height"
+                }
+            ]
+        }
+    },
+    "job_id_output_field": "docker"
+}

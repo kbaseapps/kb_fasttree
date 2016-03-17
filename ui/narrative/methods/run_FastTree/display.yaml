@@ -1,0 +1,98 @@
+#
+# define display information
+#
+name: FastTree2
+tooltip: |
+    Build a Phylogenetic reconstruction from a Multiple Sequence Alignment (MSA) with FastTree2
+screenshots: []
+
+icon: fasttree-purple.png
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    desc:
+        ui-name : |
+            Tree Description
+        short-hint : |
+            Describe Contents of the Output Tree
+        placeholder: |
+            Enter Description
+    input_name:
+        ui-name : |
+            Input MSA
+        short-hint : |
+            Multiple Sequence Alignment to build Tree from.  Data type is MSA.
+    output_name:
+        ui-name : |
+            Output Tree
+        short-hint : |
+            Phylogenetic Tree output.  Data type is Tree.
+    fastest:
+        ui-name : |
+            Fastest?
+        short-hint : |
+            Speed up the neighbor joining phase & reduce memory usage (recommended for >50,000 sequences)
+    pseudo:
+        ui-name : |
+            Pseudo Count?
+        short-hint : |
+            Use pseudocounts (recommended for highly gapped sequences)
+    gtr:
+        ui-name : |
+            GTR?
+        short-hint : |
+            Generalized time-reversible model (nucleotide alignments only)
+    wag:
+        ui-name : |
+            WAG?
+        short-hint : |
+            Whelan-And-Goldman 2001 model (amino acid alignments only)
+    noml:
+        ui-name : |
+            No ML?
+        short-hint : |
+            Turn off maximum-likelihood
+    nome:
+        ui-name : |
+            No ME?
+        short-hint : |
+            Turn off minimum-evolution NNIs and SPRs
+    cat:
+        ui-name : |
+            Num Rate Catgories (CAT)
+        short-hint : |
+	    number of rate categories of sites (default 20)
+    nocat:
+        ui-name : |
+            No Cat?
+        short-hint : |
+            Use Constant Rates (instead of above Num Rate Categories)
+    gamma:
+        ui-name : |
+            Gamma
+        short-hint : |
+            After optimizing the tree under the CAT approximation, rescale the lengths to optimize the Gamma20 likelihood
+
+description : |
+    <p>This method builds a Phylogenetic Tree reconstruction from a Multiple Sequence Alignment (MSA) of either nucleotide or protein sequences using FastTree2.</p>
+    <p>FastTree2.1.8 from http://www.microbesonline.org/fasttree/</p>
+    <p>Please cite:</p>
+    <p><A HREF="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0009490">Price, M.N., Dehal, P.S., and Arkin, A.P. (2010) FastTree 2 -- Approximately Maximum-Likelihood Trees for Large Alignments. PLoS ONE, 5(3):e9490.</A> doi:10.1371/journal.pone.0009490</p>
+    <p><A HREF="http://mbe.oxfordjournals.org/content/26/7/1641.full">Price, M.N., Dehal, P.S., and Arkin, A.P. (2009) FastTree: Computing Large Minimum-Evolution Trees with Profiles instead of a Distance Matrix. Molecular Biology and Evolution 26:1641-1650.</A> doi:10.1093/molbev/msp077</p>
