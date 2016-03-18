@@ -32,7 +32,7 @@ class kb_fasttree:
     Module Description:
     ** A KBase module: kb_fasttree
 **
-** This module runs FastTree to make Trees of either DNA or PROTEIN sequences
+** This module runs FastTree to make Trees for either DNA or PROTEIN MSAs
 **
     '''
 
@@ -218,7 +218,6 @@ class kb_fasttree:
 
         #END_CONSTRUCTOR
         pass
-
 
     def run_FastTree(self, ctx, params):
         # ctx is the context object

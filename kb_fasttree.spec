@@ -28,6 +28,7 @@ module kb_fasttree {
 	string         desc;
 	data_obj_name  input_name;
         data_obj_name  output_name;
+	int            species_tree_flag;  /* boolean */
 	data_obj_name  intree;
 	int            fastest;  /* boolean */
 	int            pseudo;   /* boolean */

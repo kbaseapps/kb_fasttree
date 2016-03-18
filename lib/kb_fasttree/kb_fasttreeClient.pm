@@ -130,6 +130,7 @@ FastTree_Params is a reference to a hash where the following keys are defined:
 	desc has a value which is a string
 	input_name has a value which is a kb_fasttree.data_obj_name
 	output_name has a value which is a kb_fasttree.data_obj_name
+	species_tree_flag has a value which is an int
 	intree has a value which is a kb_fasttree.data_obj_name
 	fastest has a value which is an int
 	pseudo has a value which is an int
@@ -160,6 +161,7 @@ FastTree_Params is a reference to a hash where the following keys are defined:
 	desc has a value which is a string
 	input_name has a value which is a kb_fasttree.data_obj_name
 	output_name has a value which is a kb_fasttree.data_obj_name
+	species_tree_flag has a value which is an int
 	intree has a value which is a kb_fasttree.data_obj_name
 	fastest has a value which is an int
 	pseudo has a value which is an int
@@ -405,6 +407,7 @@ workspace_name has a value which is a kb_fasttree.workspace_name
 desc has a value which is a string
 input_name has a value which is a kb_fasttree.data_obj_name
 output_name has a value which is a kb_fasttree.data_obj_name
+species_tree_flag has a value which is an int
 intree has a value which is a kb_fasttree.data_obj_name
 fastest has a value which is an int
 pseudo has a value which is an int
@@ -427,6 +430,7 @@ workspace_name has a value which is a kb_fasttree.workspace_name
 desc has a value which is a string
 input_name has a value which is a kb_fasttree.data_obj_name
 output_name has a value which is a kb_fasttree.data_obj_name
+species_tree_flag has a value which is an int
 intree has a value which is a kb_fasttree.data_obj_name
 fastest has a value which is an int
 pseudo has a value which is an int
