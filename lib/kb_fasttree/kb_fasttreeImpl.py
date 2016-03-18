@@ -285,10 +285,11 @@ class kb_fasttree:
             NUC_MSA_pattern = re.compile("^[\.-_ACGTUXNRYSWKMBDHVacgtuxnryswkmbdhv \t\n]+$")
             all_seqs_nuc = True
             for row_id in row_order:
-                self.log(console, row_id+": "+MSA_in['alignment'][row_id])
-                if not NUC_MSA_pattern.match(MSA_in['alignment'][row_id]):
-                    all_seqs_nuc = False
-                    break
+                self.log(console, row_id+": '"+MSA_in['alignment'][row_id]+"'")
+# HERE DEBUG
+#                if not NUC_MSA_pattern.match(MSA_in['alignment'][row_id]):
+#                    all_seqs_nuc = False
+#                    break
 
         # Missing proper input_type
         #
