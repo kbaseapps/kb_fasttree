@@ -285,6 +285,7 @@ class kb_fasttree:
             NUC_MSA_pattern = re.compile("^[\.-_ACGTUXNRYSWKMBDHVacgtuxnryswkmbdhv \t]+$")
             all_seqs_nuc = True
             for row_id in row_order:
+                self.log(console, row_id+": "+MSA_in['alignment'][row_id])
                 if not NUC_MSA_pattern.match(MSA_in['alignment'][row_id]):
                     all_seqs_nuc = False
                     break
@@ -369,7 +370,7 @@ class kb_fasttree:
         if 'gamma' in params and params['gamma'] != None and params['gamma'] != 0:
             fasttree_cmd.append('-gamma')
 
-        fasttree_cmd.append('<')
+#        fasttree_cmd.append('<')
         fasttree_cmd.append(input_MSA_file_path)
         fasttree_cmd.append('>')
         fasttree_cmd.append(output_newick_file_path)
