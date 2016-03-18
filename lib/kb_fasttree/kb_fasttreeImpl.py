@@ -282,7 +282,7 @@ class kb_fasttree:
 
             # Determine whether nuc or protein sequences
             #
-            NUC_MSA_pattern = re.compile("^[\.-_ACGTUXNRYSWKMBDHVacgtuxnryswkmbdhv \t]+$")
+            NUC_MSA_pattern = re.compile("^[\.-_ACGTUXNRYSWKMBDHVacgtuxnryswkmbdhv \t\n]+$")
             all_seqs_nuc = True
             for row_id in row_order:
                 self.log(console, row_id+": "+MSA_in['alignment'][row_id])
