@@ -46,6 +46,18 @@
             }
         },
         {
+            "id": "species_tree_flag",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+		"checked_value": "1",
+		"unchecked_value": "0"
+            }
+        },
+        {
             "id": "intree",
             "optional": true,
             "advanced": true,
@@ -187,6 +199,10 @@
                 {
                     "input_parameter": "output_name",
                     "target_property": "output_name"
+                },
+                {
+                    "input_parameter": "species_tree_flag",
+                    "target_property": "species_tree_flag"
                 },
                 {
                     "input_parameter": "intree",

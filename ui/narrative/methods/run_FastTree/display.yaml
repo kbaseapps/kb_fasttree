@@ -44,6 +44,11 @@ parameters :
             Output Tree
         short-hint : |
             Phylogenetic Tree output.  Data type is Tree.
+    species_tree_flag:
+        ui-name : |
+            Species Tree?
+        short-hint : |
+            Is tree a Species Tree (default = Gene Tree)
     intree:
         ui-name : |
             Starting Tree
