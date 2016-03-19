@@ -331,8 +331,8 @@ class kb_fasttree:
 
 
         # DEBUG: check the MSA file contents
-        with open(input_tree_file_path, 'r', 0) as input_tree_file_handle:
-            for line in input_tree_file_handle:
+        with open(input_MSA_file_path, 'r', 0) as input_MSA_file_handle:
+            for line in input_MSA_file_handle:
                 self.log(console,"MSA_LINE: '"+line+"'")
 
 
