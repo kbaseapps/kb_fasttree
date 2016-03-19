@@ -276,9 +276,16 @@ class kb_fasttree:
             for row_id in row_order:
                 #self.log(console,"row_id: '"+row_id+"'")  # DEBUG
                 #self.log(console,"alignment: '"+MSA_in['alignment'][row_id]+"'")  # DEBUG
-                record = SeqRecord(Seq(MSA_in['alignment'][row_id]), id=row_id, description=default_row_labels[row_id])
-                records.append(record)
-            SeqIO.write(records, input_MSA_file_path, "fasta")
+            # using SeqIO makes multiline sequences.  FastTree doesn't like
+                #record = SeqRecord(Seq(MSA_in['alignment'][row_id]), id=row_id, description=default_row_labels[row_id])
+                #records.append(record)
+            #SeqIO.write(records, input_MSA_file_path, "fasta")
+                records.extend(['>'+row_id,
+                                MSA_in['alignment'][row_id]
+                               ])
+            with open(input_MSA_file_path,'w',0) as input_MSA_file_handle:
+                input_MSA_file_handle.write("\n".join(records)+"\n")
+
 
             # Determine whether nuc or protein sequences
             #
@@ -293,7 +300,7 @@ class kb_fasttree:
         # Missing proper input_type
         #
         else:
-            raise ValueError('Cannot yet handle input_name type of: '+type_name)            
+            raise ValueError('Cannot yet handle input_name type of: '+type_name)
             sys.exit(0)
 
 
@@ -321,13 +328,6 @@ class kb_fasttree:
             else:
                 raise ValueError('Cannot yet handle intree type of: '+type_name)
                 sys.exit(0)
-
-
-        # check that input MSA correctly structured
-        #
-        input_MSA_file_handle = open (input_MSA_file_path, 'r', 0)
-        for line in input_MSA_file_handle:
-            self.log (console, "MSA: '"+line+"'\n")
 
 
         ### Construct the command
@@ -436,6 +436,7 @@ class kb_fasttree:
 
         with open(output_newick_file_path,'r',0) as output_newick_file_handle:
             output_newick_buf = output_newick_file_handle.read()
+        output_newick_buf = output_newick_buf.rstrip()
         
         # Extract info from MSA
         #
