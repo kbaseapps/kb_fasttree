@@ -392,11 +392,12 @@ class kb_fasttree:
 
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
-#                             stdout = subprocess.PIPE, \  # DEBUG
-                             stdout = subprocess.STDOUT, \
+                             stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
-                             shell = False)  # DEBUG
-#                             shell = True)
+                             shell = False)
+# DEBUG
+#                             stdout = subprocess.PIPE, \  # DEBUG
+#                             shell = False)
 
         while True:
             line = p.stdout.readline()
