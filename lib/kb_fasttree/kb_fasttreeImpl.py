@@ -331,9 +331,9 @@ class kb_fasttree:
 
 
         # DEBUG: check the MSA file contents
-#        with open(input_tree_file_path, 'r', 0) as input_tree_file_handle:
-#            for line in input_tree_file_handfile:
-#                self.log(console,"MSA_LINE: '"+line+"'")
+        with open(input_tree_file_path, 'r', 0) as input_tree_file_handle:
+            for line in input_tree_file_handle:
+                self.log(console,"MSA_LINE: '"+line+"'")
 
 
 
@@ -397,14 +397,12 @@ class kb_fasttree:
 #        report += "\n"+'running FASTTREE:'+"\n"
 #        report += '    '+' '.join(fasttree_cmd)+"\n"
 
+        # FastTree requires shell=True
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
                              stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
-                             shell = True)    # FastTree requires shell
-# DEBUG
-#                             stdout = subprocess.PIPE, \  # DEBUG
-#                             shell = False)
+                             shell = True)
 
         while True:
             line = p.stdout.readline()
