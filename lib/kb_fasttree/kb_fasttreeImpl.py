@@ -323,11 +323,18 @@ class kb_fasttree:
                 input_tree_file_path = os.path.join(self.scratch, params['intree']+".newick")
                 self.log(console, 'writing intree file: '+input_tree_file_path)
                 input_tree_file_handle = open(input_tree_file_path, 'w', 0)
-                input_tree_file_handfle.write(tree_in['tree'])
-                input_tree_file_handfle.close()
+                input_tree_file_handle.write(tree_in['tree'])
+                input_tree_file_handle.close()
             else:
                 raise ValueError('Cannot yet handle intree type of: '+type_name)
                 sys.exit(0)
+
+
+        # DEBUG: check the MSA file contents
+#        with open(input_tree_file_path, 'r', 0) as input_tree_file_handle:
+#            for line in input_tree_file_handfile:
+#                self.log(console,"MSA_LINE: '"+line+"'")
+
 
 
         ### Construct the command
@@ -394,7 +401,7 @@ class kb_fasttree:
                              cwd = self.scratch, \
                              stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
-                             shell = True)
+                             shell = True)    # FastTree requires shell
 # DEBUG
 #                             stdout = subprocess.PIPE, \  # DEBUG
 #                             shell = False)
