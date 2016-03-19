@@ -394,7 +394,7 @@ class kb_fasttree:
                              cwd = self.scratch, \
                              stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
-                             shell = False)
+                             shell = True)
 # DEBUG
 #                             stdout = subprocess.PIPE, \  # DEBUG
 #                             shell = False)
