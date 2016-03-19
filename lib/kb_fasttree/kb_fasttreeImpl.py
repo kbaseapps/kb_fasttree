@@ -331,9 +331,9 @@ class kb_fasttree:
 
 
         # DEBUG: check the MSA file contents
-        with open(input_MSA_file_path, 'r', 0) as input_MSA_file_handle:
-            for line in input_MSA_file_handle:
-                self.log(console,"MSA_LINE: '"+line+"'")
+#        with open(input_MSA_file_path, 'r', 0) as input_MSA_file_handle:
+#            for line in input_MSA_file_handle:
+#                self.log(console,"MSA_LINE: '"+line+"'")
 
 
 
@@ -359,8 +359,6 @@ class kb_fasttree:
         # options
         fasttree_cmd.append('-quiet')
         fasttree_cmd.append('-nopr')
-        if all_seqs_nuc:
-            fasttree_cmd.append('-nt')
         if 'fastest' in params and params['fastest'] != None and params['fastest'] != 0:
             fasttree_cmd.append('-fastest')
         if 'pseudo' in params and params['pseudo'] != None and params['pseudo'] != 0:
@@ -378,11 +376,15 @@ class kb_fasttree:
             fasttree_cmd.append('-nome')
         if 'nocat' in params and params['nocat'] != None and params['nocat'] != 0:
             fasttree_cmd.append('-nocat')
-        elif not all_seqs_nuc and 'cat' in params and params['cat'] != None and params['cat'] > 0:
+#        elif not all_seqs_nuc and 'cat' in params and params['cat'] != None and params['cat'] > 0:
+        elif 'cat' in params and params['cat'] != None and params['cat'] > 0:
             fasttree_cmd.append('-cat')
             fasttree_cmd.append(str(params['cat']))
         if 'gamma' in params and params['gamma'] != None and params['gamma'] != 0:
             fasttree_cmd.append('-gamma')
+
+        if all_seqs_nuc:
+            fasttree_cmd.append('-nt')
 
 #        fasttree_cmd.append('<')
         fasttree_cmd.append(input_MSA_file_path)
