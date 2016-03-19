@@ -388,8 +388,8 @@ class kb_fasttree:
 
 #        fasttree_cmd.append('<')
         fasttree_cmd.append(input_MSA_file_path)
-#        fasttree_cmd.append('>')
-#        fasttree_cmd.append(output_newick_file_path)
+        fasttree_cmd.append('>')
+        fasttree_cmd.append(output_newick_file_path)
 
 
         # Run FASTTREE, capture output as it happens
@@ -400,11 +400,14 @@ class kb_fasttree:
 #        report += '    '+' '.join(fasttree_cmd)+"\n"
 
         # FastTree requires shell=True
+        env = os.environ.copy()
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
                              stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
-                             shell = True)
+                             shell = True, \
+                             env = env, \
+                             executable = '/bin/bash' )
 #                            stdout = subprocess.PIPE, \
 #                             stdout = output_newick_file_path, \
 
@@ -419,6 +422,7 @@ class kb_fasttree:
         if p.returncode != 0:
             raise ValueError('Error running FASTTREE, return code: '+str(p.returncode) + 
                 '\n\n'+ '\n'.join(console))
+
 
 
         # load the method provenance from the context object
