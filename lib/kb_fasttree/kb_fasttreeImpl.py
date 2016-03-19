@@ -321,7 +321,14 @@ class kb_fasttree:
             else:
                 raise ValueError('Cannot yet handle intree type of: '+type_name)
                 sys.exit(0)
-            
+
+
+        # check that input MSA correctly structured
+        #
+        input_MSA_file_handle = open (input_MSA_file_path, 'r', 0)
+        for line in input_MSA_file_handle:
+            self.log (console, "MSA: '"+line+"'\n")
+
 
         ### Construct the command
         #
