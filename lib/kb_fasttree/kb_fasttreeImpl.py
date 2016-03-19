@@ -371,7 +371,7 @@ class kb_fasttree:
             fasttree_cmd.append('-nome')
         if 'nocat' in params and params['nocat'] != None and params['nocat'] != 0:
             fasttree_cmd.append('-nocat')
-        elif 'cat' in params and params['cat'] != None and params['cat'] > 0:
+        elif not all_seqs_nuc and 'cat' in params and params['cat'] != None and params['cat'] > 0:
             fasttree_cmd.append('-cat')
             fasttree_cmd.append(str(params['cat']))
         if 'gamma' in params and params['gamma'] != None and params['gamma'] != 0:
