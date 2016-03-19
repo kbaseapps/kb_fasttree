@@ -388,8 +388,8 @@ class kb_fasttree:
 
 #        fasttree_cmd.append('<')
         fasttree_cmd.append(input_MSA_file_path)
-        fasttree_cmd.append('>')
-        fasttree_cmd.append(output_newick_file_path)
+#        fasttree_cmd.append('>')
+#        fasttree_cmd.append(output_newick_file_path)
 
 
         # Run FASTTREE, capture output as it happens
@@ -402,7 +402,7 @@ class kb_fasttree:
         # FastTree requires shell=True
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
-                             stdout = subprocess.STDOUT, \
+                             stdout = output_newick_file_path, \
                              stderr = subprocess.STDOUT, \
                              shell = True)
 #                            stdout = subprocess.PIPE, \
