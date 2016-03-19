@@ -402,9 +402,10 @@ class kb_fasttree:
         # FastTree requires shell=True
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
-                             stdout = subprocess.PIPE, \
+                             stdout = subprocess.STDOUT, \
                              stderr = subprocess.STDOUT, \
                              shell = True)
+#                            stdout = subprocess.PIPE, \
 
         while True:
             line = p.stdout.readline()
