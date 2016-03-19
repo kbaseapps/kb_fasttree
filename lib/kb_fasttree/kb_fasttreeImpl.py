@@ -395,8 +395,8 @@ class kb_fasttree:
 #                             stdout = subprocess.PIPE, \  # DEBUG
                              stdout = subprocess.STDOUT, \
                              stderr = subprocess.STDOUT, \
-#                             shell = False)  # DEBUG
-                             shell = True)
+                             shell = False)  # DEBUG
+#                             shell = True)
 
         while True:
             line = p.stdout.readline()
