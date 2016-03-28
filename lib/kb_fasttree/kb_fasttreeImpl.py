@@ -301,7 +301,6 @@ class kb_fasttree:
         #
         else:
             raise ValueError('Cannot yet handle input_name type of: '+type_name)
-            sys.exit(0)
 
 
         # Get start tree (if any)
@@ -327,7 +326,6 @@ class kb_fasttree:
                 input_tree_file_handle.close()
             else:
                 raise ValueError('Cannot yet handle intree type of: '+type_name)
-                sys.exit(0)
 
 
         # DEBUG: check the MSA file contents
@@ -348,6 +346,8 @@ class kb_fasttree:
             raise ValueError("no such file '"+self.FASTTREE_bin+"'")
         if not os.path.isfile(input_MSA_file_path):
             raise ValueError("no such file '"+input_MSA_file_path+"'")
+        if not os.path.getsize(input_MSA_file_path) > 0:
+            raise ValueError("empty file '"+input_MSA_file_path+"'")
 
         # set the output path
         timestamp = int((datetime.utcnow() - datetime.utcfromtimestamp(0)).total_seconds()*1000)
@@ -423,7 +423,12 @@ class kb_fasttree:
             raise ValueError('Error running FASTTREE, return code: '+str(p.returncode) + 
                 '\n\n'+ '\n'.join(console))
 
-
+        # Check that FASTREE produced output
+        #
+        if not os.path.isfile(output_newick_file_path):
+            raise ValueError("failed to create FASTTREE output: "+output_newick_file_path)
+        elif not os.path.getsize(output_aln_file_path) > 0:
+            raise ValueError("created empty file for FASTTREE output: "+output_newick_file_path)
 
         # load the method provenance from the context object
         #
