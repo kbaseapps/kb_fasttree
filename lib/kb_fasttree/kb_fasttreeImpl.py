@@ -224,6 +224,7 @@ class kb_fasttree:
         # return variables are: returnVal
         #BEGIN run_FastTree
         console = []
+        invalid_msgs = []
         self.log(console,'Running run_FastTree with params=')
         self.log(console, "\n"+pformat(params))
         report = ''
@@ -447,59 +448,60 @@ class kb_fasttree:
 
         # Upload results
         #
-        self.log(console,"UPLOADING RESULTS")  # DEBUG
+        if len(invalid_msgs) == 0:
+            self.log(console,"UPLOADING RESULTS")  # DEBUG
 
-        tree_name = params['output_name']
-        tree_description = params['desc']
-        tree_type = 'GeneTree'
-        if 'species_tree_flag' in params and params['species_tree_flag'] != None and params['species_tree_flag'] != 0:
-            tree_type = 'SpeciesTree'
+            tree_name = params['output_name']
+            tree_description = params['desc']
+            tree_type = 'GeneTree'
+            if 'species_tree_flag' in params and params['species_tree_flag'] != None and params['species_tree_flag'] != 0:
+                tree_type = 'SpeciesTree'
 
-        with open(output_newick_file_path,'r',0) as output_newick_file_handle:
-            output_newick_buf = output_newick_file_handle.read()
-        output_newick_buf = output_newick_buf.rstrip()
+            with open(output_newick_file_path,'r',0) as output_newick_file_handle:
+                output_newick_buf = output_newick_file_handle.read()
+            output_newick_buf = output_newick_buf.rstrip()
         
-        # Extract info from MSA
-        #
-        tree_attributes = None
-        default_node_labels = None
-        ws_refs = None
-        kb_refs = None
-        leaf_list = None
-        if default_row_labels != None:
-            default_node_labels = dict()
-            leaf_list = []
-            for row_id in default_row_labels.keys():
-                default_node_labels[row_id] = default_row_labels[row_id]
-                leaf_list.append(row_id)
+            # Extract info from MSA
+            #
+            tree_attributes = None
+            default_node_labels = None
+            ws_refs = None
+            kb_refs = None
+            leaf_list = None
+            if default_row_labels != None:
+                default_node_labels = dict()
+                leaf_list = []
+                for row_id in default_row_labels.keys():
+                    default_node_labels[row_id] = default_row_labels[row_id]
+                    leaf_list.append(row_id)
 
-        if 'ws_refs' in MSA_in.keys() and MSA_in['ws_refs'] != None:
-            ws_refs = MSA_in['ws_refs']
-        if 'kb_refs' in MSA_in.keys() and MSA_in['kb_refs'] != None:
-            kb_refs = MSA_in['kb_refs']
+            if 'ws_refs' in MSA_in.keys() and MSA_in['ws_refs'] != None:
+                ws_refs = MSA_in['ws_refs']
+            if 'kb_refs' in MSA_in.keys() and MSA_in['kb_refs'] != None:
+                kb_refs = MSA_in['kb_refs']
 
-        # Build output_Tree structure
-        #
-        output_Tree = {
+            # Build output_Tree structure
+            #
+            output_Tree = {
                       'name': tree_name,
                       'description': tree_description,
                       'type': tree_type,
                       'tree': output_newick_buf
                      }
-        if tree_attributes != None:
-            output_Tree['tree_attributes'] = tree_attributes
-        if default_node_labels != None:
-            output_Tree['default_node_labels'] = default_node_labels
-        if ws_refs != None:
-            output_Tree['ws_refs'] = ws_refs 
-        if kb_refs != None:
-            output_Tree['kb_refs'] = kb_refs
-        if leaf_list != None:
-            output_Tree['leaf_list'] = leaf_list 
+            if tree_attributes != None:
+                output_Tree['tree_attributes'] = tree_attributes
+            if default_node_labels != None:
+                output_Tree['default_node_labels'] = default_node_labels
+            if ws_refs != None:
+                output_Tree['ws_refs'] = ws_refs 
+            if kb_refs != None:
+                output_Tree['kb_refs'] = kb_refs
+            if leaf_list != None:
+                output_Tree['leaf_list'] = leaf_list 
 
-        # Store output_Tree
-        #
-        new_obj_info = ws.save_objects({
+            # Store output_Tree
+            #
+            new_obj_info = ws.save_objects({
                             'workspace': params['workspace_name'],
                             'objects':[{
                                     'type': 'KBaseTrees.Tree',
@@ -514,15 +516,23 @@ class kb_fasttree:
         # build output report object
         #
         self.log(console,"BUILDING REPORT")  # DEBUG
-#        self.log(console,"sequences in many set: "+str(seq_total))
-#        self.log(console,"sequences in hit set:  "+str(hit_total))
-#        report += 'sequences in many set: '+str(seq_total)+"\n"
-#        report += 'sequences in hit set:  '+str(hit_total)+"\n"
 
-        reportObj = {
-            'objects_created':[{'ref':params['workspace_name']+'/'+params['output_name'], 'description':'FastTree Tree'}],
-            'text_message':report
-        }
+        if len(invalid_msgs) == 0:
+            #self.log(console,"sequences in many set: "+str(seq_total))
+            #self.log(console,"sequences in hit set:  "+str(hit_total))
+            #report += 'sequences in many set: '+str(seq_total)+"\n"
+            #report += 'sequences in hit set:  '+str(hit_total)+"\n"
+            reportObj = {
+                'objects_created':[{'ref':params['workspace_name']+'/'+params['output_name'], 'description':'FastTree Tree'}],
+                'text_message':report
+                }
+        else:
+            report += "FAILURE\n\n"+"\n".join(invalid_msgs)+"\n"
+            reportObj = {
+                'objects_created':[],
+                'text_message':report
+                }
+
         reportName = 'fasttree_report_'+str(hex(uuid.getnode()))
         report_obj_info = ws.save_objects({
 #                'id':info[6],
