@@ -399,6 +399,11 @@ class kb_fasttree:
         if not os.path.getsize(input_MSA_file_path) > 0:
             raise ValueError("empty file '"+input_MSA_file_path+"'")
 
+        # DEBUG
+        with open(input_MSA_file_path,'r',0) as input_MSA_file_handle:
+            for line in input_MSA_file_handle:
+                self.log(console,"MSA LINE: '"+line+"'")
+
         # set the output path
         timestamp = int((datetime.utcnow() - datetime.utcfromtimestamp(0)).total_seconds()*1000)
         output_dir = os.path.join(self.scratch,'output.'+str(timestamp))
