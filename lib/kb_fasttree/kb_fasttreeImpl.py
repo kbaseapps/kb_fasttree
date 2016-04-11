@@ -269,7 +269,9 @@ class kb_fasttree:
             else:
                 for row_id in row_order:
                     default_row_labels[row_id] = row_id
-            
+            if len(row_order) < 2:
+                self.log(invalid_msgs,"must have multiple records in MSA: "+params['input_name'])
+
             # export features to FASTA file
             input_MSA_file_path = os.path.join(self.scratch, params['input_name']+".fasta")
             self.log(console, 'writing fasta file: '+input_MSA_file_path)
@@ -334,6 +336,53 @@ class kb_fasttree:
 #            for line in input_MSA_file_handle:
 #                self.log(console,"MSA_LINE: '"+line+"'")
 
+        # validate input data
+        #
+        if len(invalid_msgs) > 0:
+
+            # load the method provenance from the context object
+            self.log(console,"SETTING PROVENANCE")  # DEBUG
+            provenance = [{}]
+            if 'provenance' in ctx:
+                provenance = ctx['provenance']
+            # add additional info to provenance here, in this case the input data object reference
+            provenance[0]['input_ws_objects'] = []
+            provenance[0]['input_ws_objects'].append(params['workspace_name']+'/'+params['input_name'])
+            if 'intree' in params and params['intree'] != None:
+                provenance[0]['input_ws_objects'].append(params['workspace_name']+'/'+params['intree'])
+            provenance[0]['service'] = 'kb_fasttree'
+            provenance[0]['method'] = 'run_FastTree'
+
+            # report
+            report += "FAILURE\n\n"+"\n".join(invalid_msgs)+"\n"
+            reportObj = {
+                'objects_created':[],
+                'text_message':report
+                }
+
+            reportName = 'fasttree_report_'+str(hex(uuid.getnode()))
+            report_obj_info = ws.save_objects({
+#                'id':info[6],
+                'workspace':params['workspace_name'],
+                'objects':[
+                    {
+                        'type':'KBaseReport.Report',
+                        'data':reportObj,
+                        'name':reportName,
+                        'meta':{},
+                        'hidden':1,
+                        'provenance':provenance
+                    }
+                ]
+            })[0]
+
+
+            self.log(console,"BUILDING RETURN OBJECT")
+            returnVal = { 'report_name': reportName,
+                          'report_ref': str(report_obj_info[6]) + '/' + str(report_obj_info[0]) + '/' + str(report_obj_info[4]),
+                          }
+            self.log(console,"run_FastTree DONE")
+            return [returnVal]
 
 
         ### Construct the command
