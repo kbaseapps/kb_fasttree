@@ -334,7 +334,9 @@ class kb_fasttree:
         # DEBUG: check the MSA file contents
 #        with open(input_MSA_file_path, 'r', 0) as input_MSA_file_handle:
 #            for line in input_MSA_file_handle:
-#                self.log(console,"MSA_LINE: '"+line+"'")
+#                #self.log(console,"MSA_LINE: '"+line+"'")  # too big for console
+#                self.log(invalid_msgs,"MSA_LINE: '"+line+"'")
+
 
         # validate input data
         #
@@ -402,7 +404,8 @@ class kb_fasttree:
         # DEBUG
         with open(input_MSA_file_path,'r',0) as input_MSA_file_handle:
             for line in input_MSA_file_handle:
-                self.log(console,"MSA LINE: '"+line+"'")
+                #self.log(console,"MSA LINE: '"+line+"'")  # too big for console
+                self.log(invalid_msgs,"MSA LINE: '"+line+"'")
 
         # set the output path
         timestamp = int((datetime.utcnow() - datetime.utcfromtimestamp(0)).total_seconds()*1000)
