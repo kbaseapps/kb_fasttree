@@ -391,8 +391,8 @@ class kb_fasttree:
         #
         #  e.g. fasttree -in <fasta_in> -out <fasta_out> -maxiters <n> -haxours <h>
         #
-#        fasttree_cmd = [self.FASTTREE_bin]
-        fasttree_cmd = []  # DEBUG
+        fasttree_cmd = [self.FASTTREE_bin]
+#        fasttree_cmd = []  # DEBUG
 
         # check for necessary files
         if not os.path.isfile(self.FASTTREE_bin):
@@ -416,8 +416,8 @@ class kb_fasttree:
         output_newick_file_path = os.path.join(output_dir, params['output_name']+'.newick');
 
         # options
-#        fasttree_cmd.append('-quiet')
-#        fasttree_cmd.append('-nopr')
+        fasttree_cmd.append('-quiet')
+        fasttree_cmd.append('-nopr')
         if 'fastest' in params and params['fastest'] != None and params['fastest'] != 0:
             fasttree_cmd.append('-fastest')
         if 'pseudo' in params and params['pseudo'] != None and params['pseudo'] != 0:
@@ -448,15 +448,15 @@ class kb_fasttree:
 
 #        fasttree_cmd.append('<')
         fasttree_cmd.append(input_MSA_file_path)
-#        fasttree_cmd.append('>')
-#        fasttree_cmd.append(output_newick_file_path)
+        fasttree_cmd.append('>')
+        fasttree_cmd.append(output_newick_file_path)
 
 
         # Run FASTTREE, capture output as it happens
         #
         self.log(console, 'RUNNING FASTTREE:')
-#        self.log(console, '    '+' '.join(fasttree_cmd))
-        self.log(console, '    '+self.FASTTREE_bin+' '+' '.join(fasttree_cmd))
+        self.log(console, '    '+' '.join(fasttree_cmd))
+#        self.log(console, '    '+self.FASTTREE_bin+' '+' '.join(fasttree_cmd))
 #        report += "\n"+'running FASTTREE:'+"\n"
 #        report += '    '+' '.join(fasttree_cmd)+"\n"
 
@@ -464,11 +464,10 @@ class kb_fasttree:
         env = os.environ.copy()
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
-                             stdout = output_newick_file_path, \
+                             stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
                              shell = True, \
-                             env = env, \
-                             executable = self.FASTTREE_bin )
+                             env = env )
 
 #        p = subprocess.Popen(fasttree_cmd, \
 #                             cwd = self.scratch, \
