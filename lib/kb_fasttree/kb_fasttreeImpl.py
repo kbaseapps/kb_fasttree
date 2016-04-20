@@ -416,8 +416,8 @@ class kb_fasttree:
         output_newick_file_path = os.path.join(output_dir, params['output_name']+'.newick');
 
         # options
-        fasttree_cmd.append('-quiet')
-        fasttree_cmd.append('-nopr')
+#        fasttree_cmd.append('-quiet')
+#        fasttree_cmd.append('-nopr')
         if 'fastest' in params and params['fastest'] != None and params['fastest'] != 0:
             fasttree_cmd.append('-fastest')
         if 'pseudo' in params and params['pseudo'] != None and params['pseudo'] != 0:
@@ -435,11 +435,11 @@ class kb_fasttree:
             fasttree_cmd.append('-nome')
         if 'nocat' in params and params['nocat'] != None and params['nocat'] != 0:
             fasttree_cmd.append('-nocat')
-        elif not all_seqs_nuc and 'cat' in params and params['cat'] != None and params['cat'] > 0:
-        # DEBUG
-#        elif 'cat' in params and params['cat'] != None and params['cat'] > 0:
-            fasttree_cmd.append('-cat')
-            fasttree_cmd.append(str(params['cat']))
+#        elif not all_seqs_nuc and 'cat' in params and params['cat'] != None and params['cat'] > 0:
+#        # DEBUG
+##        elif 'cat' in params and params['cat'] != None and params['cat'] > 0:
+#            fasttree_cmd.append('-cat')
+#            fasttree_cmd.append(str(params['cat']))
         if 'gamma' in params and params['gamma'] != None and params['gamma'] != 0:
             fasttree_cmd.append('-gamma')
 
@@ -466,7 +466,7 @@ class kb_fasttree:
                              cwd = self.scratch, \
                              stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
-                             shell = True)
+                             shell = False )
 #                             executable = self.FASTTREE_bin )
 
 #        p = subprocess.Popen(fasttree_cmd, \
