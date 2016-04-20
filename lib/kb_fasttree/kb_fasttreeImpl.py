@@ -445,10 +445,10 @@ class kb_fasttree:
         if all_seqs_nuc:
             fasttree_cmd.append('-nt')
 
-##        fasttree_cmd.append('<')
+#        fasttree_cmd.append('<')
         fasttree_cmd.append(input_MSA_file_path)
-#        fasttree_cmd.append('>')
-#        fasttree_cmd.append(output_newick_file_path)
+        fasttree_cmd.append('>')
+        fasttree_cmd.append(output_newick_file_path)
 
 
         # Run FASTTREE, capture output as it happens
@@ -464,9 +464,10 @@ class kb_fasttree:
                              cwd = self.scratch, \
                              stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
-                             shell = True, \
+                             shell = False, \
                              env = env, \
                              executable = '/bin/bash' )
+#                             shell = True, \
 #                            stdout = subprocess.PIPE, \
 #                             stdout = output_newick_file_path, \
 
