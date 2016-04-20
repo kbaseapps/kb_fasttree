@@ -465,7 +465,7 @@ class kb_fasttree:
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
                              stdout = subprocess.PIPE, \
-                             stderr = subprocess.STDOUT, \
+                             stderr = subprocess.PIPE, \
                              shell = True, \
                              env = env )
 
