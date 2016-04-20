@@ -290,7 +290,8 @@ class kb_fasttree:
                                ])
                 row_i += 1
             with open(input_MSA_file_path,'w',0) as input_MSA_file_handle:
-                input_MSA_file_handle.write("\n".join(records)+"\n")
+                #input_MSA_file_handle.write("\n".join(records)+"\n")
+                input_MSA_file_handle.write("".join(records)+"")  # DEBUG
 
 
             # Determine whether nuc or protein sequences
