@@ -464,7 +464,7 @@ class kb_fasttree:
         env = os.environ.copy()
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
-                             stdout = subprocess.STDOUT, \
+                             stdout = output_newick_file_path, \
                              stderr = subprocess.STDOUT, \
                              shell = True, \
                              env = env, \
