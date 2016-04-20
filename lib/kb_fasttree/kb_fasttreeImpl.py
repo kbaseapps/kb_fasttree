@@ -416,8 +416,8 @@ class kb_fasttree:
         output_newick_file_path = os.path.join(output_dir, params['output_name']+'.newick');
 
         # options
-#        fasttree_cmd.append('-quiet')
-#        fasttree_cmd.append('-nopr')
+        fasttree_cmd.append('-quiet')
+        fasttree_cmd.append('-nopr')
         if 'fastest' in params and params['fastest'] != None and params['fastest'] != 0:
             fasttree_cmd.append('-fastest')
         if 'pseudo' in params and params['pseudo'] != None and params['pseudo'] != 0:
@@ -466,7 +466,7 @@ class kb_fasttree:
                              cwd = self.scratch, \
                              stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
-                             shell = False)
+                             shell = True)
 #                             executable = self.FASTTREE_bin )
 
 #        p = subprocess.Popen(fasttree_cmd, \
