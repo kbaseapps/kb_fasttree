@@ -435,11 +435,11 @@ class kb_fasttree:
             fasttree_cmd.append('-nome')
         if 'nocat' in params and params['nocat'] != None and params['nocat'] != 0:
             fasttree_cmd.append('-nocat')
-#        elif not all_seqs_nuc and 'cat' in params and params['cat'] != None and params['cat'] > 0:
-#        # DEBUG
-##        elif 'cat' in params and params['cat'] != None and params['cat'] > 0:
-#            fasttree_cmd.append('-cat')
-#            fasttree_cmd.append(str(params['cat']))
+        elif not all_seqs_nuc and 'cat' in params and params['cat'] != None and params['cat'] > 0:
+        # DEBUG
+#        elif 'cat' in params and params['cat'] != None and params['cat'] > 0:
+            fasttree_cmd.append('-cat')
+            fasttree_cmd.append(str(params['cat']))
         if 'gamma' in params and params['gamma'] != None and params['gamma'] != 0:
             fasttree_cmd.append('-gamma')
 
@@ -464,7 +464,7 @@ class kb_fasttree:
         env = os.environ.copy()
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
-                             stdout = subprocess.PIPE, \
+                             stdout = subprocess.STDOUT, \
                              stderr = subprocess.PIPE, \
                              shell = True, \
                              env = env )
