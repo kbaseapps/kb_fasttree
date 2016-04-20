@@ -276,6 +276,7 @@ class kb_fasttree:
             input_MSA_file_path = os.path.join(self.scratch, params['input_name']+".fasta")
             self.log(console, 'writing fasta file: '+input_MSA_file_path)
             records = []
+            row_i = 1
             for row_id in row_order:
                 #self.log(console,"row_id: '"+row_id+"'")  # DEBUG
                 #self.log(console,"alignment: '"+MSA_in['alignment'][row_id]+"'")  # DEBUG
@@ -283,9 +284,11 @@ class kb_fasttree:
                 #record = SeqRecord(Seq(MSA_in['alignment'][row_id]), id=row_id, description=default_row_labels[row_id])
                 #records.append(record)
             #SeqIO.write(records, input_MSA_file_path, "fasta")
-                records.extend(['>'+row_id,
+                records.extend(['>'+row_i,  # DEBUG
+#                records.extend(['>'+row_id,
                                 MSA_in['alignment'][row_id]
                                ])
+                row_i += 1
             with open(input_MSA_file_path,'w',0) as input_MSA_file_handle:
                 input_MSA_file_handle.write("\n".join(records)+"\n")
 
