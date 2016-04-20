@@ -391,8 +391,8 @@ class kb_fasttree:
         #
         #  e.g. fasttree -in <fasta_in> -out <fasta_out> -maxiters <n> -haxours <h>
         #
-        fasttree_cmd = [self.FASTTREE_bin]
-        #fasttree_cmd = []  # DEBUG
+#        fasttree_cmd = [self.FASTTREE_bin]
+        fasttree_cmd = []  # DEBUG
 
         # check for necessary files
         if not os.path.isfile(self.FASTTREE_bin):
@@ -455,19 +455,19 @@ class kb_fasttree:
         # Run FASTTREE, capture output as it happens
         #
         self.log(console, 'RUNNING FASTTREE:')
-        self.log(console, '    '+' '.join(fasttree_cmd))
-#        self.log(console, '    '+self.FASTTREE_bin+' '+' '.join(fasttree_cmd))
+#        self.log(console, '    '+' '.join(fasttree_cmd))
+        self.log(console, '    '+self.FASTTREE_bin+' '+' '.join(fasttree_cmd))
 #        report += "\n"+'running FASTTREE:'+"\n"
 #        report += '    '+' '.join(fasttree_cmd)+"\n"
 
-        # FastTree requires shell=True
+        # FastTree requires shell=True in order to see input data
         env = os.environ.copy()
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
                              stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
-                             shell = False )
-#                             executable = self.FASTTREE_bin )
+                             shell = False, \
+                             executable = self.FASTTREE_bin )
 
 #        p = subprocess.Popen(fasttree_cmd, \
 #                             cwd = self.scratch, \
