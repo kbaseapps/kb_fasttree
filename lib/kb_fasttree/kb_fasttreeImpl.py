@@ -391,7 +391,8 @@ class kb_fasttree:
         #
         #  e.g. fasttree -in <fasta_in> -out <fasta_out> -maxiters <n> -haxours <h>
         #
-        fasttree_cmd = [self.FASTTREE_bin]
+        #fasttree_cmd = [self.FASTTREE_bin]
+        fasttree_cmd = []  # DEBUG
 
         # check for necessary files
         if not os.path.isfile(self.FASTTREE_bin):
@@ -454,7 +455,8 @@ class kb_fasttree:
         # Run FASTTREE, capture output as it happens
         #
         self.log(console, 'RUNNING FASTTREE:')
-        self.log(console, '    '+' '.join(fasttree_cmd))
+#        self.log(console, '    '+' '.join(fasttree_cmd))
+        self.log(console, '    '+self.FASTTREE_bin+' '.join(fasttree_cmd))
 #        report += "\n"+'running FASTTREE:'+"\n"
 #        report += '    '+' '.join(fasttree_cmd)+"\n"
 
@@ -465,9 +467,10 @@ class kb_fasttree:
                              stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
                              shell = True, \
-                             env = env )
+                             env = env, \
+                             executable = self.FASTTREE_bin )
 #                             executable = '/bin/bash' )
-#                             shell = False, \
+#                             shell = True, \  # seems necessary?
 #                            stdout = subprocess.PIPE, \
 #                             stdout = output_newick_file_path, \
 
