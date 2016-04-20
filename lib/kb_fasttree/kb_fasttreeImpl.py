@@ -284,7 +284,7 @@ class kb_fasttree:
                 #record = SeqRecord(Seq(MSA_in['alignment'][row_id]), id=row_id, description=default_row_labels[row_id])
                 #records.append(record)
             #SeqIO.write(records, input_MSA_file_path, "fasta")
-                records.extend(['>'+row_i,  # DEBUG
+                records.extend(['>'+str(row_i),  # DEBUG
 #                records.extend(['>'+row_id,
                                 MSA_in['alignment'][row_id]
                                ])
