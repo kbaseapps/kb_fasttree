@@ -464,10 +464,10 @@ class kb_fasttree:
                              cwd = self.scratch, \
                              stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
-                             shell = False, \
-                             env = env, \
-                             executable = '/bin/bash' )
-#                             shell = True, \
+                             shell = True, \
+                             env = env )
+#                             executable = '/bin/bash' )
+#                             shell = False, \
 #                            stdout = subprocess.PIPE, \
 #                             stdout = output_newick_file_path, \
 
