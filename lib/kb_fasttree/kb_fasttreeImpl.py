@@ -455,7 +455,7 @@ class kb_fasttree:
         if all_seqs_nuc:
             fasttree_cmd.append('-nt')
 
-#        fasttree_cmd.append('<')
+        fasttree_cmd.append('<')
         fasttree_cmd.append(input_MSA_file_path)
         fasttree_cmd.append('>')
         fasttree_cmd.append(output_newick_file_path)
@@ -473,6 +473,7 @@ class kb_fasttree:
         env = os.environ.copy()
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
+                             stdin = subprocess.PIPE, \
                              stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
                              shell = True, \
