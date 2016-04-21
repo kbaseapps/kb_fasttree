@@ -39,12 +39,12 @@ RUN make
 #
 RUN mkdir -p /kb/module/FastTree/bin
 WORKDIR /kb/module/FastTree/bin
-#RUN curl http://www.microbesonline.org/fasttree/FastTree > FastTree2.1.8_64
+#RUN curl http://www.microbesonline.org/fasttree/FastTree > FastTree2.1.9_64
 RUN \
     git clone https://github.com/dcchivian/kb_fasttree && \
-    cp kb_fasttree/src/FastTree2.1.8_64 . && \
-    chmod 555 FastTree2.1.8_64 && \
-    ln -s FastTree2.1.8_64 FastTree
+    cp kb_fasttree/src/FastTree2.1.9_64 . && \
+    chmod 555 FastTree2.1.9_64 && \
+    ln -s FastTree2.1.9_64 FastTree
 
 
 WORKDIR /kb/module
