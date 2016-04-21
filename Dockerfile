@@ -42,7 +42,8 @@ WORKDIR /kb/module/FastTree/bin
 #RUN curl http://www.microbesonline.org/fasttree/FastTree > FastTree2.1.9_64
 RUN \
     git clone https://github.com/dcchivian/kb_fasttree && \
-    cp kb_fasttree/src/FastTree2.1.9_64 . && \
+#    cp kb_fasttree/src/FastTree2.1.9_64 . && \
+     gcc -Wall -O3 -finline-functions -funroll-loops -o FastTree2.1.9_64 -lm FastTree.c && \
     chmod 555 FastTree2.1.9_64 && \
     ln -s FastTree2.1.9_64 FastTree
 
