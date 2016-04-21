@@ -455,8 +455,8 @@ class kb_fasttree:
         if all_seqs_nuc:
             fasttree_cmd.append('-nt')
 
-        fasttree_cmd.append('<')
-        fasttree_cmd.append(input_MSA_file_path)
+#        fasttree_cmd.append('<')
+#        fasttree_cmd.append(input_MSA_file_path)
         fasttree_cmd.append('>')
         fasttree_cmd.append(output_newick_file_path)
 
@@ -477,7 +477,8 @@ class kb_fasttree:
                              stdout = subprocess.PIPE, \
                              stderr = subprocess.STDOUT, \
                              shell = True, \
-                             env = env )
+                             env = env)
+#                             executable = '/bin/bash' )
 
 #        p = subprocess.Popen(fasttree_cmd, \
 #                             cwd = self.scratch, \
@@ -487,11 +488,19 @@ class kb_fasttree:
 #                             env = env, \
 #                             executable = self.FASTTREE_bin )
 
-#                             executable = '/bin/bash' )
 #                             shell = True, \  # seems necessary?
 #                            stdout = subprocess.PIPE, \
 #                             stdout = output_newick_file_path, \
 
+        
+        # write MSA to process for FastTree
+        #
+        with open(input_MSA_file_path,'r',0) as input_MSA_file_handle:
+            for line in input_MSA_file_handle:
+                p.stdin.write(line)
+
+        # Read output
+        #
         while True:
             line = p.stdout.readline()
             if not line: break
