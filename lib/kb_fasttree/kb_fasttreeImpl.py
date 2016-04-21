@@ -194,7 +194,7 @@ class kb_fasttree:
                                 'meta':{},
                                 'provenance':provenance
                             }]
-                        })
+                        })[0]
         self.log(console,'SAVED TO WORKSPACE')
 
         return new_obj_info[0]
@@ -608,7 +608,7 @@ class kb_fasttree:
                                     'meta': {},
                                     'provenance': provenance
                                 }]
-                        })
+                        })[0]
 
 
         # build output report object
