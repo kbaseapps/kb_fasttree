@@ -425,7 +425,7 @@ class kb_fasttree:
         output_newick_file_path = os.path.join(output_dir, params['output_name']+'.newick');
 
         # options
-        fasttree_cmd.append('-quiet')
+        #fasttree_cmd.append('-quiet')
         fasttree_cmd.append('-nopr')
         if 'fastest' in params and params['fastest'] != None and params['fastest'] != 0:
             fasttree_cmd.append('-fastest')
@@ -498,6 +498,7 @@ class kb_fasttree:
         with open(input_MSA_file_path,'r',0) as input_MSA_file_handle:
             for line in input_MSA_file_handle:
                 p.stdin.write(line)
+        p.stdin.close()
 
         # Read output
         #
