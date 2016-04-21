@@ -655,7 +655,6 @@ class kb_fasttree:
                       'output_ref': str(new_obj_info[6]) + '/' + str(new_obj_info[0]) + '/' + str(new_obj_info[4])
                       }
         self.log(console,"run_FastTree DONE")
-
         #END run_FastTree
 
         # At some point might do deeper type checking...
