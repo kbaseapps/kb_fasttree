@@ -474,7 +474,7 @@ class kb_fasttree:
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
                              stdin = subprocess.PIPE, \
-                             stdout = subprocess.PIPE, \
+                             stdout = subprocess.STDOUT, \
                              stderr = subprocess.STDOUT, \
                              shell = True, \
                              env = env)
@@ -499,6 +499,7 @@ class kb_fasttree:
             for line in input_MSA_file_handle:
                 p.stdin.write(line)
         p.stdin.close()
+        p.wait()
 
         # Read output
         #
