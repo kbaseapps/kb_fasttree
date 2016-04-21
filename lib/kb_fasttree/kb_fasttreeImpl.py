@@ -424,8 +424,8 @@ class kb_fasttree:
             os.makedirs(output_dir)
         output_newick_file_path = os.path.join(output_dir, params['output_name']+'.newick');
 
-        fasttree_cmd.append('-out')
-        fasttree_cmd.append(output_newick_file_path)
+#        fasttree_cmd.append('-out')
+#        fasttree_cmd.append(output_newick_file_path)
 
 
         # options
@@ -461,8 +461,8 @@ class kb_fasttree:
 
 #        fasttree_cmd.append('<')
 #        fasttree_cmd.append(input_MSA_file_path)
-#        fasttree_cmd.append('>')
-#        fasttree_cmd.append(output_newick_file_path)
+        fasttree_cmd.append('>')
+        fasttree_cmd.append(output_newick_file_path)
 
 
         # Run FASTTREE, capture output as it happens
@@ -475,7 +475,10 @@ class kb_fasttree:
 
         # FastTree requires shell=True in order to see input data
         env = os.environ.copy()
-        p = subprocess.Popen(fasttree_cmd, \
+#        p = subprocess.Popen(fasttree_cmd, \
+
+        joined_fasttree_cmd = ' '.join(fasttree_cmd)
+        p = subprocess.Popen([joined_fasttree_cmd], \
                              cwd = self.scratch, \
                              stdin = subprocess.PIPE, \
                              stderr = subprocess.PIPE, \
