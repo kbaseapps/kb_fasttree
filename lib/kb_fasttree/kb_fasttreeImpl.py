@@ -290,8 +290,7 @@ class kb_fasttree:
                                ])
                 row_i += 1
             with open(input_MSA_file_path,'w',0) as input_MSA_file_handle:
-                #input_MSA_file_handle.write("\n".join(records)+"\n")
-                input_MSA_file_handle.write("".join(records)+"")  # DEBUG
+                input_MSA_file_handle.write("\n".join(records)+"\n")
 
 
             # Determine whether nuc or protein sequences
@@ -303,6 +302,12 @@ class kb_fasttree:
                 if NUC_MSA_pattern.match(MSA_in['alignment'][row_id]) == None:
                     all_seqs_nuc = False
                     break
+
+            # DEBUG
+            with open(input_MSA_file_path,'w',0) as input_MSA_file_handle:
+                records = [">1","ACDEFG",">2","ACEEFG",">3","ACDDFG"]
+                input_MSA_file_handle.write("\n".join(records)+"\n")
+
 
         # Missing proper input_type
         #
