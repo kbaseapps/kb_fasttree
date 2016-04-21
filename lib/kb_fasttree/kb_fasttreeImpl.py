@@ -276,7 +276,6 @@ class kb_fasttree:
             input_MSA_file_path = os.path.join(self.scratch, params['input_name']+".fasta")
             self.log(console, 'writing fasta file: '+input_MSA_file_path)
             records = []
-            row_i = 1
             for row_id in row_order:
                 #self.log(console,"row_id: '"+row_id+"'")  # DEBUG
                 #self.log(console,"alignment: '"+MSA_in['alignment'][row_id]+"'")  # DEBUG
@@ -284,11 +283,9 @@ class kb_fasttree:
                 #record = SeqRecord(Seq(MSA_in['alignment'][row_id]), id=row_id, description=default_row_labels[row_id])
                 #records.append(record)
             #SeqIO.write(records, input_MSA_file_path, "fasta")
-                records.extend(['>'+str(row_i),  # DEBUG
-#                records.extend(['>'+row_id,
+                records.extend(['>'+row_id,
                                 MSA_in['alignment'][row_id]
                                ])
-                row_i += 1
             with open(input_MSA_file_path,'w',0) as input_MSA_file_handle:
                 input_MSA_file_handle.write("\n".join(records)+"\n")
 
@@ -302,12 +299,6 @@ class kb_fasttree:
                 if NUC_MSA_pattern.match(MSA_in['alignment'][row_id]) == None:
                     all_seqs_nuc = False
                     break
-
-            # DEBUG
-            with open(input_MSA_file_path,'w',0) as input_MSA_file_handle:
-                records = [">1","ACDEFG",">2","ACEEFG",">3","ACDDFG"]
-                input_MSA_file_handle.write("\n".join(records)+"\n")
-
 
         # Missing proper input_type
         #
@@ -412,10 +403,11 @@ class kb_fasttree:
             raise ValueError("empty file '"+input_MSA_file_path+"'")
 
         # DEBUG
-        with open(input_MSA_file_path,'r',0) as input_MSA_file_handle:
-            for line in input_MSA_file_handle:
-                #self.log(console,"MSA LINE: '"+line+"'")  # too big for console
-                self.log(invalid_msgs,"MSA LINE: '"+line+"'")
+#        with open(input_MSA_file_path,'r',0) as input_MSA_file_handle:
+#            for line in input_MSA_file_handle:
+#                #self.log(console,"MSA LINE: '"+line+"'")  # too big for console
+#                self.log(invalid_msgs,"MSA LINE: '"+line+"'")
+
 
         # set the output path
         timestamp = int((datetime.utcnow() - datetime.utcfromtimestamp(0)).total_seconds()*1000)
@@ -424,6 +416,7 @@ class kb_fasttree:
             os.makedirs(output_dir)
         output_newick_file_path = os.path.join(output_dir, params['output_name']+'.newick');
 
+        # This doesn't work for some reason
 #        fasttree_cmd.append('-out')
 #        fasttree_cmd.append(output_newick_file_path)
 
@@ -459,6 +452,7 @@ class kb_fasttree:
         if all_seqs_nuc:
             fasttree_cmd.append('-nt')
 
+        # better (meaning it works) to write MSA to STDIN (below)
 #        fasttree_cmd.append('<')
 #        fasttree_cmd.append(input_MSA_file_path)
         fasttree_cmd.append('>')
@@ -476,8 +470,7 @@ class kb_fasttree:
         # FastTree requires shell=True in order to see input data
         env = os.environ.copy()
 #        p = subprocess.Popen(fasttree_cmd, \
-
-        joined_fasttree_cmd = ' '.join(fasttree_cmd)
+        joined_fasttree_cmd = ' '.join(fasttree_cmd)  # redirect out doesn't work with subprocess unless you join command first
         p = subprocess.Popen([joined_fasttree_cmd], \
                              cwd = self.scratch, \
                              stdin = subprocess.PIPE, \
@@ -509,6 +502,7 @@ class kb_fasttree:
         p.stdin.close()
         p.wait()
 
+
         # Read output
         #
         while True:
@@ -529,8 +523,9 @@ class kb_fasttree:
         #
         if not os.path.isfile(output_newick_file_path):
             raise ValueError("failed to create FASTTREE output: "+output_newick_file_path)
-        elif not os.path.getsize(output_aln_file_path) > 0:
+        elif not os.path.getsize(output_newick_file_path) > 0:
             raise ValueError("created empty file for FASTTREE output: "+output_newick_file_path)
+
 
         # load the method provenance from the context object
         #
@@ -561,6 +556,7 @@ class kb_fasttree:
             with open(output_newick_file_path,'r',0) as output_newick_file_handle:
                 output_newick_buf = output_newick_file_handle.read()
             output_newick_buf = output_newick_buf.rstrip()
+            self.log(console,"\nNEWICK:\n"+output_newick_buf+"\n")
         
             # Extract info from MSA
             #
@@ -623,6 +619,7 @@ class kb_fasttree:
             #self.log(console,"sequences in hit set:  "+str(hit_total))
             #report += 'sequences in many set: '+str(seq_total)+"\n"
             #report += 'sequences in hit set:  '+str(hit_total)+"\n"
+            report += output_newick_buf+"\n"
             reportObj = {
                 'objects_created':[{'ref':params['workspace_name']+'/'+params['output_name'], 'description':'FastTree Tree'}],
                 'text_message':report
