@@ -2,7 +2,7 @@ module-name:
     kb_fasttree
 
 module-description:
-    A KBase module
+    Phylogenetic Tree Building with FastTree2
 
 service-language:
     python
