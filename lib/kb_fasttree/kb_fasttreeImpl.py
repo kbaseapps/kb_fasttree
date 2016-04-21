@@ -478,10 +478,10 @@ class kb_fasttree:
         p = subprocess.Popen(fasttree_cmd, \
                              cwd = self.scratch, \
                              stdin = subprocess.PIPE, \
-                             stdout = subprocess.STDOUT, \
                              stderr = subprocess.PIPE, \
                              shell = True, \
                              env = env)
+#                             stdout = subprocess.PIPE, \
 #                             executable = '/bin/bash' )
 
 #        p = subprocess.Popen(fasttree_cmd, \
@@ -508,11 +508,13 @@ class kb_fasttree:
         # Read output
         #
         while True:
-            line = p.stdout.readline()
+#            line = p.stdout.readline()
+            line = p.stderr.readline()
             if not line: break
             self.log(console, line.replace('\n', ''))
 
-        p.stdout.close()
+#        p.stdout.close()
+        p.stderr.close()
         p.wait()
         self.log(console, 'return code: ' + str(p.returncode))
         if p.returncode != 0:
