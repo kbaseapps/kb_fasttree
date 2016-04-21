@@ -259,6 +259,10 @@
                     "target_property": "report_ref"
                 },
                 {
+                    "service_method_output_path": [0, "output_ref"],
+                    "target_property": "output_ref"
+                },
+                {
 		    "constant_value": "16",
                     "target_property": "report_window_line_height"
                 }

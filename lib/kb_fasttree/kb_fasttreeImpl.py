@@ -382,6 +382,7 @@ class kb_fasttree:
             self.log(console,"BUILDING RETURN OBJECT")
             returnVal = { 'report_name': reportName,
                           'report_ref': str(report_obj_info[6]) + '/' + str(report_obj_info[0]) + '/' + str(report_obj_info[4]),
+                          'output_ref': None
                           }
             self.log(console,"run_FastTree DONE")
             return [returnVal]
@@ -651,6 +652,7 @@ class kb_fasttree:
         self.log(console,"BUILDING RETURN OBJECT")
         returnVal = { 'report_name': reportName,
                       'report_ref': str(report_obj_info[6]) + '/' + str(report_obj_info[0]) + '/' + str(report_obj_info[4]),
+                      'output_ref': str(new_obj_info[6]) + '/' + str(new_obj_info[0]) + '/' + str(new_obj_info[4])
                       }
         self.log(console,"run_FastTree DONE")
 

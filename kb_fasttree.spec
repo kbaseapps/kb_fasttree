@@ -47,8 +47,7 @@ module kb_fasttree {
     typedef structure {
 	data_obj_name report_name;
 	data_obj_ref  report_ref;
-/*       data_obj_ref  output_tree_ref;
-*/
+        data_obj_ref  output_ref;
     } FastTree_Output;
 	
 

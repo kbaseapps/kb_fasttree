@@ -146,6 +146,7 @@ data_obj_name is a string
 FastTree_Output is a reference to a hash where the following keys are defined:
 	report_name has a value which is a kb_fasttree.data_obj_name
 	report_ref has a value which is a kb_fasttree.data_obj_ref
+	output_ref has a value which is a kb_fasttree.data_obj_ref
 data_obj_ref is a string
 
 </pre>
@@ -177,6 +178,7 @@ data_obj_name is a string
 FastTree_Output is a reference to a hash where the following keys are defined:
 	report_name has a value which is a kb_fasttree.data_obj_name
 	report_ref has a value which is a kb_fasttree.data_obj_ref
+	output_ref has a value which is a kb_fasttree.data_obj_ref
 data_obj_ref is a string
 
 
@@ -468,6 +470,7 @@ FastTree Output
 a reference to a hash where the following keys are defined:
 report_name has a value which is a kb_fasttree.data_obj_name
 report_ref has a value which is a kb_fasttree.data_obj_ref
+output_ref has a value which is a kb_fasttree.data_obj_ref
 
 </pre>
 
@@ -478,6 +481,7 @@ report_ref has a value which is a kb_fasttree.data_obj_ref
 a reference to a hash where the following keys are defined:
 report_name has a value which is a kb_fasttree.data_obj_name
 report_ref has a value which is a kb_fasttree.data_obj_ref
+output_ref has a value which is a kb_fasttree.data_obj_ref
 
 
 =end text
