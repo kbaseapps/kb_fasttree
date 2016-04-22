@@ -21,6 +21,9 @@ from biokbase.workspace.client import Workspace as workspaceService
 from requests_toolbelt import MultipartEncoder  # added
 from biokbase.AbstractHandle.Client import AbstractHandle as HandleService  # added
 
+# silence whining
+import requests
+requests.packages.urllib3.disable_warnings()
 #END_HEADER
 
 
