@@ -365,7 +365,7 @@ class kb_fasttree:
                 'text_message':report
                 }
 
-            reportName = 'fasttree_report_'+str(hex(uuid.getnode()))
+            reportName = 'fasttree_report_'+str(uuid.uuid4())
             report_obj_info = ws.save_objects({
 #                'id':info[6],
                 'workspace':params['workspace_name'],
@@ -635,7 +635,7 @@ class kb_fasttree:
                 'text_message':report
                 }
 
-        reportName = 'fasttree_report_'+str(hex(uuid.getnode()))
+        reportName = 'fasttree_report_'+str(uuid.uuid4())
         report_obj_info = ws.save_objects({
 #                'id':info[6],
                 'workspace':params['workspace_name'],
