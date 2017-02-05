@@ -50,11 +50,12 @@ class kb_fasttree(object):
            of a workspace or object.  This is received from Narrative.),
            parameter "desc" of String, parameter "input_ref" of type
            "data_obj_ref", parameter "output_name" of type "data_obj_name",
-           parameter "species_tree_flag" of Long, parameter "intree" of type
-           "data_obj_name", parameter "fastest" of Long, parameter "pseudo"
-           of Long, parameter "gtr" of Long, parameter "wag" of Long,
-           parameter "noml" of Long, parameter "nome" of Long, parameter
-           "cat" of Long, parameter "nocat" of Long, parameter "gamma" of Long
+           parameter "species_tree_flag" of Long, parameter "intree_ref" of
+           type "data_obj_ref", parameter "fastest" of Long, parameter
+           "pseudo" of Long, parameter "gtr" of Long, parameter "wag" of
+           Long, parameter "noml" of Long, parameter "nome" of Long,
+           parameter "cat" of Long, parameter "nocat" of Long, parameter
+           "gamma" of Long
         :returns: instance of type "FastTree_Output" (FastTree Output) ->
            structure: parameter "report_name" of type "data_obj_name",
            parameter "report_ref" of type "data_obj_ref", parameter
