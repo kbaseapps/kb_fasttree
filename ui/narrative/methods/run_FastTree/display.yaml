@@ -49,7 +49,7 @@ parameters :
             Species Tree?
         short-hint : |
             Is tree a Species Tree (default = Gene Tree)
-    intree:
+    intree_ref:
         ui-name : |
             Starting Tree
         short-hint : |

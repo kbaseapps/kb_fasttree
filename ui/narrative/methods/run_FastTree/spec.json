@@ -58,7 +58,7 @@
             }
         },
         {
-            "id": "intree",
+            "id": "intree_ref",
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
@@ -206,8 +206,9 @@
                     "target_property": "species_tree_flag"
                 },
                 {
-                    "input_parameter": "intree",
-                    "target_property": "intree"
+                    "input_parameter": "intree_ref",
+                    "target_property": "intree_ref",
+		    "target_type_transform": "resolved-ref"
                 },
                 {
                     "input_parameter": "fastest",

@@ -19,8 +19,9 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import generic_protein
 from biokbase.workspace.client import Workspace as workspaceService
-from requests_toolbelt import MultipartEncoder  # added
-from biokbase.AbstractHandle.Client import AbstractHandle as HandleService  # added
+from requests_toolbelt import MultipartEncoder
+from biokbase.AbstractHandle.Client import AbstractHandle as HandleService
+from KBaseReport.KBaseReportClient import KBaseReport
 
 # silence whining
 import requests
@@ -271,23 +272,24 @@ class kb_fasttree:
         #
         if 'workspace_name' not in params:
             raise ValueError('workspace_name parameter is required')
-        if 'input_name' not in params:
-            raise ValueError('input_name parameter is required')
+        if 'input_ref' not in params:
+            raise ValueError('input_ref parameter is required')
         if 'output_name' not in params:
             raise ValueError('output_name parameter is required')
 
 
-        #### Get the input_name MSA object
+        #### Get the input_ref MSA object
         ##
         try:
             ws = workspaceService(self.workspaceURL, token=ctx['token'])
-            objects = ws.get_objects([{'ref': params['workspace_name']+'/'+params['input_name']}])
+            objects = ws.get_objects([{'ref': params['input_ref']}])
             data = objects[0]['data']
             info = objects[0]['info']
+            input_name = info[1]
             input_type_name = info[2].split('.')[1].split('-')[0]
 
         except Exception as e:
-            raise ValueError('Unable to fetch input_name object from workspace: ' + str(e))
+            raise ValueError('Unable to fetch input_ref object from workspace: ' + str(e))
             #to get the full stack trace: traceback.format_exc()
 
         if input_type_name == 'MSA':
@@ -305,10 +307,10 @@ class kb_fasttree:
                 for row_id in row_order:
                     default_row_labels[row_id] = row_id
             if len(row_order) < 2:
-                self.log(invalid_msgs,"must have multiple records in MSA: "+params['input_name'])
+                self.log(invalid_msgs,"must have multiple records in MSA: "+params['input_ref'])
 
             # export features to FASTA file
-            input_MSA_file_path = os.path.join(self.scratch, params['input_name']+".fasta")
+            input_MSA_file_path = os.path.join(self.scratch, input_name+".fasta")
             self.log(console, 'writing fasta file: '+input_MSA_file_path)
             records = []
             for row_id in row_order:
@@ -343,25 +345,26 @@ class kb_fasttree:
 
         # Get start tree (if any)
         #
-        if 'intree' in params and params['intree'] != None:
+        if 'intree_ref' in params and params['intree_ref'] != None:
             try:
                 ws = workspaceService(self.workspaceURL, token=ctx['token'])
-                objects = ws.get_objects([{'ref': params['workspace_name']+'/'+params['intree']}])
+                objects = ws.get_objects([{'ref': params['intree_ref']}])
                 data = objects[0]['data']
                 info = objects[0]['info']
-                input_type_name = info[2].split('.')[1].split('-')[0]
+                intree_name = info[1]
+                intree_type_name = info[2].split('.')[1].split('-')[0]
 
             except Exception as e:
-                raise ValueError('Unable to fetch input_name object from workspace: ' + str(e))
+                raise ValueError('Unable to fetch intree_ref object from workspace: ' + str(e))
                 #to get the full stack trace: traceback.format_exc()
             
-            if input_type_name == 'Tree':
+            if intree_type_name == 'Tree':
                 tree_in = data
-                input_tree_file_path = os.path.join(self.scratch, params['intree']+".newick")
-                self.log(console, 'writing intree file: '+input_tree_file_path)
-                input_tree_file_handle = open(input_tree_file_path, 'w', 0)
-                input_tree_file_handle.write(tree_in['tree'])
-                input_tree_file_handle.close()
+                intree_newick_file_path = os.path.join(self.scratch, intree_name+".newick")
+                self.log(console, 'writing intree file: '+intree_newick_file_path)
+                intree_newick_file_handle = open(intree_newick_file_path, 'w', 0)
+                intree_newick_file_handle.write(tree_in['tree'])
+                intree_newick_file_handle.close()
             else:
                 raise ValueError('Cannot yet handle intree type of: '+type_name)
 
@@ -384,9 +387,9 @@ class kb_fasttree:
                 provenance = ctx['provenance']
             # add additional info to provenance here, in this case the input data object reference
             provenance[0]['input_ws_objects'] = []
-            provenance[0]['input_ws_objects'].append(params['workspace_name']+'/'+params['input_name'])
-            if 'intree' in params and params['intree'] != None:
-                provenance[0]['input_ws_objects'].append(params['workspace_name']+'/'+params['intree'])
+            provenance[0]['input_ws_objects'].append(params['input_ref'])
+            if 'intree_ref' in params and params['intree_ref'] != None:
+                provenance[0]['input_ws_objects'].append(params['intree_ref'])
             provenance[0]['service'] = 'kb_fasttree'
             provenance[0]['method'] = 'run_FastTree'
 
@@ -464,7 +467,7 @@ class kb_fasttree:
             fasttree_cmd.append('-fastest')
         if 'pseudo' in params and params['pseudo'] != None and params['pseudo'] != 0:
             fasttree_cmd.append('-pseudo')
-        if 'intree' in params and params['intree'] != None:
+        if 'intree_ref' in params and params['intree_ref'] != None:
             fasttree_cmd.append('-intree')
             fasttree_cmd.append(intree_newick_file_path)
         if all_seqs_nuc and 'gtr' in params and params['gtr'] != None and params['gtr'] != 0:
@@ -571,9 +574,9 @@ class kb_fasttree:
             provenance = ctx['provenance']
         # add additional info to provenance here, in this case the input data object reference
         provenance[0]['input_ws_objects'] = []
-        provenance[0]['input_ws_objects'].append(params['workspace_name']+'/'+params['input_name'])
-        if 'intree' in params and params['intree'] != None:
-            provenance[0]['input_ws_objects'].append(params['workspace_name']+'/'+params['intree'])
+        provenance[0]['input_ws_objects'].append(params[params['input_ref'])
+        if 'intree_ref' in params and params['intree_ref'] != None:
+            provenance[0]['input_ws_objects'].append(params['intree_ref'])
         provenance[0]['service'] = 'kb_fasttree'
         provenance[0]['method'] = 'run_FastTree'
 
