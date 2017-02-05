@@ -128,7 +128,7 @@ $return is a kb_fasttree.FastTree_Output
 FastTree_Params is a reference to a hash where the following keys are defined:
 	workspace_name has a value which is a kb_fasttree.workspace_name
 	desc has a value which is a string
-	input_name has a value which is a kb_fasttree.data_obj_name
+	input_ref has a value which is a kb_fasttree.data_obj_ref
 	output_name has a value which is a kb_fasttree.data_obj_name
 	species_tree_flag has a value which is an int
 	intree has a value which is a kb_fasttree.data_obj_name
@@ -142,12 +142,12 @@ FastTree_Params is a reference to a hash where the following keys are defined:
 	nocat has a value which is an int
 	gamma has a value which is an int
 workspace_name is a string
+data_obj_ref is a string
 data_obj_name is a string
 FastTree_Output is a reference to a hash where the following keys are defined:
 	report_name has a value which is a kb_fasttree.data_obj_name
 	report_ref has a value which is a kb_fasttree.data_obj_ref
 	output_ref has a value which is a kb_fasttree.data_obj_ref
-data_obj_ref is a string
 
 </pre>
 
@@ -160,7 +160,7 @@ $return is a kb_fasttree.FastTree_Output
 FastTree_Params is a reference to a hash where the following keys are defined:
 	workspace_name has a value which is a kb_fasttree.workspace_name
 	desc has a value which is a string
-	input_name has a value which is a kb_fasttree.data_obj_name
+	input_ref has a value which is a kb_fasttree.data_obj_ref
 	output_name has a value which is a kb_fasttree.data_obj_name
 	species_tree_flag has a value which is an int
 	intree has a value which is a kb_fasttree.data_obj_name
@@ -174,12 +174,12 @@ FastTree_Params is a reference to a hash where the following keys are defined:
 	nocat has a value which is an int
 	gamma has a value which is an int
 workspace_name is a string
+data_obj_ref is a string
 data_obj_name is a string
 FastTree_Output is a reference to a hash where the following keys are defined:
 	report_name has a value which is a kb_fasttree.data_obj_name
 	report_ref has a value which is a kb_fasttree.data_obj_ref
 	output_ref has a value which is a kb_fasttree.data_obj_ref
-data_obj_ref is a string
 
 
 =end text
@@ -218,9 +218,10 @@ Method for Tree building of either DNA or PROTEIN sequences
 	}
     }
 
-    my $result = $self->{client}->call($self->{url}, $self->{headers}, {
-	method => "kb_fasttree.run_FastTree",
-	params => \@args,
+    my $url = $self->{url};
+    my $result = $self->{client}->call($url, $self->{headers}, {
+	    method => "kb_fasttree.run_FastTree",
+	    params => \@args,
     });
     if ($result) {
 	if ($result->is_error) {
@@ -241,6 +242,36 @@ Method for Tree building of either DNA or PROTEIN sequences
 }
  
   
+sub status
+{
+    my($self, @args) = @_;
+    if ((my $n = @args) != 0) {
+        Bio::KBase::Exceptions::ArgumentValidationError->throw(error =>
+                                   "Invalid argument count for function status (received $n, expecting 0)");
+    }
+    my $url = $self->{url};
+    my $result = $self->{client}->call($url, $self->{headers}, {
+        method => "kb_fasttree.status",
+        params => \@args,
+    });
+    if ($result) {
+        if ($result->is_error) {
+            Bio::KBase::Exceptions::JSONRPC->throw(error => $result->error_message,
+                           code => $result->content->{error}->{code},
+                           method_name => 'status',
+                           data => $result->content->{error}->{error} # JSON::RPC::ReturnObject only supports JSONRPC 1.1 or 1.O
+                          );
+        } else {
+            return wantarray ? @{$result->result} : $result->result->[0];
+        }
+    } else {
+        Bio::KBase::Exceptions::HTTP->throw(error => "Error invoking method status",
+                        status_line => $self->{client}->status_line,
+                        method_name => 'status',
+                       );
+    }
+}
+   
 
 sub version {
     my ($self) = @_;
@@ -407,7 +438,7 @@ FastTree Input Params
 a reference to a hash where the following keys are defined:
 workspace_name has a value which is a kb_fasttree.workspace_name
 desc has a value which is a string
-input_name has a value which is a kb_fasttree.data_obj_name
+input_ref has a value which is a kb_fasttree.data_obj_ref
 output_name has a value which is a kb_fasttree.data_obj_name
 species_tree_flag has a value which is an int
 intree has a value which is a kb_fasttree.data_obj_name
@@ -430,7 +461,7 @@ gamma has a value which is an int
 a reference to a hash where the following keys are defined:
 workspace_name has a value which is a kb_fasttree.workspace_name
 desc has a value which is a string
-input_name has a value which is a kb_fasttree.data_obj_name
+input_ref has a value which is a kb_fasttree.data_obj_ref
 output_name has a value which is a kb_fasttree.data_obj_name
 species_tree_flag has a value which is an int
 intree has a value which is a kb_fasttree.data_obj_name
