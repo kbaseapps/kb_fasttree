@@ -34,7 +34,7 @@ parameters :
             Describe Contents of the Output Tree
         placeholder: |
             Enter Description
-    input_name:
+    input_ref:
         ui-name : |
             Input MSA
         short-hint : |
