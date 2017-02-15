@@ -575,7 +575,7 @@ class kb_fasttree:
             provenance = ctx['provenance']
         # add additional info to provenance here, in this case the input data object reference
         provenance[0]['input_ws_objects'] = []
-        provenance[0]['input_ws_objects'].append(params[params['input_ref'])
+        provenance[0]['input_ws_objects'].append(params['input_ref'])
         if 'intree_ref' in params and params['intree_ref'] != None:
             provenance[0]['input_ws_objects'].append(params['intree_ref'])
         provenance[0]['service'] = 'kb_fasttree'
