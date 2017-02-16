@@ -313,13 +313,16 @@ class kb_fasttree:
                 row_id_disp = re.sub('\:','%'+r'\1'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\;','%'+r'\1'.encode("hex"), row_id_disp)
 
+                new_id[row_id] = row_id_disp
+
                 #self.log(console,"row_id: '"+row_id+"'")  # DEBUG
                 #self.log(console,"alignment: '"+MSA_in['alignment'][row_id]+"'")  # DEBUG
             # using SeqIO makes multiline sequences.  FastTree doesn't like
                 #record = SeqRecord(Seq(MSA_in['alignment'][row_id]), id=row_id, description=default_row_labels[row_id])
                 #records.append(record)
             #SeqIO.write(records, input_MSA_file_path, "fasta")
-                records.extend(['>'+row_id,
+                #records.extend(['>'+row_id,
+                records.extend(['>'+row_id_disp,
                                 MSA_in['alignment'][row_id]
                                ])
             with open(input_MSA_file_path,'w',0) as input_MSA_file_handle:
@@ -610,8 +613,10 @@ class kb_fasttree:
                 default_node_labels = dict()
                 leaf_list = []
                 for row_id in default_row_labels.keys():
-                    default_node_labels[row_id] = default_row_labels[row_id]
-                    leaf_list.append(row_id)
+                    new_row_id = new_id[row_id]
+                    #default_node_labels[row_id] = default_row_labels[row_id]
+                    default_node_labels[new_row_id] = default_row_labels[row_id]
+                    leaf_list.append(new_row_id)
 
             if 'ws_refs' in MSA_in.keys() and MSA_in['ws_refs'] != None:
                 ws_refs = MSA_in['ws_refs']
