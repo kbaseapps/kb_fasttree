@@ -304,15 +304,16 @@ class kb_fasttree:
             self.log(console, 'writing fasta file: '+input_MSA_file_path)
             records = []
             for row_id in row_order:
-                # take care of characters that will mess up newick
+                # take care of characters that will mess up newick and/or fasttree
                 row_id_disp = re.sub('\s','_',row_id)
+                row_id_disp = re.sub('\/','%'+r'\1'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\\','%'+r'\1'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\(','%'+r'\1'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\)','%'+r'\1'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\[','%'+r'\1'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\]','%'+r'\1'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\:','%'+r'\1'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\;','%'+r'\1'.encode("hex"), row_id_disp)
-
                 new_id[row_id] = row_id_disp
 
                 #self.log(console,"row_id: '"+row_id+"'")  # DEBUG
