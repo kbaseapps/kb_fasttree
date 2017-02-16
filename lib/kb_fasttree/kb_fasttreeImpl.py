@@ -26,6 +26,9 @@ from KBaseReport.KBaseReportClient import KBaseReport
 # silence whining
 import requests
 requests.packages.urllib3.disable_warnings()
+
+import ete3
+
 #END_HEADER
 
 
