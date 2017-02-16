@@ -307,7 +307,7 @@ class kb_fasttree:
                 # take care of characters that will mess up newick and/or fasttree
                 row_id_disp = re.sub('\s','_',row_id)
                 row_id_disp = re.sub('\/','%'+r'\1'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\\','%'+r'\1'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub(r'\\','%'+r'\1'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\(','%'+r'\1'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\)','%'+r'\1'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\[','%'+r'\1'.encode("hex"), row_id_disp)
@@ -330,8 +330,8 @@ class kb_fasttree:
                 input_MSA_file_handle.write("\n".join(records)+"\n")
 
             # DEBUG
-            self.log(console, "MSA INPUT:")
-            self.log(console, "\n".join(records)+"\n")  # DEBUG
+            #self.log(console, "MSA INPUT:")
+            #self.log(console, "\n".join(records)+"\n")  # DEBUG
 
             # Determine whether nuc or protein sequences
             #
