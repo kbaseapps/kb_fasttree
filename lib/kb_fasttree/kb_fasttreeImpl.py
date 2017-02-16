@@ -315,6 +315,9 @@ class kb_fasttree:
             with open(input_MSA_file_path,'w',0) as input_MSA_file_handle:
                 input_MSA_file_handle.write("\n".join(records)+"\n")
 
+            # DEBUG
+            self.loc(console, "MSA INPUT:")
+            self.log(console, "\n".join(records)+"\n")  # DEBUG
 
             # Determine whether nuc or protein sequences
             #
