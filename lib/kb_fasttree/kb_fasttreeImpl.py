@@ -78,24 +78,6 @@ class kb_fasttree:
     def get_genome_set_feature_seqs(self, ws_data, ws_info):
         pass
 
-    # config contains contents of config file in a hash or None if it couldn't
-    # be found
-    def __init__(self, config):
-        #BEGIN_CONSTRUCTOR
-        self.workspaceURL = config['workspace-url']
-        self.shockURL = config['shock-url']
-        self.handleURL = config['handle-service-url']
-        self.scratch = os.path.abspath(config['scratch'])
-        # HACK!! temporary hack for issue where megahit fails on mac because of silent named pipe error
-        #self.host_scratch = self.scratch
-        self.scratch = os.path.join('/kb','module','local_scratch')
-        # end hack
-        if not os.path.exists(self.scratch):
-            os.makedirs(self.scratch)
-
-        #END_CONSTRUCTOR
-        pass
-
 
     # Helper script borrowed from the transform service, logger removed
     #
@@ -217,10 +199,16 @@ class kb_fasttree:
         self.workspaceURL = config['workspace-url']
         self.shockURL = config['shock-url']
         self.handleURL = config['handle-service-url']
+        self.serviceWizardURL = config['service-wizard-url']
+
+        self.callbackURL = os.environ.get('SDK_CALLBACK_URL')
+        if self.callbackURL == None:
+            raise ValueError ("SDK_CALLBACK_URL not set in environment")
+
         self.scratch = os.path.abspath(config['scratch'])
         # HACK!! temporary hack for issue where megahit fails on mac because of silent named pipe error
         #self.host_scratch = self.scratch
-        self.scratch = os.path.join('/kb','module','local_scratch')
+        #self.scratch = os.path.join('/kb','module','local_scratch')
         # end hack
         if not os.path.exists(self.scratch):
             os.makedirs(self.scratch)
