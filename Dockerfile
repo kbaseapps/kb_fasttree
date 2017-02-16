@@ -7,8 +7,8 @@ MAINTAINER Dylan Chivian
 
 
 # Install ETE3
-RUN apt-get install python-numpy python-qt4 python-lxml python-six && \
-    pip install --upgrade ete3
+RUN apt-get install python-numpy python-qt4 python-lxml python-six
+RUN pip install --upgrade ete3
 
 
 
