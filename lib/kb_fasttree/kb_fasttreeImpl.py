@@ -299,10 +299,20 @@ class kb_fasttree:
                 self.log(invalid_msgs,"must have multiple records in MSA: "+params['input_ref'])
 
             # export features to FASTA file
+            new_id = dict()
             input_MSA_file_path = os.path.join(self.scratch, input_name+".fasta")
             self.log(console, 'writing fasta file: '+input_MSA_file_path)
             records = []
             for row_id in row_order:
+                # take care of characters that will mess up newick
+                row_id_disp = re.sub('\s','_',row_id)
+                row_id_disp = re.sub('\(','%'+r'\1'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\)','%'+r'\1'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\[','%'+r'\1'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\]','%'+r'\1'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\:','%'+r'\1'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\;','%'+r'\1'.encode("hex"), row_id_disp)
+
                 #self.log(console,"row_id: '"+row_id+"'")  # DEBUG
                 #self.log(console,"alignment: '"+MSA_in['alignment'][row_id]+"'")  # DEBUG
             # using SeqIO makes multiline sequences.  FastTree doesn't like
