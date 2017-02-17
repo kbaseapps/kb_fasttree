@@ -303,7 +303,7 @@ class kb_fasttree:
                 self.log(invalid_msgs,"must have multiple records in MSA: "+params['input_ref'])
 
             # export features to FASTA file
-            new_id = dict()
+            new_ids = dict()
             input_MSA_file_path = os.path.join(self.scratch, input_name+".fasta")
             self.log(console, 'writing fasta file: '+input_MSA_file_path)
             records = []
@@ -318,7 +318,7 @@ class kb_fasttree:
                 row_id_disp = re.sub('\]','%'+r'\1'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\:','%'+r'\1'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\;','%'+r'\1'.encode("hex"), row_id_disp)
-                new_id[row_id] = row_id_disp
+                new_ids[row_id] = row_id_disp
 
                 #self.log(console,"row_id: '"+row_id+"'")  # DEBUG
                 #self.log(console,"alignment: '"+MSA_in['alignment'][row_id]+"'")  # DEBUG
@@ -605,6 +605,8 @@ class kb_fasttree:
             with open(output_newick_file_path,'r',0) as output_newick_file_handle:
                 output_newick_buf = output_newick_file_handle.read()
             output_newick_buf = output_newick_buf.rstrip()
+            if not output_newick_buf.endswith(';'):
+                output_newick_buf += ';'
             self.log(console,"\nNEWICK:\n"+output_newick_buf+"\n")
         
             # Extract info from MSA
@@ -618,7 +620,7 @@ class kb_fasttree:
                 default_node_labels = dict()
                 leaf_list = []
                 for row_id in default_row_labels.keys():
-                    new_row_id = new_id[row_id]
+                    new_row_id = new_ids[row_id]
                     #default_node_labels[row_id] = default_row_labels[row_id]
                     default_node_labels[new_row_id] = default_row_labels[row_id]
                     leaf_list.append(new_row_id)
@@ -692,17 +694,43 @@ class kb_fasttree:
             return [returnVal]
 
 
-        # Upload newick
+        # Upload newick and newick labels
         #
+        newick_labels_file = params['output_name']+'-labels.newick'
+        output_newick_labels_file_path = os.path.join(output_dir, newick_labels_file);
+        mod_newick_buf = output_newick_buf
+        for row_id in new_ids:
+            new_id = new_ids[row_id]
+            label = default_node_labels[new_id]
+            label = re.sub('\s','_',row_id)
+            label = re.sub('\/','%'+r'\1'.encode("hex"), label)
+            label = re.sub(r'\\','%'+r'\1'.encode("hex"), label)
+            label = re.sub('\(','%'+r'\1'.encode("hex"), label)
+            label = re.sub('\)','%'+r'\1'.encode("hex"), label)
+            label = re.sub('\[','%'+r'\1'.encode("hex"), label)
+            label = re.sub('\]','%'+r'\1'.encode("hex"), label)
+            label = re.sub('\:','%'+r'\1'.encode("hex"), label)
+            label = re.sub('\;','%'+r'\1'.encode("hex"), label)
+            mod_newick_buf = re.sub ('\('+new_id+'\:', '('+label+':', mod_newick_buf)
+            mod_newick_buf = re.sub ('\,'+new_id+'\:', ','+label+':', mod_newick_buf)
+        
+        with open (output_newick_labels_file_path, 'w', 0) as output_newick_labels_file_handle:
+            output_newick_labels_file_handle.write(mod_newick_buf)
+
+        # upload
         dfu = DFUClient(self.callbackURL)
         try:
             newick_upload_ret = dfu.file_to_shock({'file_path': output_newick_file_path,
-                                                   # DEBUG
-                                                   #'make_handle': 0,
                                                    #'pack': 'zip'})
                                                    'make_handle': 0})
         except:
             raise ValueError ('error uploading newick file to shock')
+        try:
+            newick_upload_ret = dfu.file_to_shock({'file_path': output_newick_labels_file_path,
+                                                   #'pack': 'zip'})
+                                                   'make_handle': 0})
+        except:
+            raise ValueError ('error uploading newick labels file to shock')
 
 
         # Create html with tree image
