@@ -726,7 +726,7 @@ class kb_fasttree:
         except:
             raise ValueError ('error uploading newick file to shock')
         try:
-            newick_upload_ret = dfu.file_to_shock({'file_path': output_newick_labels_file_path,
+            newick_labels_upload_ret = dfu.file_to_shock({'file_path': output_newick_labels_file_path,
                                                    #'pack': 'zip'})
                                                    'make_handle': 0})
         except:
@@ -766,9 +766,14 @@ class kb_fasttree:
 #                                    'label': params['output_name']+' HTML'}
 #                                   ]
         reportObj['file_links'] = [{'shock_id': newick_upload_ret['shock_id'],
-                                    'name': params['output_name']+'.newick',
+                                    'name': params['output_name'}+'.newick',
                                     'label': params['output_name']+' NEWICK'
-                                    }]
+                                    },
+                                   {'shock_id': newick_labels_upload_ret['shock_id'],
+                                    'name': params['output_name']+'-labels.newick',
+                                    'label': params['output_name']+' NEWICK (with labels)'
+                                    }
+                                   ]
 
         SERVICE_VER = 'release'
         reportClient = KBaseReport(self.callbackURL, token=ctx['token'], service_ver=SERVICE_VER)
