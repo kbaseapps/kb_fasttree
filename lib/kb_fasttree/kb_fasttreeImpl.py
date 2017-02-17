@@ -21,13 +21,14 @@ from Bio.Alphabet import generic_protein
 from biokbase.workspace.client import Workspace as workspaceService
 from requests_toolbelt import MultipartEncoder
 from biokbase.AbstractHandle.Client import AbstractHandle as HandleService
+from DataFileUtil.DataFileUtilClient import DataFileUtil as DFUClient
 from KBaseReport.KBaseReportClient import KBaseReport
 
 # silence whining
 import requests
 requests.packages.urllib3.disable_warnings()
 
-import ete3
+import ete3  # Tree drawing package we install in Dockerfile
 
 #END_HEADER
 
@@ -660,49 +661,100 @@ class kb_fasttree:
                         })[0]
 
 
-        # build output report object
+        # If input data is invalid
         #
         self.log(console,"BUILDING REPORT")  # DEBUG
 
-        if len(invalid_msgs) == 0:
-            #self.log(console,"sequences in many set: "+str(seq_total))
-            #self.log(console,"sequences in hit set:  "+str(hit_total))
-            #report += 'sequences in many set: '+str(seq_total)+"\n"
-            #report += 'sequences in hit set:  '+str(hit_total)+"\n"
-            report += output_newick_buf+"\n"
-            reportObj = {
-                'objects_created':[{'ref':params['workspace_name']+'/'+params['output_name'], 'description':'FastTree Tree'}],
-                'text_message':report
-                }
-        else:
+        if len(invalid_msgs) != 0:
+            reportName = 'fasttree_report_'+str(uuid.uuid4())
             report += "FAILURE\n\n"+"\n".join(invalid_msgs)+"\n"
             reportObj = {
                 'objects_created':[],
                 'text_message':report
                 }
+            report_obj_info = ws.save_objects({
+                    #'id':info[6],
+                    'workspace':params['workspace_name'],
+                    'objects':[
+                        {
+                            'type':'KBaseReport.Report',
+                            'data':reportObj,
+                            'name':reportName,
+                            'meta':{},
+                            'hidden':1,
+                            'provenance':provenance
+                            }
+                        ]
+                    })[0]
+            returnVal = { 'report_name': reportName,
+                          'report_ref': str(report_obj_info[6]) + '/' + str(report_obj_info[0]) + '/' + str(report_obj_info[4]),
+                          }
+            return [returnVal]
 
-        reportName = 'fasttree_report_'+str(uuid.uuid4())
-        report_obj_info = ws.save_objects({
-#                'id':info[6],
-                'workspace':params['workspace_name'],
-                'objects':[
-                    {
-                        'type':'KBaseReport.Report',
-                        'data':reportObj,
-                        'name':reportName,
-                        'meta':{},
-                        'hidden':1,
-                        'provenance':provenance
-                    }
-                ]
-            })[0]
+
+        # Upload newick
+        #
+        dfu = DFUClient(self.callbackURL)
+        try:
+            newick_upload_ret = dfu.file_to_shock({'file_path': output_newick_file_path,
+                                                   # DEBUG
+                                                   #'make_handle': 0,
+                                                   #'pack': 'zip'})
+                                                   'make_handle': 0})
+        except:
+            raise ValueError ('error uploading newick file to shock')
 
 
+        # Create html with tree image
+        #
+        timestamp = int((datetime.utcnow() - datetime.utcfromtimestamp(0)).total_seconds()*1000)
+        html_output_dir = os.path.join(self.scratch,'output_html.'+str(timestamp))
+        if not os.path.exists(html_output_dir):
+            os.makedirs(html_output_dir)
+        html_file = params['output_name']+'.html'
+        output_html_file_path = os.path.join(html_output_dir, html_file);
+
+        # HERE
+
+
+
+        # Create report obj
+        #
+        reportName = 'blast_report_'+str(uuid.uuid4())
+        #report += output_newick_buf+"\n"
+        reportObj = {'objects_created': [],
+                     #'text_message': '',  # or is it 'message'?
+                     'message': '',  # or is it 'text_message'?
+                     'direct_html': '',
+                     'direct_html_link_index': None,
+                     'file_links': [],
+                     'html_links': [],
+                     'workspace_name': params['workspace_name'],
+                     'report_object_name': reportName
+                     }
+#        reportObj['direct_html_link_index'] = 0
+#        reportObj['html_links'] = [{'shock_id': html_upload_ret['shock_id'],
+#                                    'name': html_file,
+#                                    'label': params['output_name']+' HTML'}
+#                                   ]
+        reportObj['file_links'] = [{'shock_id': newick_upload_ret['shock_id'],
+                                    'name': params['output_name']+'.newick',
+                                    'label': params['output_name']+' NEWICK'
+                                    }]
+
+        SERVICE_VER = 'release'
+        reportClient = KBaseReport(self.callbackURL, token=ctx['token'], service_ver=SERVICE_VER)
+        report_info = reportClient.create_extended_report(reportObj)
+
+
+        # Done
+        #
         self.log(console,"BUILDING RETURN OBJECT")
-        returnVal = { 'report_name': reportName,
-                      'report_ref': str(report_obj_info[6]) + '/' + str(report_obj_info[0]) + '/' + str(report_obj_info[4]),
-                      'output_ref': str(new_obj_info[6]) + '/' + str(new_obj_info[0]) + '/' + str(new_obj_info[4])
+        returnVal = { 'report_name': report_info['name'],
+                      'report_ref': report_info['ref'],
+                      'output_ref': str(new_obj_info[6])+'/'+str(new_obj_info[0])+'/'+str(new_obj_info[4])
                       }
+
         self.log(console,"run_FastTree DONE")
         #END run_FastTree
 
