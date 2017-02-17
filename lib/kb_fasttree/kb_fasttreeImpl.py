@@ -764,7 +764,7 @@ class kb_fasttree:
         except:
             raise ValueError ('error uploading png file to shock')
         try:
-            pdf_upload_ret = dfu.file_to_shock({'file_path': pdf_file_path,
+            pdf_upload_ret = dfu.file_to_shock({'file_path': output_pdf_file_path,
                                                 #'pack': 'zip'})
                                                 'make_handle': 0})
         except:
