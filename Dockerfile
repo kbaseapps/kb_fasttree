@@ -7,7 +7,7 @@ MAINTAINER Dylan Chivian
 
 
 # Install ETE3
-#RUN apt-get install python-numpy python-qt4 python-lxml python-six
+#RUN apt-get -y --fix-missing install python-numpy python-qt4 python-lxml python-six
 #RUN pip install python-numpy
 #RUN pip install python-qt4
 #RUN sudo pip install python-qt5
@@ -16,7 +16,8 @@ MAINTAINER Dylan Chivian
 #RUN pip install --upgrade ete3
 #RUN pip install ete3
 
-RUN sudo apt-get -y --fix-missing install python-qt4
+#RUN sudo apt-get -y --fix-missing install python-qt4
+RUN apt-get -y --fix-missing install python-numpy python-qt4 python-lxml python-six
 RUN pip install ete3==3.0.0b35
 
 
