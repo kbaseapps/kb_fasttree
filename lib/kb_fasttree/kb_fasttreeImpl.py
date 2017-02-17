@@ -791,7 +791,7 @@ class kb_fasttree:
 #                                    'label': params['output_name']+' HTML'}
 #                                   ]
         reportObj['file_links'] = [{'shock_id': newick_upload_ret['shock_id'],
-                                    'name': params['output_name'}+'.newick',
+                                    'name': params['output_name']+'.newick',
                                     'label': params['output_name']+' NEWICK'
                                     },
                                    {'shock_id': newick_labels_upload_ret['shock_id'],
