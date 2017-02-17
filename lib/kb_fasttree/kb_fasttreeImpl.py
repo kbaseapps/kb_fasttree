@@ -314,14 +314,14 @@ class kb_fasttree:
             for row_id in row_order:
                 # take care of characters that will mess up newick and/or fasttree
                 row_id_disp = re.sub('\s','_',row_id)
-                row_id_disp = re.sub('\/','%'+r'\1'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub(r'\\','%'+r'\1'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\(','%'+r'\1'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\)','%'+r'\1'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\[','%'+r'\1'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\]','%'+r'\1'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\:','%'+r'\1'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\;','%'+r'\1'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\/','%'+'/'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub(r'\\','%'+'\\'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\(','%'+'('.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\)','%'+')'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\[','%'+'['.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\]','%'+']'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\:','%'+':'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\;','%'+';'.encode("hex"), row_id_disp)
                 new_ids[row_id] = row_id_disp
 
                 self.log(console,"row_id: '"+row_id+"' row_id_disp: '"+row_id_disp+"'")  # DEBUG
