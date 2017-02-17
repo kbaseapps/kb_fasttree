@@ -10,6 +10,7 @@ MAINTAINER Dylan Chivian
 #RUN apt-get -y --fix-missing install python-numpy python-qt4 python-lxml python-six
 # only need qt4
 RUN apt-get update
+RUN apt-get -y install xvfb
 RUN apt-get -y install python-qt4
 RUN pip install ete3==3.0.0b35
 
