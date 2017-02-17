@@ -1,7 +1,8 @@
 {
     "ver": "0.0.1",
     "authors": [
-        "dylan"
+        "dylan",
+	"paramvir"
     ],
     "contact": "help@kbase.us",
     "visible": true,
