@@ -717,6 +717,8 @@ class kb_fasttree:
             label = re.sub('\;','%'+';'.encode("hex"), label)
             mod_newick_buf = re.sub ('\('+new_id+'\:', '('+label+':', mod_newick_buf)
             mod_newick_buf = re.sub ('\,'+new_id+'\:', ','+label+':', mod_newick_buf)
+
+            self.log(console, "new_id: '"+new_id+"' label: '"+label+"'")  # DEBUG
         
         with open (output_newick_labels_file_path, 'w', 0) as output_newick_labels_file_handle:
             output_newick_labels_file_handle.write(mod_newick_buf)
