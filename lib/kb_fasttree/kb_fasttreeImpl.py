@@ -293,18 +293,22 @@ class kb_fasttree:
             MSA_in = data
             row_order = []
             default_row_labels = dict()
-            if 'row_order' in MSA_in.keys():
+            if 'row_order' in MSA_in:
                 row_order = MSA_in['row_order']
             else:
                 row_order = sorted(MSA_in['alignment'].keys())
 
-            if 'default_row_labels' in MSA_in.keys():
+            if 'default_row_labels' in MSA_in:
                 default_row_labels = MSA_in['default_row_labels']
             else:
                 for row_id in row_order:
                     default_row_labels[row_id] = row_id
             if len(row_order) < 2:
                 self.log(invalid_msgs,"must have multiple records in MSA: "+params['input_ref'])
+            # DEBUG
+            for row_id in row_order:
+                self.log(console, "row_id: '"+row_id+"' default_row_label: '"+default_row_labels['row_id']+"'")
+
 
             # export features to FASTA file
             new_ids = dict()
@@ -620,7 +624,7 @@ class kb_fasttree:
             ws_refs = None
             kb_refs = None
             leaf_list = None
-            if default_row_labels != None:
+            if default_row_labels:
                 default_node_labels = dict()
                 leaf_list = []
                 for row_id in default_row_labels.keys():
