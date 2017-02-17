@@ -252,6 +252,10 @@ class kb_fasttree:
         # ctx is the context object
         # return variables are: returnVal
         #BEGIN run_FastTree
+
+        # init
+        #
+        dfu = DFUClient(self.callbackURL)
         console = []
         invalid_msgs = []
         self.log(console,'Running run_FastTree with params=')
@@ -718,7 +722,6 @@ class kb_fasttree:
             output_newick_labels_file_handle.write(mod_newick_buf)
 
         # upload
-        dfu = DFUClient(self.callbackURL)
         try:
             newick_upload_ret = dfu.file_to_shock({'file_path': output_newick_file_path,
                                                    #'pack': 'zip'})
@@ -740,10 +743,32 @@ class kb_fasttree:
         if not os.path.exists(html_output_dir):
             os.makedirs(html_output_dir)
         html_file = params['output_name']+'.html'
+        png_file = params['output_name']+'.png'
+        pdf_file = params['output_name']+'.pdf'
         output_html_file_path = os.path.join(html_output_dir, html_file);
+        output_png_file_path = os.path.join(html_output_dir, png_file);
+        output_pdf_file_path = os.path.join(output_dir, pdf_file);
+
 
         # HERE
+        t = ete3.Tree("(A:1,(B:1,(E:1,D:1):0.5):0.5);")
+        t.render(output_png_file_path, w=150, units="mm")        
+        t.render(output_pdf_file_path, w=150, units="mm")        
 
+
+        # upload
+        try:
+            png_upload_ret = dfu.file_to_shock({'file_path': output_png_file_path,
+                                                #'pack': 'zip'})
+                                                'make_handle': 0})
+        except:
+            raise ValueError ('error uploading png file to shock')
+        try:
+            pdf_upload_ret = dfu.file_to_shock({'file_path': pdf_file_path,
+                                                #'pack': 'zip'})
+                                                'make_handle': 0})
+        except:
+            raise ValueError ('error uploading pdf file to shock')
 
 
         # Create report obj
@@ -772,6 +797,14 @@ class kb_fasttree:
                                    {'shock_id': newick_labels_upload_ret['shock_id'],
                                     'name': params['output_name']+'-labels.newick',
                                     'label': params['output_name']+' NEWICK (with labels)'
+                                    },
+                                   {'shock_id': png_upload_ret['shock_id'],
+                                    'name': params['output_name']+'.png',
+                                    'label': params['output_name']+' PNG'
+                                    },
+                                   {'shock_id': pdf_upload_ret['shock_id'],
+                                    'name': params['output_name']+'.pdf',
+                                    'label': params['output_name']+' PDF'
                                     }
                                    ]
 
