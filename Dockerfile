@@ -14,8 +14,10 @@ MAINTAINER Dylan Chivian
 #RUN pip install python-lxml
 #RUN pip install python-six
 #RUN pip install --upgrade ete3
-RUN pip install ete3==3.0.0b35
 #RUN pip install ete3
+
+RUN apt-get install python-qt4
+RUN pip install ete3==3.0.0b35
 
 
 
