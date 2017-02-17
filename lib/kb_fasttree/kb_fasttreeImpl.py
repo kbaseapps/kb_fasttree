@@ -307,7 +307,7 @@ class kb_fasttree:
                 self.log(invalid_msgs,"must have multiple records in MSA: "+params['input_ref'])
             # DEBUG
             for row_id in row_order:
-                self.log(console, "row_id: '"+row_id+"' default_row_label: '"+default_row_labels['row_id']+"'")
+                self.log(console, "row_id: '"+row_id+"' default_row_label: '"+default_row_labels[row_id]+"'")
 
 
             # export features to FASTA file
