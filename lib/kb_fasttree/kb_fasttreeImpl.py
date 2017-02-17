@@ -324,7 +324,7 @@ class kb_fasttree:
                 row_id_disp = re.sub('\;','%'+r'\1'.encode("hex"), row_id_disp)
                 new_ids[row_id] = row_id_disp
 
-                #self.log(console,"row_id: '"+row_id+"'")  # DEBUG
+                self.log(console,"row_id: '"+row_id+"' row_id_disp: '"+row_id_disp+"'")  # DEBUG
                 #self.log(console,"alignment: '"+MSA_in['alignment'][row_id]+"'")  # DEBUG
             # using SeqIO makes multiline sequences.  FastTree doesn't like
                 #record = SeqRecord(Seq(MSA_in['alignment'][row_id]), id=row_id, description=default_row_labels[row_id])
