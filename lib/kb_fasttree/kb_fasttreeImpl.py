@@ -292,9 +292,8 @@ class kb_fasttree:
         if input_type_name == 'MSA':
             MSA_in = data
             # DEBUG
-            for field in MSA_in.keys():
-                self.log(console, "MSA key: '"+field+"'")
-
+            #for field in MSA_in.keys():
+            #    self.log(console, "MSA key: '"+field+"'")
             row_order = []
             default_row_labels = dict()
             if 'row_order' in MSA_in:
@@ -310,8 +309,8 @@ class kb_fasttree:
             if len(row_order) < 2:
                 self.log(invalid_msgs,"must have multiple records in MSA: "+params['input_ref'])
             # DEBUG
-            for row_id in row_order:
-                self.log(console, "row_id: '"+row_id+"' default_row_label: '"+default_row_labels[row_id]+"'")
+            #for row_id in row_order:
+            #    self.log(console, "row_id: '"+row_id+"' default_row_label: '"+default_row_labels[row_id]+"'")
 
 
             # export features to FASTA file
@@ -714,7 +713,7 @@ class kb_fasttree:
         for row_id in new_ids:
             new_id = new_ids[row_id]
             label = default_node_labels[new_id]
-            label = re.sub('\s','_',row_id)
+            label = re.sub('\s','_',label)
             label = re.sub('\/','%'+'/'.encode("hex"), label)
             label = re.sub(r'\\','%'+'\\'.encode("hex"), label)
             label = re.sub('\(','%'+'('.encode("hex"), label)
@@ -726,7 +725,7 @@ class kb_fasttree:
             mod_newick_buf = re.sub ('\('+new_id+'\:', '('+label+':', mod_newick_buf)
             mod_newick_buf = re.sub ('\,'+new_id+'\:', ','+label+':', mod_newick_buf)
 
-            self.log(console, "new_id: '"+new_id+"' label: '"+label+"'")  # DEBUG
+            #self.log(console, "new_id: '"+new_id+"' label: '"+label+"'")  # DEBUG
         
         with open (output_newick_labels_file_path, 'w', 0) as output_newick_labels_file_handle:
             output_newick_labels_file_handle.write(mod_newick_buf)
