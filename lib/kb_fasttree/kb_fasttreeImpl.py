@@ -291,6 +291,10 @@ class kb_fasttree:
 
         if input_type_name == 'MSA':
             MSA_in = data
+            # DEBUG
+            for field in MSA_in.keys():
+                self.log(console, "MSA key: '"+field+"'")
+
             row_order = []
             default_row_labels = dict()
             if 'row_order' in MSA_in:
