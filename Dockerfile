@@ -16,7 +16,7 @@ MAINTAINER Dylan Chivian
 #RUN pip install --upgrade ete3
 #RUN pip install ete3
 
-RUN apt-get -y --fix-missing install python-qt4
+RUN sudo apt-get -y --fix-missing install python-qt4
 RUN pip install ete3==3.0.0b35
 
 
