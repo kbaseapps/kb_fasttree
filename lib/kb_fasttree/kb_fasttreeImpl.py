@@ -329,6 +329,7 @@ class kb_fasttree:
                 row_id_disp = re.sub('\]','%'+']'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\:','%'+':'.encode("hex"), row_id_disp)
                 row_id_disp = re.sub('\;','%'+';'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\|','%'+';'.encode("hex"), row_id_disp)
                 new_ids[row_id] = row_id_disp
 
                 #self.log(console,"row_id: '"+row_id+"' row_id_disp: '"+row_id_disp+"'")  # DEBUG
@@ -722,6 +723,7 @@ class kb_fasttree:
             label = re.sub('\]','%'+']'.encode("hex"), label)
             label = re.sub('\:','%'+':'.encode("hex"), label)
             label = re.sub('\;','%'+';'.encode("hex"), label)
+            label = re.sub('\|','%'+';'.encode("hex"), label)
             mod_newick_buf = re.sub ('\('+new_id+'\:', '('+label+':', mod_newick_buf)
             mod_newick_buf = re.sub ('\,'+new_id+'\:', ','+label+':', mod_newick_buf)
 
