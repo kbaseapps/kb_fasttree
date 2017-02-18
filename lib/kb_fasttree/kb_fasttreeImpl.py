@@ -812,11 +812,25 @@ class kb_fasttree:
 
             n.set_style(style)
 
-        # save
+        # save images
         t.render(output_png_file_path, w=5, units="in", dpi=200, tree_style=ts)
         t.render(output_pdf_file_path, w=5, units="in", tree_style=ts)  # dpi irrelevant
 
-        # upload
+        # make html
+        html_report_lines = []
+        html_report_lines += ['<html>']
+        html_report_lines += ['<head><title>KBase FastTree-2: '+params['output_name']+'</title></head>']
+        html_report_lines += ['<body bgcolor="white">']
+        html_report_lines += ['<img src="'+png_file+'">']
+        html_report_lines += ['</body>']
+        html_report_lines += ['</html>']
+
+        html_report_str = "\n".join(html_report_lines)
+        with open (output_html_file_path, 'w', 0) as html_handle:
+            html_handle.write(html_report_str)
+
+
+        # upload images and html
         try:
             png_upload_ret = dfu.file_to_shock({'file_path': output_png_file_path,
                                                 #'pack': 'zip'})
@@ -829,6 +843,12 @@ class kb_fasttree:
                                                 'make_handle': 0})
         except:
             raise ValueError ('error uploading pdf file to shock')
+        try:
+            html_upload_ret = dfu.file_to_shock({'file_path': html_output_dir,
+                                                 'make_handle': 0,
+                                                 'pack': 'zip'})
+        except:
+            raise ValueError ('error uploading png file to shock')
 
 
         # Create report obj
@@ -845,11 +865,12 @@ class kb_fasttree:
                      'workspace_name': params['workspace_name'],
                      'report_object_name': reportName
                      }
-#        reportObj['direct_html_link_index'] = 0
-#        reportObj['html_links'] = [{'shock_id': html_upload_ret['shock_id'],
-#                                    'name': html_file,
-#                                    'label': params['output_name']+' HTML'}
-#                                   ]
+        reportObj['direct_html_link_index'] = 0
+        reportObj['html_links'] = [{'shock_id': html_upload_ret['shock_id'],
+                                    'name': html_file,
+                                    'label': params['output_name']+' HTML'
+                                    }
+                                   ]
         reportObj['file_links'] = [{'shock_id': newick_upload_ret['shock_id'],
                                     'name': params['output_name']+'.newick',
                                     'label': params['output_name']+' NEWICK'
