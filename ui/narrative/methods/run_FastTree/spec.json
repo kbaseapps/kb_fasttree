@@ -9,7 +9,8 @@
     "categories": ["active","comparative_genomics"],
     "widgets": {
         "input": null,
-        "output": "kbaseTree"
+	#"output": "kbaseTree"
+        "output": "kbaseReportView"
     },
     "parameters": [ 
         {
