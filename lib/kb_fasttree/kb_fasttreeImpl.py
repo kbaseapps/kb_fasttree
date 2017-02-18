@@ -821,7 +821,7 @@ class kb_fasttree:
         html_report_lines += ['<html>']
         html_report_lines += ['<head><title>KBase FastTree-2: '+params['output_name']+'</title></head>']
         html_report_lines += ['<body bgcolor="white">']
-        html_report_lines += ['<img width=300 src="'+png_file+'">']
+        html_report_lines += ['<img width=600 src="'+png_file+'">']
         html_report_lines += ['</body>']
         html_report_lines += ['</html>']
 
