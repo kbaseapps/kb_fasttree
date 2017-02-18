@@ -771,7 +771,7 @@ class kb_fasttree:
         ts.show_branch_support = True
         ts.scale = 50 # 50 pixels per branch length unit
         ts.branch_vertical_margin = 5 # pixels between adjacent branches
-        ts.title.add_face(ete3.TextFace("Hello ETE", fsize=10), column=0)
+        ts.title.add_face(ete3.TextFace(params['output_name']+" "+params['desc'], fsize=10), column=0)
 
         node_style = ete3.NodeStyle()
         node_style["fgcolor"] = "#606060"  # for node balls
