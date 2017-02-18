@@ -729,6 +729,7 @@ class kb_fasttree:
 
             #self.log(console, "new_id: '"+new_id+"' label: '"+label+"'")  # DEBUG
         
+        mod_newick_buf = re.sub ('_', ' ', mod_newick_buf)
         with open (output_newick_labels_file_path, 'w', 0) as output_newick_labels_file_handle:
             output_newick_labels_file_handle.write(mod_newick_buf)
 
@@ -760,12 +761,60 @@ class kb_fasttree:
         output_png_file_path = os.path.join(html_output_dir, png_file);
         output_pdf_file_path = os.path.join(output_dir, pdf_file);
 
-
-        # HERE
+        # init ETE3 objects
         t = ete3.Tree(mod_newick_buf)
-        t.render(output_png_file_path, w=300, units="mm")        
-        t.render(output_pdf_file_path, w=300, units="mm")        
+        ts = ete3.TreeStyle()
 
+       # customize
+        ts.show_leaf_name = True
+        ts.show_branch_length = False
+        ts.show_branch_support = True
+        ts.scale = 50 # 50 pixels per branch length unit
+        ts.branch_vertical_margin = 5 # pixels between adjacent branches
+        ts.title.add_face(ete3.TextFace("Hello ETE", fsize=10), column=0)
+
+        node_style = ete3.NodeStyle()
+        node_style["fgcolor"] = "#606060"  # for node balls
+        node_style["size"] = 10  # for node balls (gets reset based on support)
+        node_style["vt_line_color"] = "#606060"
+        node_style["hz_line_color"] = "#606060"
+        node_style["vt_line_width"] = 2
+        node_style["hz_line_width"] = 2
+        node_style["vt_line_type"] = 0 # 0 solid, 1 dashed, 2 dotted
+        node_style["hz_line_type"] = 0
+
+        leaf_style = ete3.NodeStyle()
+        leaf_style["fgcolor"] = "#ffffff"  # for node balls
+        leaf_style["size"] = 2  # for node balls (we're using it to add space)
+        leaf_style["vt_line_color"] = "#606060"  # unecessary
+        leaf_style["hz_line_color"] = "#606060"
+        leaf_style["vt_line_width"] = 2
+        leaf_style["hz_line_width"] = 2
+        leaf_style["vt_line_type"] = 0 # 0 solid, 1 dashed, 2 dotted
+        leaf_style["hz_line_type"] = 0
+
+        for n in t.traverse():
+            if n.is_leaf():
+                style = leaf_style
+            else:
+                style = ete3.NodeStyle()
+                for k in node_style.keys():
+                    style[k] = node_style[k]
+
+                if n.support > 0.95:
+                    style["size"] = 6
+                elif n.support > 0.90:
+                    style["size"] = 5
+                elif n.support > 0.80:
+                    style["size"] = 4
+                else:
+                    style["size"] = 2
+
+            n.set_style(style)
+
+        # save
+        t.render(output_png_file_path, w=5, units="in", dpi=200, tree_style=ts)
+        t.render(output_pdf_file_path, w=5, units="in", tree_style=ts)  # dpi irrelevant
 
         # upload
         try:
