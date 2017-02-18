@@ -765,11 +765,11 @@ class kb_fasttree:
         t = ete3.Tree(mod_newick_buf)
         ts = ete3.TreeStyle()
 
-       # customize
+        # customize
         ts.show_leaf_name = True
         ts.show_branch_length = False
         ts.show_branch_support = True
-        ts.scale = 50 # 50 pixels per branch length unit
+        #ts.scale = 50 # 50 pixels per branch length unit
         ts.branch_vertical_margin = 5 # pixels between adjacent branches
         ts.title.add_face(ete3.TextFace(params['output_name']+" "+params['desc'], fsize=10), column=0)
 
@@ -813,15 +813,19 @@ class kb_fasttree:
             n.set_style(style)
 
         # save images
-        t.render(output_png_file_path, w=5, units="in", dpi=200, tree_style=ts)
-        t.render(output_pdf_file_path, w=5, units="in", tree_style=ts)  # dpi irrelevant
+        dpi = 200
+        img_units = "in"
+        img_pix_width = 1000
+        img_in_width = round(float(img_pix_width)/float(dpi), 1)
+        t.render(output_png_file_path, w=img_in_width, units=img_units, dpi=dpi, tree_style=ts)
+        t.render(output_pdf_file_path, w=img_in_width, units=img_units, tree_style=ts)  # dpi irrelevant
 
         # make html
         html_report_lines = []
         html_report_lines += ['<html>']
         html_report_lines += ['<head><title>KBase FastTree-2: '+params['output_name']+'</title></head>']
         html_report_lines += ['<body bgcolor="white">']
-        html_report_lines += ['<img width=600 src="'+png_file+'">']
+        html_report_lines += ['<img width='+str(img_pix_width)+'" src="'+png_file+'">']
         html_report_lines += ['</body>']
         html_report_lines += ['</html>']
 
