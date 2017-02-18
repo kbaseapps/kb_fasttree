@@ -763,8 +763,8 @@ class kb_fasttree:
 
         # HERE
         t = ete3.Tree(mod_newick_buf)
-        t.render(output_png_file_path, w=150, units="mm")        
-        t.render(output_pdf_file_path, w=150, units="mm")        
+        t.render(output_png_file_path, w=300, units="mm")        
+        t.render(output_pdf_file_path, w=300, units="mm")        
 
 
         # upload
