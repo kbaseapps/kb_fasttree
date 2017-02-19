@@ -101,8 +101,24 @@ parameters :
             After optimizing the tree under the CAT approximation, rescale the lengths to optimize the Gamma20 likelihood
 
 description : |
-    <p>This method builds a Phylogenetic Tree reconstruction from a Multiple Sequence Alignment (MSA) of either nucleotide or protein sequences using FastTree2.</p>
+    <p>This method builds a Phylogenetic Tree reconstruction from a Multiple Sequence Alignment (MSA) of either nucleotide or protein sequences using FastTree2.  Tree display uses ETE3 (v3.0.0b35).</p>
     <p>FastTree2.1.8 from http://www.microbesonline.org/fasttree/</p>
-    <p>Please cite:</p>
-    <p><A HREF="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0009490">Price, M.N., Dehal, P.S., and Arkin, A.P. (2010) FastTree 2 -- Approximately Maximum-Likelihood Trees for Large Alignments. PLoS ONE, 5(3):e9490.</A> doi:10.1371/journal.pone.0009490</p>
-    <p><A HREF="http://mbe.oxfordjournals.org/content/26/7/1641.full">Price, M.N., Dehal, P.S., and Arkin, A.P. (2009) FastTree: Computing Large Minimum-Evolution Trees with Profiles instead of a Distance Matrix. Molecular Biology and Evolution 26:1641-1650.</A> doi:10.1093/molbev/msp077</p>
+
+publications:
+    -
+        pmid : 20224823
+        display-text : |
+            'Price MN, Dehal PS, and Arkin AP. (2010) FastTree 2 -- Approximately Maximum-Likelihood Trees for Large Alignments. PLoS ONE, 5(3):e9490. doi:10.1371/journal.pone.0009490'
+        link: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0009490
+    -
+        pmid : 19377059
+        display-text : |
+            'Price MN, Dehal PS, Arkin AP. (2009) FastTree: computing large minimum evolution trees with profiles instead of a distance matrix. Mol Biol Evol. 2009 Jul;26(7):1641-50. doi: 10.1093/molbev/msp077.'
+        link: https://www.ncbi.nlm.nih.gov/pubmed/19377059
+    -
+        pmid : 26921390 
+        display-text : |
+            'Huerta-Cepas J, Serra F, and Bork P. (2016) ETE 3: Reconstruction, analysis and visualization of phylogenomic data. Mol Biol Evol 2016; doi: 10.1093/molbev/msw046'
+        link: https://www.ncbi.nlm.nih.gov/pubmed/26921390
+    -
+        link: http://etetoolkit.org
