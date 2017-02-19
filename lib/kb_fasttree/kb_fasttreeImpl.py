@@ -813,10 +813,11 @@ class kb_fasttree:
             n.set_style(style)
 
         # save images
-        dpi = 200
+        dpi = 300
         img_units = "in"
-        img_pix_width = 600
+        img_pix_width = 1200
         img_in_width = round(float(img_pix_width)/float(dpi), 1)
+        img_html_width = img_pix_width // 2
         t.render(output_png_file_path, w=img_in_width, units=img_units, dpi=dpi, tree_style=ts)
         t.render(output_pdf_file_path, w=img_in_width, units=img_units, tree_style=ts)  # dpi irrelevant
 
