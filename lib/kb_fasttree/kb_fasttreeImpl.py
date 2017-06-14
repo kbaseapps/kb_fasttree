@@ -51,9 +51,9 @@ class kb_fasttree:
     # state. A method could easily clobber the state set by another while
     # the latter method is running.
     ######################################### noqa
-    VERSION = "0.0.1"
-    GIT_URL = "https://github.com/kbaseapps/kb_fasttree.git"
-    GIT_COMMIT_HASH = "89c087510b4a2f3bdda13e51e192c6b4c892aa77"
+    VERSION = "0.0.2"
+    GIT_URL = "https://github.com/kbaseapps/kb_fasttree"
+    GIT_COMMIT_HASH = "efac401948d543c0cc8972f39e6b987aceb4c377"
 
     #BEGIN_CLASS_HEADER
     workspaceURL = None
