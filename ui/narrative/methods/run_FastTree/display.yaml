@@ -1,7 +1,7 @@
 #
 # define display information
 #
-name: FASTTREE-2 Phylogenetic Tree from MSA
+name: FASTTREE-2 Phylogenetic Tree from MSA - v2.1.9
 tooltip: |
     Build a Phylogenetic reconstruction from a Multiple Sequence Alignment (MSA) with FastTree2
 screenshots: []
