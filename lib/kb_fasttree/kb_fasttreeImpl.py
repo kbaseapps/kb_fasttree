@@ -367,7 +367,7 @@ class kb_fasttree:
 
         # Get start tree (if any)
         #
-        if 'intree_ref' in params and params['intree_ref'] != None:
+        if 'intree_ref' in params and params['intree_ref'] != None and params['intree_ref'] != '':
             try:
                 ws = workspaceService(self.workspaceURL, token=ctx['token'])
                 objects = ws.get_objects([{'ref': params['intree_ref']}])
@@ -410,7 +410,7 @@ class kb_fasttree:
             # add additional info to provenance here, in this case the input data object reference
             provenance[0]['input_ws_objects'] = []
             provenance[0]['input_ws_objects'].append(params['input_ref'])
-            if 'intree_ref' in params and params['intree_ref'] != None:
+            if 'intree_ref' in params and params['intree_ref'] != None and params['intree_ref'] != '':
                 provenance[0]['input_ws_objects'].append(params['intree_ref'])
             provenance[0]['service'] = 'kb_fasttree'
             provenance[0]['method'] = 'run_FastTree'
@@ -489,7 +489,7 @@ class kb_fasttree:
             fasttree_cmd.append('-fastest')
         if 'pseudo' in params and params['pseudo'] != None and params['pseudo'] != 0:
             fasttree_cmd.append('-pseudo')
-        if 'intree_ref' in params and params['intree_ref'] != None:
+        if 'intree_ref' in params and params['intree_ref'] != None and params['intree_ref'] != '':
             fasttree_cmd.append('-intree')
             fasttree_cmd.append(intree_newick_file_path)
         if all_seqs_nuc and 'gtr' in params and params['gtr'] != None and params['gtr'] != 0:
@@ -597,7 +597,7 @@ class kb_fasttree:
         # add additional info to provenance here, in this case the input data object reference
         provenance[0]['input_ws_objects'] = []
         provenance[0]['input_ws_objects'].append(params['input_ref'])
-        if 'intree_ref' in params and params['intree_ref'] != None:
+        if 'intree_ref' in params and params['intree_ref'] != None and params['intree_ref'] != '':
             provenance[0]['input_ws_objects'].append(params['intree_ref'])
         provenance[0]['service'] = 'kb_fasttree'
         provenance[0]['method'] = 'run_FastTree'

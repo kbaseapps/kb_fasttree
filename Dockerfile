@@ -32,12 +32,11 @@ RUN apt-get update && \
 
 # -----------------------------------------
 
+RUN mkdir -p /kb/module
 COPY ./ /kb/module
 RUN mkdir -p /kb/module/work
 RUN chmod -R a+rw /kb/module
-
 WORKDIR /kb/module
-
 RUN make all
 
 
@@ -58,6 +57,7 @@ RUN \
     ln -s FastTree2.1.9_64 FastTree
 
 
+WORKDIR /kb/module
 ENTRYPOINT [ "./scripts/entrypoint.sh" ]
 
 CMD [ ]
