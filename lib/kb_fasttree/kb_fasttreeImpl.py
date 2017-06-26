@@ -663,16 +663,20 @@ class kb_fasttree:
 
             # Store output_Tree
             #
-            new_obj_info = ws.save_objects({
-                            'workspace': params['workspace_name'],
-                            'objects':[{
-                                    'type': 'KBaseTrees.Tree',
-                                    'data': output_Tree,
-                                    'name': params['output_name'],
-                                    'meta': {},
-                                    'provenance': provenance
-                                }]
-                        })[0]
+            try:
+                new_obj_info = ws.save_objects({
+                    'workspace': params['workspace_name'],
+                    'objects':[{
+                        'type': 'KBaseTrees.Tree',
+                        'data': output_Tree,
+                        'name': params['output_name'],
+                        'meta': {},
+                        'provenance': provenance
+                    }]
+                })[0]
+            except Exception as e:
+                raise ValueError('Unable to save tree '+params['output_name']+' object to workspace '+str(params['workspace_name'])+': ' + str(e))
+                #to get the full stack trace: traceback.format_exc()
 
 
         # If input data is invalid
@@ -870,6 +874,7 @@ class kb_fasttree:
                      'workspace_name': params['workspace_name'],
                      'report_object_name': reportName
                      }
+        reportObj['objects_created'].append({'ref': str(params['workspace_name'])+'/'+str(params['output_name']),'description': params['output_name']+' Tree'})
         reportObj['direct_html_link_index'] = 0
         reportObj['html_links'] = [{'shock_id': html_upload_ret['shock_id'],
                                     'name': html_file,
