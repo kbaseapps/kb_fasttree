@@ -367,7 +367,7 @@ class kb_fasttree:
 
         # Get start tree (if any)
         #
-        if 'intree_ref' in params and params['intree_ref'] != None:
+        if 'intree_ref' in params and params['intree_ref'] != None and params['intree_ref'] != '':
             try:
                 ws = workspaceService(self.workspaceURL, token=ctx['token'])
                 objects = ws.get_objects([{'ref': params['intree_ref']}])
@@ -410,7 +410,7 @@ class kb_fasttree:
             # add additional info to provenance here, in this case the input data object reference
             provenance[0]['input_ws_objects'] = []
             provenance[0]['input_ws_objects'].append(params['input_ref'])
-            if 'intree_ref' in params and params['intree_ref'] != None:
+            if 'intree_ref' in params and params['intree_ref'] != None and params['intree_ref'] != '':
                 provenance[0]['input_ws_objects'].append(params['intree_ref'])
             provenance[0]['service'] = 'kb_fasttree'
             provenance[0]['method'] = 'run_FastTree'
@@ -489,7 +489,7 @@ class kb_fasttree:
             fasttree_cmd.append('-fastest')
         if 'pseudo' in params and params['pseudo'] != None and params['pseudo'] != 0:
             fasttree_cmd.append('-pseudo')
-        if 'intree_ref' in params and params['intree_ref'] != None:
+        if 'intree_ref' in params and params['intree_ref'] != None and params['intree_ref'] != '':
             fasttree_cmd.append('-intree')
             fasttree_cmd.append(intree_newick_file_path)
         if all_seqs_nuc and 'gtr' in params and params['gtr'] != None and params['gtr'] != 0:
@@ -597,7 +597,7 @@ class kb_fasttree:
         # add additional info to provenance here, in this case the input data object reference
         provenance[0]['input_ws_objects'] = []
         provenance[0]['input_ws_objects'].append(params['input_ref'])
-        if 'intree_ref' in params and params['intree_ref'] != None:
+        if 'intree_ref' in params and params['intree_ref'] != None and params['intree_ref'] != '':
             provenance[0]['input_ws_objects'].append(params['intree_ref'])
         provenance[0]['service'] = 'kb_fasttree'
         provenance[0]['method'] = 'run_FastTree'
@@ -663,16 +663,20 @@ class kb_fasttree:
 
             # Store output_Tree
             #
-            new_obj_info = ws.save_objects({
-                            'workspace': params['workspace_name'],
-                            'objects':[{
-                                    'type': 'KBaseTrees.Tree',
-                                    'data': output_Tree,
-                                    'name': params['output_name'],
-                                    'meta': {},
-                                    'provenance': provenance
-                                }]
-                        })[0]
+            try:
+                new_obj_info = ws.save_objects({
+                    'workspace': params['workspace_name'],
+                    'objects':[{
+                        'type': 'KBaseTrees.Tree',
+                        'data': output_Tree,
+                        'name': params['output_name'],
+                        'meta': {},
+                        'provenance': provenance
+                    }]
+                })[0]
+            except Exception as e:
+                raise ValueError('Unable to save tree '+params['output_name']+' object to workspace '+str(params['workspace_name'])+': ' + str(e))
+                #to get the full stack trace: traceback.format_exc()
 
 
         # If input data is invalid
@@ -870,6 +874,7 @@ class kb_fasttree:
                      'workspace_name': params['workspace_name'],
                      'report_object_name': reportName
                      }
+        reportObj['objects_created'].append({'ref': str(params['workspace_name'])+'/'+str(params['output_name']),'description': params['output_name']+' Tree'})
         reportObj['direct_html_link_index'] = 0
         reportObj['html_links'] = [{'shock_id': html_upload_ret['shock_id'],
                                     'name': html_file,
