@@ -106,7 +106,8 @@ parameters :
 description : |
     <p>This method builds a Phylogenetic Tree reconstruction from a Multiple Sequence Alignment (MSA) of either nucleotide or protein sequences using FastTree2.  Tree display uses ETE3 (v3.0.0b35).</p>
     <p>FastTree2.1.9 from <a href="http://www.microbesonline.org/fasttree/">http://www.microbesonline.org/fasttree/</a></p>
-    <p>Please cite:</p>
+    <p><i>Please cite:</i></p>
+    <blockquote>
     <p>FastTree:<br>
        <ul>
        <li> Price MN, Dehal PS, and Arkin AP. (2010) FastTree 2 -- Approximately Maximum-Likelihood Trees for Large Alignments. <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0009490">PLoS ONE, 5(3):e9490.</a> doi:10.1371/journal.pone.0009490
@@ -117,7 +118,9 @@ description : |
       <ul>
       <li>Huerta-Cepas J, Serra F, and Bork P. (2016) ETE 3: Reconstruction, analysis and visualization of phylogenomic data. <a href="https://www.ncbi.nlm.nih.gov/pubmed/26921390">Mol Biol Evol 2016</a> doi:10.1093/molbev/msw046
       <li> <a href="http://etetoolkit.org">http://etetoolkit.org</a>
+     </ul>
     </p>
+    </blockquote>
     <p><hr></p>
     <p><i>Implemented for KBase by <a href="mailto:DCChivian@lbl.gov">Dylan Chivian (DCChivian@lbl.gov)</a></i></p>
     <p><hr></p>
