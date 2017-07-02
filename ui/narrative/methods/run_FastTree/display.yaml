@@ -105,6 +105,7 @@ parameters :
 
 description : |
     <p>This method builds a Phylogenetic Tree reconstruction from a Multiple Sequence Alignment (MSA) of either nucleotide or protein sequences using FastTree2.  Tree display uses ETE3 (v3.0.0b35).</p>
+    <p><hr></p>
     <p>FastTree2.1.9 from <a href="http://www.microbesonline.org/fasttree/">http://www.microbesonline.org/fasttree/</a></p>
     <p><i>Please cite:</i></p>
     <p><b>FastTree:</b><br>
