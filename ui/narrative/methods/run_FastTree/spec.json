@@ -1,10 +1,10 @@
 {
-    "ver": "1.0.0",
+    "ver": "1.0.1",
     "authors": [
         "dylan",
 	"psdehal"
     ],
-    "contact": "help@kbase.us",
+    "contact": "http://kbase.us/contact-us/",
     "visible": true,
     "categories": ["active","comparative_genomics"],
     "widgets": {
