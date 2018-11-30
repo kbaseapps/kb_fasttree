@@ -146,21 +146,26 @@ description : |
     <p><b><i>Output Tree Image:</i></b> The Tree is rendered using the ETE3 Toolkit.</p>
     <p><b><i>Downloadable files:</i></b> The Newick formatted output tree, as well as rendered PNG and PDF formats, are available for download.</p>
 
-publications:
+publications :
     -
-        pmid : 20224823
-        display-text : |
-            'Price MN, Dehal PS, and Arkin AP. (2010) FastTree 2 -- Approximately Maximum-Likelihood Trees for Large Alignments. PLoS ONE, 5(3):e9490. doi:10.1371/journal.pone.0009490'
-        link: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0009490
+        pmid : 26921390
+        display-text: |
+            Huerta-Cepas J, Serra F, Bork P. ETE 3: Reconstruction, Analysis, and Visualization of Phylogenomic Data. Mol Biol Evol. 2016;33: 1635–1638. doi:10.1093/molbev/msw046
+        link: https://www.ncbi.nlm.nih.gov/pubmed/26921390
+
+    -
+        display-text: |
+            ETE3 source:
+        link: http://etetoolkit.org
+
     -
         pmid : 19377059
-        display-text : |
-            'Price MN, Dehal PS, Arkin AP. (2009) FastTree: computing large minimum evolution trees with profiles instead of a distance matrix. Mol Biol Evol. 2009 Jul;26(7):1641-50. doi: 10.1093/molbev/msp077.'
+        display-text: |
+            Price MN, Dehal PS, Arkin AP. FastTree: computing large minimum evolution trees with profiles instead of a distance matrix. Mol Biol Evol. 2009;26: 1641–1650. doi:10.1093/molbev/msp077
         link: https://www.ncbi.nlm.nih.gov/pubmed/19377059
+
     -
-        pmid : 26921390 
-        display-text : |
-            'Huerta-Cepas J, Serra F, and Bork P. (2016) ETE 3: Reconstruction, analysis and visualization of phylogenomic data. Mol Biol Evol 2016; doi: 10.1093/molbev/msw046'
-        link: https://www.ncbi.nlm.nih.gov/pubmed/26921390
-    -
-        link: http://etetoolkit.org
+        pmid : 20224823
+        display-text: |
+            Price MN, Dehal PS, Arkin AP. FastTree 2 – Approximately Maximum-Likelihood Trees for Large Alignments. PLOS ONE. 2010;5: e9490. doi:10.1371/journal.pone.0009490
+        link: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0009490
