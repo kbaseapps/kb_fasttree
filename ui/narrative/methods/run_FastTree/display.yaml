@@ -129,7 +129,7 @@ description : |
     <p><b><i>Output Object:</i></b> A KBase Tree object is generated.</p>
     <p><b><i>Output Tree Image:</i></b> The Tree is rendered using the ETE3 Toolkit.</p>
     <p><b><i>Downloadable files:</i></b> The Newick formatted output tree, as well as rendered PNG and PDF formats, are available for download.</p>
-   <hr>
+    
     <p><a href="http://www.microbesonline.org/fasttree/">FastTree2.1.9 source</a></p>
 
     <p><strong>Team members who implemented App in KBase:</strong> Dylan Chivian. For questions, please <a href=”http://kbase.us/contact-us/”>contact us</a>.</p>
