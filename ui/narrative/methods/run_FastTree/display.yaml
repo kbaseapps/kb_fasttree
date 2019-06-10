@@ -1,13 +1,12 @@
 #
 # define display information
 #
-name: FASTTREE-2 Phylogenetic Tree from MSA - v2.1.9
+name: Build Phylogenetic Tree from MSA using FastTree2 - v2.1.9
 tooltip: |
-    Build a Phylogenetic reconstruction from a Multiple Sequence Alignment (MSA) with FastTree2
+    Build a phylogenetic reconstruction from a Multiple Sequence Alignment (MSA) using FastTree2.
 screenshots:
 
-    - FASTTREE_input_widget.png
-    - FASTTREE_output_tree.png
+    []
 
 icon: fasttree-purple.png
 
@@ -34,117 +33,106 @@ parameters :
         ui-name : |
             Tree Description
         short-hint : |
-            Describe Contents of the Output Tree
+            Provide a text description of the output tree contents.
         placeholder: |
             Enter Description
     input_ref:
         ui-name : |
             Input MSA
         short-hint : |
-            Multiple Sequence Alignment to build Tree from.  Data type is MSA.
+            The Multiple Sequence Alignment (MSA) to build the tree from.
     output_name:
         ui-name : |
             Output Tree
         short-hint : |
-            Phylogenetic Tree output.  Data type is Tree.
+            The phylogenetic tree output.
     species_tree_flag:
         ui-name : |
             Species Tree?
         short-hint : |
-            Is tree a Species Tree (default = Gene Tree)
+            Select to build a SpeciesTree data object (default is a GeneTree). This parameter is for ensuring that downstream methods read the output Tree object correctly. A species tree can be built from either a 16S nucleotide alignment, concatenated protein markers, or any other MSA that contains what you consider a phylogenetically informative set of sequences.
     intree_ref:
         ui-name : |
             Starting Tree
         short-hint : |
-            Initial Tree Topology
+            Initial tree topology.
     fastest:
         ui-name : |
             Fastest?
         short-hint : |
-            Speed up the neighbor joining phase & reduce memory usage (recommended for >50,000 sequences)
+            Speeds up the neighbor joining phase and reduces memory usage (recommended for >50,000 sequences).
     pseudo:
         ui-name : |
             Pseudo Count?
         short-hint : |
-            Use pseudocounts (recommended for highly gapped sequences)
+            Use pseudocounts (recommended for highly gapped sequences).
     gtr:
         ui-name : |
             GTR?
         short-hint : |
-            Generalized time-reversible model (nucleotide alignments only)
+            Generalized time-reversible model (nucleotide alignments only).
     wag:
         ui-name : |
             WAG?
         short-hint : |
-            Whelan-And-Goldman 2001 model (amino acid alignments only)
+            Whelan-And-Goldman 2001 model (amino acid alignments only).
     noml:
         ui-name : |
             No ML?
         short-hint : |
-            Turn off maximum-likelihood
+            Turn off maximum-likelihood.
     nome:
         ui-name : |
             No ME?
         short-hint : |
-            Turn off minimum-evolution NNIs and SPRs
+            Turn off minimum-evolution NNIs (nearest-neighbor interchanges) and SPRs (subtree-prune-regraft moves).
     cat:
         ui-name : |
             Num Rate Catgories (CAT)
         short-hint : |
-            number of rate categories of sites (default 20)
+            The number of rate categories of sites (default is 20).
     nocat:
         ui-name : |
             No Cat?
         short-hint : |
-            Use Constant Rates (instead of above Num Rate Categories)
+            Use Constant Rates (instead of above Num Rate Categories).
     gamma:
         ui-name : |
             Gamma
         short-hint : |
-            After optimizing the tree under the CAT approximation, rescale the lengths to optimize the Gamma20 likelihood
+            After optimizing the tree under the CAT approximation, rescale the lengths to optimize the Gamma20 likelihood.
 
 description : |
-    <p>This method builds a Phylogenetic Tree reconstruction from a Multiple Sequence Alignment (MSA) of either nucleotide or protein sequences using FastTree2.  Tree display uses ETE3 (v3.0.0b35).</p>
-    <p><hr></p>
-    <p>FastTree2.1.9 from <a href="http://www.microbesonline.org/fasttree/">http://www.microbesonline.org/fasttree/</a></p>
-    <p><i>Please cite:</i></p>
-    <p><b>FastTree:</b><br>
-       <ul>
-       <li> Price MN, Dehal PS, and Arkin AP. (2010) FastTree 2 -- Approximately Maximum-Likelihood Trees for Large Alignments. <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0009490">PLoS ONE, 5(3):e9490.</a> doi:10.1371/journal.pone.0009490
-      <li> Price MN, Dehal PS, Arkin AP. (2009) FastTree: computing large minimum evolution trees with profiles instead of a distance matrix. <a href="https://www.ncbi.nlm.nih.gov/pubmed/19377059">Mol Biol Evol. 2009 Jul;26(7):1641-50</a> doi:10.1093/molbev/msp077
-      </ul>
-    </p>
-    <p><b>ETE3:</b><br>
-      <ul>
-      <li>Huerta-Cepas J, Serra F, and Bork P. (2016) ETE 3: Reconstruction, analysis and visualization of phylogenomic data. <a href="https://www.ncbi.nlm.nih.gov/pubmed/26921390">Mol Biol Evol 2016</a> doi:10.1093/molbev/msw046
-      <li> <a href="http://etetoolkit.org">http://etetoolkit.org</a>
-     </ul>
-    </p>
-    <p><hr></p>
-    <p><i>Implemented for KBase by <a href="mailto:DCChivian@lbl.gov">Dylan Chivian (DCChivian@lbl.gov)</a></i></p>
-    <p><hr></p>
-    <p>FastTree2 takes a precomputed Multiple Sequence Alignment (MSA) and, following an evolutionary model for the distance between aligned positions (e.g. the Jones-Taylor-Thornton JTT model), determines the distances between sequences and infers an approximately Maximum Likelihood tree for those distances.  FastTree-2 is much faster than many methods of comparable quality.  The output is a newick formatted tree, which KBase displays using the ETE3 toolkit.  A KBase Tree object is generated and stored in the Narrative.  The newick file and tree images are available for download.  Nucleotide or Protein sequence MSAs may be used, and the method is agnostic to whether it is a gene tree or a species tree (but tree type must be indicated to set for the output Tree object)</p>
-    <p><hr></p>
-    <p><b>Configuration:</b></p>
+    <p>This App reconstructs a phylogenetic tree from a Multiple Sequence Alignment (MSA) of either nucleotide or protein sequences using FastTree2. FastTree2 can be used to determine evolutionary relationships among aligned sequences. FastTree2 will calculate the distances between proteins in the alignment and build an approximately maximum-likelihood tree. The tree is displayed using ETE3 (v3.0.0b35).</p>
+
+    <p>We recommend that users to review the <a href=”https://narrative.kbase.us/narrative/ws.22290.obj.1">Build Gene Tree Tutorial</a> to understand the upstream processes required to use this App.</p>
+
+    <p>FastTree2 takes a precomputed MSA and, following an evolutionary model for the distance between aligned positions (e.g. the Jones-Taylor-Thornton JTT model), determines the distances between sequences and infers an approximately Maximum Likelihood tree for those distances. FastTree2 is much faster than many methods of comparable quality. The output is a newick formatted tree, which KBase displays using the ETE3 toolkit. A KBase Tree object is generated and stored in the Narrative. The newick file and tree images are available for download. Nucleotide or Protein sequence MSAs may be used, and the method is agnostic to whether it is a GeneTree or a SpeciesTree (but tree type must be indicated to set for the output Tree object).</p>
+
+    <p><h3>Configuration:</h3></p>
     <p><b><i>Tree Description:</i></b> This is used in the output figure and carried in the Tree object.</p>
-    <p><b><i>Input MSA:</i></b> The MSA from which to generate the tree.  You must pre-concatenate MSAs if you wish to make a species tree from concatenated phylogenetic marker MSAs.</p>
-    <p><b><i>Output Tree:</i></b> The name of the output tree object.</p>
-    <p><b><i>Species Tree?:</i></b> Indicate whether a Species Tree is being computed.  This is so downstream methods read the output Tree object correctly.  A species tree can be built from either a 16S nucleotide alignment, concatenated protein markers, or any other MSA that contains what you consider a phylogenetically informative set of sequences.</p>
-    <p><b><i>Starting Tree:</i></b> You may initialize the tree building with a selected topology.  This must be a KBase Tree object.</p>
-    <p><b><i>Fastest?:</i></b> FastTree-2 takes O(L*a*N + N^1.5) space and O(L*a*log(N)*N^1.5) time, where N is the number of unique sequences, L is the width of the alignment, and a is the size of the alphabet.  With -fastest, the theoretical space reduces to O(L*a*N + N^1.25) space and the time reduces to O(L*a*N^1.25).</p>
+    <p><b><i>Input MSA:</i></b> The MSA from which to generate the tree. You must pre-concatenate MSAs if you wish to make a SpeciesTree from concatenated phylogenetic marker MSAs.</p>
+    <p><b><i>Output Tree:</i></b> The name of the output Tree object.</p>
+    <p><b><i>Species Tree?:</i></b> Indicate whether or not a SpeciesTree is being computed. This is so downstream Apps read the output Tree object correctly. A SpeciesTree can be built from either a 16S nucleotide alignment, concatenated protein markers, or any other MSA that contains what you consider a phylogenetically informative set of sequences.</p>
+    <p><b><i>Starting Tree:</i></b> You may initialize the tree building with a selected topology. This must be a KBase Tree object.</p>
+    <p><b><i>Fastest?:</i></b> FastTree2 takes O(L*a*N + N^1.5) space and O(L*a*log(N)*N^1.5) time, where N is the number of unique sequences, L is the width of the alignment, and a is the size of the alphabet.  With -fastest, the theoretical space reduces to O(L*a*N + N^1.25) space and the time reduces to O(L*a*N^1.25).</p>
     <p><b><i>Pseudo Count?:</i></b> Missing regions of the alignment should be inferred using pseudocounts, so if you have many fragmentary sequences, use this option.</p>
-    <p><b><i>GTR?:</i></b> Use a generalized time-reversible model (for nucleotide alignments only)</p>
+    <p><b><i>GTR?:</i></b> Use a generalized time-reversible model (for nucleotide alignments only).</p>
     <p><b><i>WAG?:</i></b> Use the Whelan-And-Goldman 2001 model (amino acid alignments only).</p>
     <p><b><i>No ML?:</i></b> Turn off maximum-likelihood.</p>
     <p><b><i>No ME?:</i></b> Turn off minimum-evolution NNIs (nearest-neighbor interchanges) and SPRs (subtree-prune-regraft moves).</p>
-    <p><b><i>Num Rate Categories (CAT):</i></b> Number of rate categories of sites (default 20).  This allows modeling of non-uniform evolutionary rates across sequences.</p>
-    <p><b><i>No Cat?:</i></b> Use Constant Rates (instead of above Num Rate Categories).  This is if you expect uniform evolutionary rates along sequences.</p>
+    <p><b><i>Num Rate Categories (CAT):</i></b> Number of rate categories of sites (default is 20). This allows modeling of non-uniform evolutionary rates across sequences.</p>
+    <p><b><i>No Cat?:</i></b> Use Constant Rates (instead of above Num Rate Categories). This is if you expect uniform evolutionary rates along sequences.</p>
     <p><b><i>Gamma:</i></b> After optimizing the tree under the CAT approximation, rescale the lengths to optimize the Gamma20 likelihood.</p>
-    <p><hr></p>
-    <p><b>Output:</b></p>
-    <p><b><i>Output Object:</i></b> A KBase Tree object is generated by the method.</p>
+
+    <p><h3>App Output:</h3></p>
+    <p><b><i>Output Object:</i></b> A KBase Tree object is generated.</p>
     <p><b><i>Output Tree Image:</i></b> The Tree is rendered using the ETE3 Toolkit.</p>
     <p><b><i>Downloadable files:</i></b> The Newick formatted output tree, as well as rendered PNG and PDF formats, are available for download.</p>
+    
+    <p><a href="http://www.microbesonline.org/fasttree/">FastTree2.1.9 source</a></p>
+
+    <p><strong>Team members who implemented App in KBase:</strong> Dylan Chivian. For questions, please <a href=”http://kbase.us/contact-us/”>contact us</a>.</p>
 
 publications :
     -
