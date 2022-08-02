@@ -5,10 +5,10 @@ import time
 import uuid
 
 from os import environ
-from ConfigParser import ConfigParser
+from configparser import ConfigParser  # py3
 from pprint import pprint
 
-from biokbase.workspace.client import Workspace as workspaceService
+from installed_clients.WorkspaceClient import Workspace as workspaceService
 from kb_fasttree.kb_fasttreeImpl import kb_fasttree
 
 
@@ -54,6 +54,15 @@ class kb_fasttreeTest(unittest.TestCase):
     def getContext(self):
         return self.__class__.ctx
 
+
+    ##############
+    # UNIT TESTS #
+    ##############
+
+
+    #### basic fasttree test
+    ##
+    # HIDE @unittest.skip("skipped test_kb_fasttree_run_FastTree_01()")  # uncomment to skip
     def test_kb_fasttree_run_FastTree_01(self):
         # Prepare test objects in workspace if needed using 
         # self.getWsClient().save_objects({'workspace': self.getWsName(), 'objects': []})
@@ -70,7 +79,7 @@ class kb_fasttreeTest(unittest.TestCase):
 
         # MSA
         MSA_json_file = os.path.join('data', 'DsrA.MSA.json')
-        with open (MSA_json_file, 'r', 0) as MSA_json_fh:
+        with open (MSA_json_file, 'r') as MSA_json_fh:
             MSA_obj = json.load(MSA_json_fh)
 
         provenance = [{}]

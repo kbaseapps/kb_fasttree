@@ -1,7 +1,7 @@
 #
 # define display information
 #
-name: Build Phylogenetic Tree from MSA using FastTree2 - v2.1.9
+name: Build Phylogenetic Tree from MSA using FastTree2 - v2.1.11
 tooltip: |
     Build a phylogenetic reconstruction from a Multiple Sequence Alignment (MSA) using FastTree2.
 screenshots:
@@ -130,7 +130,7 @@ description : |
     <p><b><i>Output Tree Image:</i></b> The Tree is rendered using the ETE3 Toolkit.</p>
     <p><b><i>Downloadable files:</i></b> The Newick formatted output tree, as well as rendered PNG and PDF formats, are available for download.</p>
     
-    <p><a href="http://www.microbesonline.org/fasttree/">FastTree2.1.9 source</a></p>
+    <p><a href="http://www.microbesonline.org/fasttree/">FastTree2.1.11 source</a></p>
 
     <p><strong>Team members who implemented App in KBase:</strong> Dylan Chivian. For questions, please <a href=”http://kbase.us/contact-us/”>contact us</a>.</p>
 

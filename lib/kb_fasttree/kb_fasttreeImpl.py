@@ -11,18 +11,16 @@ import traceback
 import uuid
 from datetime import datetime
 from pprint import pprint, pformat
-import numpy as np
-import gzip
+#import numpy as np
+#import gzip
 
-from Bio import SeqIO
-from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord
-from Bio.Alphabet import generic_protein
-from biokbase.workspace.client import Workspace as workspaceService
-from requests_toolbelt import MultipartEncoder
-from biokbase.AbstractHandle.Client import AbstractHandle as HandleService
-from DataFileUtil.DataFileUtilClient import DataFileUtil as DFUClient
-from KBaseReport.KBaseReportClient import KBaseReport
+#from Bio import SeqIO
+#from Bio.Seq import Seq
+#from Bio.SeqRecord import SeqRecord
+#from Bio.Alphabet import generic_protein
+from installed_clients.WorkspaceClient import Workspace as workspaceService
+from installed_clients.DataFileUtilClient import DataFileUtil as DFUClient
+from installed_clients.KBaseReportClient import KBaseReport
 
 # silence whining
 import requests
@@ -51,20 +49,21 @@ class kb_fasttree:
     # state. A method could easily clobber the state set by another while
     # the latter method is running.
     ######################################### noqa
-    VERSION = "1.0.3"
+    VERSION = "1.1.0"
     GIT_URL = "https://github.com/kbaseapps/kb_fasttree"
-    GIT_COMMIT_HASH = "efac401948d543c0cc8972f39e6b987aceb4c377"
+    GIT_COMMIT_HASH = "b967ee863c008d6b131ffb70569e536dc863f127"
 
     #BEGIN_CLASS_HEADER
-    workspaceURL = None
-    shockURL = None
-    handleURL = None
-
     FASTTREE_bin = '/kb/module/FastTree/bin/FastTree'
 
-    # target is a list for collecting log messages
+    def now_ISO(self):
+        now_timestamp = datetime.now()
+        now_secs_from_epoch = (now_timestamp - datetime(1970,1,1)).total_seconds()
+        now_timestamp_in_iso = datetime.fromtimestamp(int(now_secs_from_epoch)).strftime('%Y-%m-%d_%T')
+        return now_timestamp_in_iso
+
     def log(self, target, message):
-        # we should do something better here...
+        message = '['+self.now_ISO()+'] '+message
         if target is not None:
             target.append(message)
         print(message)
@@ -83,117 +82,6 @@ class kb_fasttree:
         pass
 
 
-    # Helper script borrowed from the transform service, logger removed
-    #
-    def upload_file_to_shock(self,
-                             console,  # DEBUG
-                             shock_service_url = None,
-                             filePath = None,
-                             ssl_verify = True,
-                             token = None):
-        """
-        Use HTTP multi-part POST to save a file to a SHOCK instance.
-        """
-        self.log(console,"UPLOADING FILE "+filePath+" TO SHOCK")
-
-        if token is None:
-            raise Exception("Authentication token required!")
-
-        #build the header
-        header = dict()
-        header["Authorization"] = "Oauth {0}".format(token)
-        if filePath is None:
-            raise Exception("No file given for upload to SHOCK!")
-
-        dataFile = open(os.path.abspath(filePath), 'rb')
-        m = MultipartEncoder(fields={'upload': (os.path.split(filePath)[-1], dataFile)})
-        header['Content-Type'] = m.content_type
-
-        #logger.info("Sending {0} to {1}".format(filePath,shock_service_url))
-        try:
-            response = requests.post(shock_service_url + "/node", headers=header, data=m, allow_redirects=True, verify=ssl_verify)
-            dataFile.close()
-        except:
-            dataFile.close()
-            raise
-        if not response.ok:
-            response.raise_for_status()
-        result = response.json()
-        if result['error']:
-            raise Exception(result['error'][0])
-        else:
-            return result["data"]
-
-
-    def upload_SingleEndLibrary_to_shock_and_ws (self,
-                                                 ctx,
-                                                 console,  # DEBUG
-                                                 workspace_name,
-                                                 obj_name,
-                                                 file_path,
-                                                 provenance,
-                                                 sequencing_tech):
-
-        self.log(console,'UPLOADING FILE '+file_path+' TO '+workspace_name+'/'+obj_name)
-
-        # 1) upload files to shock
-        token = ctx['token']
-        forward_shock_file = self.upload_file_to_shock(
-            console,  # DEBUG
-            shock_service_url = self.shockURL,
-            filePath = file_path,
-            token = token
-            )
-        #pprint(forward_shock_file)
-        self.log(console,'SHOCK UPLOAD DONE')
-
-        # 2) create handle
-        self.log(console,'GETTING HANDLE')
-        hs = HandleService(url=self.handleURL, token=token)
-        forward_handle = hs.persist_handle({
-                                        'id' : forward_shock_file['id'], 
-                                        'type' : 'shock',
-                                        'url' : self.shockURL,
-                                        'file_name': forward_shock_file['file']['name'],
-                                        'remote_md5': forward_shock_file['file']['checksum']['md5']})
-
-        
-        # 3) save to WS
-        self.log(console,'SAVING TO WORKSPACE')
-        single_end_library = {
-            'lib': {
-                'file': {
-                    'hid':forward_handle,
-                    'file_name': forward_shock_file['file']['name'],
-                    'id': forward_shock_file['id'],
-                    'url': self.shockURL,
-                    'type':'shock',
-                    'remote_md5':forward_shock_file['file']['checksum']['md5']
-                },
-                'encoding':'UTF8',
-                'type':'fasta',
-                'size':forward_shock_file['file']['size']
-            },
-            'sequencing_tech':sequencing_tech
-        }
-        self.log(console,'GETTING WORKSPACE SERVICE OBJECT')
-        ws = workspaceService(self.workspaceURL, token=ctx['token'])
-        self.log(console,'SAVE OPERATION...')
-        new_obj_info = ws.save_objects({
-                        'workspace':workspace_name,
-                        'objects':[
-                            {
-                                'type':'KBaseFile.SingleEndLibrary',
-                                'data':single_end_library,
-                                'name':obj_name,
-                                'meta':{},
-                                'provenance':provenance
-                            }]
-                        })[0]
-        self.log(console,'SAVED TO WORKSPACE')
-
-        return new_obj_info[0]
-
     #END_CLASS_HEADER
 
     # config contains contents of config file in a hash or None if it couldn't
@@ -201,8 +89,6 @@ class kb_fasttree:
     def __init__(self, config):
         #BEGIN_CONSTRUCTOR
         self.workspaceURL = config['workspace-url']
-        self.shockURL = config['shock-url']
-        self.handleURL = config['handle-service-url']
         self.serviceWizardURL = config['service-wizard-url']
 
         self.callbackURL = os.environ.get('SDK_CALLBACK_URL')
@@ -321,15 +207,15 @@ class kb_fasttree:
             for row_id in row_order:
                 # take care of characters that will mess up newick and/or fasttree
                 row_id_disp = re.sub('\s','_',row_id)
-                row_id_disp = re.sub('\/','%'+'/'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub(r'\\','%'+'\\'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\(','%'+'('.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\)','%'+')'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\[','%'+'['.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\]','%'+']'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\:','%'+':'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\;','%'+';'.encode("hex"), row_id_disp)
-                row_id_disp = re.sub('\|','%'+';'.encode("hex"), row_id_disp)
+                row_id_disp = re.sub('\/','%'+'/'.encode("utf-8").hex(), row_id_disp)
+                row_id_disp = re.sub(r'\\','%'+'\\'.encode("utf-8").hex(), row_id_disp)
+                row_id_disp = re.sub('\(','%'+'('.encode("utf-8").hex(), row_id_disp)
+                row_id_disp = re.sub('\)','%'+')'.encode("utf-8").hex(), row_id_disp)
+                row_id_disp = re.sub('\[','%'+'['.encode("utf-8").hex(), row_id_disp)
+                row_id_disp = re.sub('\]','%'+']'.encode("utf-8").hex(), row_id_disp)
+                row_id_disp = re.sub('\:','%'+':'.encode("utf-8").hex(), row_id_disp)
+                row_id_disp = re.sub('\;','%'+';'.encode("utf-8").hex(), row_id_disp)
+                row_id_disp = re.sub('\|','%'+';'.encode("utf-8").hex(), row_id_disp)
                 new_ids[row_id] = row_id_disp
 
                 #self.log(console,"row_id: '"+row_id+"' row_id_disp: '"+row_id_disp+"'")  # DEBUG
@@ -342,7 +228,7 @@ class kb_fasttree:
                 records.extend(['>'+row_id_disp,
                                 MSA_in['alignment'][row_id]
                                ])
-            with open(input_MSA_file_path,'w',0) as input_MSA_file_handle:
+            with open(input_MSA_file_path,'w') as input_MSA_file_handle:
                 input_MSA_file_handle.write("\n".join(records)+"\n")
 
             # DEBUG
@@ -384,7 +270,7 @@ class kb_fasttree:
                 tree_in = data
                 intree_newick_file_path = os.path.join(self.scratch, intree_name+".newick")
                 self.log(console, 'writing intree file: '+intree_newick_file_path)
-                intree_newick_file_handle = open(intree_newick_file_path, 'w', 0)
+                intree_newick_file_handle = open(intree_newick_file_path, 'w')
                 intree_newick_file_handle.write(tree_in['tree'])
                 intree_newick_file_handle.close()
             else:
@@ -392,7 +278,7 @@ class kb_fasttree:
 
 
         # DEBUG: check the MSA file contents
-#        with open(input_MSA_file_path, 'r', 0) as input_MSA_file_handle:
+#        with open(input_MSA_file_path, 'r') as input_MSA_file_handle:
 #            for line in input_MSA_file_handle:
 #                #self.log(console,"MSA_LINE: '"+line+"'")  # too big for console
 #                self.log(invalid_msgs,"MSA_LINE: '"+line+"'")
@@ -464,7 +350,7 @@ class kb_fasttree:
             raise ValueError("empty file '"+input_MSA_file_path+"'")
 
         # DEBUG
-#        with open(input_MSA_file_path,'r',0) as input_MSA_file_handle:
+#        with open(input_MSA_file_path,'r') as input_MSA_file_handle:
 #            for line in input_MSA_file_handle:
 #                #self.log(console,"MSA LINE: '"+line+"'")  # too big for console
 #                self.log(invalid_msgs,"MSA LINE: '"+line+"'")
@@ -557,9 +443,9 @@ class kb_fasttree:
         
         # write MSA to process for FastTree
         #
-        with open(input_MSA_file_path,'r',0) as input_MSA_file_handle:
+        with open(input_MSA_file_path,'r') as input_MSA_file_handle:
             for line in input_MSA_file_handle:
-                p.stdin.write(line)
+                p.stdin.write(line.encode())
         p.stdin.close()
         p.wait()
 
@@ -614,7 +500,7 @@ class kb_fasttree:
             if 'species_tree_flag' in params and params['species_tree_flag'] != None and params['species_tree_flag'] != 0:
                 tree_type = 'SpeciesTree'
 
-            with open(output_newick_file_path,'r',0) as output_newick_file_handle:
+            with open(output_newick_file_path,'r') as output_newick_file_handle:
                 output_newick_buf = output_newick_file_handle.read()
             output_newick_buf = output_newick_buf.rstrip()
             if not output_newick_buf.endswith(';'):
@@ -719,22 +605,22 @@ class kb_fasttree:
             new_id = new_ids[row_id]
             label = default_node_labels[new_id]
             label = re.sub('\s','_',label)
-            label = re.sub('\/','%'+'/'.encode("hex"), label)
-            label = re.sub(r'\\','%'+'\\'.encode("hex"), label)
-            label = re.sub('\(','%'+'('.encode("hex"), label)
-            label = re.sub('\)','%'+')'.encode("hex"), label)
-            label = re.sub('\[','%'+'['.encode("hex"), label)
-            label = re.sub('\]','%'+']'.encode("hex"), label)
-            label = re.sub('\:','%'+':'.encode("hex"), label)
-            label = re.sub('\;','%'+';'.encode("hex"), label)
-            label = re.sub('\|','%'+';'.encode("hex"), label)
+            label = re.sub('\/','%'+'/'.encode("utf-8").hex(), label)
+            label = re.sub(r'\\','%'+'\\'.encode("utf-8").hex(), label)
+            label = re.sub('\(','%'+'('.encode("utf-8").hex(), label)
+            label = re.sub('\)','%'+')'.encode("utf-8").hex(), label)
+            label = re.sub('\[','%'+'['.encode("utf-8").hex(), label)
+            label = re.sub('\]','%'+']'.encode("utf-8").hex(), label)
+            label = re.sub('\:','%'+':'.encode("utf-8").hex(), label)
+            label = re.sub('\;','%'+';'.encode("utf-8").hex(), label)
+            label = re.sub('\|','%'+';'.encode("utf-8").hex(), label)
             mod_newick_buf = re.sub ('\('+new_id+'\:', '('+label+':', mod_newick_buf)
             mod_newick_buf = re.sub ('\,'+new_id+'\:', ','+label+':', mod_newick_buf)
 
             #self.log(console, "new_id: '"+new_id+"' label: '"+label+"'")  # DEBUG
         
         mod_newick_buf = re.sub ('_', ' ', mod_newick_buf)
-        with open (output_newick_labels_file_path, 'w', 0) as output_newick_labels_file_handle:
+        with open (output_newick_labels_file_path, 'w') as output_newick_labels_file_handle:
             output_newick_labels_file_handle.write(mod_newick_buf)
 
         # upload
@@ -835,7 +721,7 @@ class kb_fasttree:
         html_report_lines += ['</html>']
 
         html_report_str = "\n".join(html_report_lines)
-        with open (output_html_file_path, 'w', 0) as html_handle:
+        with open (output_html_file_path, 'w') as html_handle:
             html_handle.write(html_report_str)
 
 
