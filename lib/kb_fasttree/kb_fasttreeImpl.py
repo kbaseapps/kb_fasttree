@@ -192,8 +192,8 @@ class kb_fasttree:
             else:
                 for row_id in row_order:
                     default_row_labels[row_id] = row_id
-            if len(row_order) < 2:
-                self.log(invalid_msgs,"must have multiple records in MSA: "+params['input_ref'])
+            if len(row_order) <= 2:
+                self.log(invalid_msgs,"must have 3 or more records in MSA: "+params['input_ref'])
             # DEBUG
             #for row_id in row_order:
             #    self.log(console, "row_id: '"+row_id+"' default_row_label: '"+default_row_labels[row_id]+"'")
@@ -517,12 +517,13 @@ class kb_fasttree:
             if default_row_labels:
                 default_node_labels = dict()
                 leaf_list = []
-                for row_id in default_row_labels.keys():
+                #for row_id in default_row_labels.keys():  # some row ids don't wind up in trimmed MSA
+                for row_id in row_order:
                     new_row_id = new_ids[row_id]
                     #default_node_labels[row_id] = default_row_labels[row_id]
                     default_node_labels[new_row_id] = default_row_labels[row_id]
                     leaf_list.append(new_row_id)
-
+                    
             if 'ws_refs' in MSA_in.keys() and MSA_in['ws_refs'] != None:
                 ws_refs = MSA_in['ws_refs']
             if 'kb_refs' in MSA_in.keys() and MSA_in['kb_refs'] != None:
