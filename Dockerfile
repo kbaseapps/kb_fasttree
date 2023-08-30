@@ -37,7 +37,7 @@ RUN make all
 #
 RUN mkdir -p /kb/module/FastTree/bin
 WORKDIR /kb/module/FastTree/bin
-RUN curl http://www.microbesonline.org/fasttree/FastTree > FastTree2.1.11_64 && \
+RUN curl -o FastTree2.1.11_64 http://www.microbesonline.org/fasttree/FastTree && \
 #RUN \
 #    git clone https://github.com/kbaseapps/kb_fasttree && \
 #    cp kb_fasttree/src/FastTree2.1.11_64 . && \
