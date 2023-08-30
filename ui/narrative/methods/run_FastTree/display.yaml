@@ -136,6 +136,18 @@ description : |
 
 publications :
     -
+        pmid : 20224823
+        display-text: |
+            Price MN, Dehal PS, Arkin AP. FastTree 2 – Approximately Maximum-Likelihood Trees for Large Alignments. PLOS ONE. 2010;5: e9490. doi:10.1371/journal.pone.0009490
+        link: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0009490
+
+    -
+        pmid : 19377059
+        display-text: |
+            Price MN, Dehal PS, Arkin AP. FastTree: computing large minimum evolution trees with profiles instead of a distance matrix. Mol Biol Evol. 2009;26: 1641–1650. doi:10.1093/molbev/msp077
+        link: https://www.ncbi.nlm.nih.gov/pubmed/19377059
+
+    -
         pmid : 26921390
         display-text: |
             Huerta-Cepas J, Serra F, Bork P. ETE 3: Reconstruction, Analysis, and Visualization of Phylogenomic Data. Mol Biol Evol. 2016;33: 1635–1638. doi:10.1093/molbev/msw046
@@ -146,14 +158,3 @@ publications :
             ETE3 source:
         link: http://etetoolkit.org
 
-    -
-        pmid : 19377059
-        display-text: |
-            Price MN, Dehal PS, Arkin AP. FastTree: computing large minimum evolution trees with profiles instead of a distance matrix. Mol Biol Evol. 2009;26: 1641–1650. doi:10.1093/molbev/msp077
-        link: https://www.ncbi.nlm.nih.gov/pubmed/19377059
-
-    -
-        pmid : 20224823
-        display-text: |
-            Price MN, Dehal PS, Arkin AP. FastTree 2 – Approximately Maximum-Likelihood Trees for Large Alignments. PLOS ONE. 2010;5: e9490. doi:10.1371/journal.pone.0009490
-        link: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0009490

@@ -3,6 +3,7 @@
 - update Docker base image to kbase/sdkpython:3.8.10
 - update ETE3 to 3.1.2
 - update PyQt5 (note: must use PyQt5==5.11.3 on debian)
+- added Github Actions testing
 
 ### Version 1.0.3
 - update base image to sdkbase2
