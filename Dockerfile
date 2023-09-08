@@ -1,4 +1,4 @@
-FROM kbase/kbase:sdkbase2.latest
+FROM kbase/sdkpython:3.8.10
 MAINTAINER KBase Developer [Dylan Chivian (DCChivian@lbl.gov)]
 
 # -----------------------------------------
@@ -7,15 +7,21 @@ MAINTAINER KBase Developer [Dylan Chivian (DCChivian@lbl.gov)]
 # install line here, a git checkout to download code, or run any other
 # installation scripts.
 
-#RUN apt-get update
+# Update
+RUN apt-get update
+
+# udpate certs
+RUN apt-get upgrade -y
+RUN sed -i 's/\(.*DST_Root_CA_X3.crt\)/!\1/' /etc/ca-certificates.conf
+RUN update-ca-certificates
+
 
 # Install ETE3
-#RUN apt-get -y --fix-missing install python-numpy python-qt4 python-lxml python-six
-# only need qt4
-#RUN apt-get -y install python-qt4
 RUN apt-get update && \
-    apt-get -y install xvfb python-qt4 && \
-    pip install ete3==3.0.0b35
+    apt-get -y install xvfb
+RUN pip install --upgrade pip
+# Note: You must use PyQt5==5.11.3 on debian
+RUN pip install ete3==3.1.2 PyQt5==5.11.3 numpy==1.23.1
 
 # -----------------------------------------
 
@@ -31,17 +37,12 @@ RUN make all
 #
 RUN mkdir -p /kb/module/FastTree/bin
 WORKDIR /kb/module/FastTree/bin
-#RUN curl http://www.microbesonline.org/fasttree/FastTree > FastTree2.1.9_64
-RUN \
-    git clone https://github.com/kbaseapps/kb_fasttree && \
-    cp kb_fasttree/src/FastTree2.1.9_64 . && \
-# INCLUDES ARE FAILING
-#     gcc -Wall -O3 -finline-functions -funroll-loops -o FastTree2.1.9_64 -lm kb_fasttree/src/FastTree.c && \
-#    cp kb_fasttree/src/FastTree2.1.9_64_DEBUG ./FastTree2.1.9_64 && \
+RUN curl -o FastTree2.1.11_64 http://www.microbesonline.org/fasttree/FastTree && \
 #RUN \
-#    curl https://github.com/dcchivian/kb_fasttree/blob/master/src/FastTree2.1.9_64 > FastTree2.1.9_64 && \
-    chmod 555 FastTree2.1.9_64 && \
-    ln -s FastTree2.1.9_64 FastTree
+#    git clone https://github.com/kbaseapps/kb_fasttree && \
+#    cp kb_fasttree/src/FastTree2.1.11_64 . && \
+    chmod 555 FastTree2.1.11_64 && \
+    ln -s FastTree2.1.11_64 FastTree
 
 
 WORKDIR /kb/module

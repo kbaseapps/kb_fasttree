@@ -1,7 +1,7 @@
 #
 # define display information
 #
-name: Build Phylogenetic Tree from MSA using FastTree2 - v2.1.9
+name: Build Phylogenetic Tree from MSA using FastTree2 - v2.1.11
 tooltip: |
     Build a phylogenetic reconstruction from a Multiple Sequence Alignment (MSA) using FastTree2.
 screenshots:
@@ -103,12 +103,17 @@ parameters :
             After optimizing the tree under the CAT approximation, rescale the lengths to optimize the Gamma20 likelihood.
 
 description : |
-    <p>This App reconstructs a phylogenetic tree from a Multiple Sequence Alignment (MSA) of either nucleotide or protein sequences using FastTree2. FastTree2 can be used to determine evolutionary relationships among aligned sequences. FastTree2 will calculate the distances between proteins in the alignment and build an approximately maximum-likelihood tree. The tree is displayed using ETE3 (v3.0.0b35).</p>
+    <p>This App reconstructs a phylogenetic tree from a Multiple Sequence Alignment (MSA) of either nucleotide or protein sequences using FastTree2. FastTree2 can be used to determine evolutionary relationships among aligned sequences. FastTree2 will calculate the distances between proteins in the alignment and build an approximately maximum-likelihood tree. The tree is displayed using ETE3 (v3.1.2).</p>
 
     <p>We recommend that users to review the <a href=”https://narrative.kbase.us/narrative/ws.22290.obj.1">Build Gene Tree Tutorial</a> to understand the upstream processes required to use this App.</p>
 
     <p>FastTree2 takes a precomputed MSA and, following an evolutionary model for the distance between aligned positions (e.g. the Jones-Taylor-Thornton JTT model), determines the distances between sequences and infers an approximately Maximum Likelihood tree for those distances. FastTree2 is much faster than many methods of comparable quality. The output is a newick formatted tree, which KBase displays using the ETE3 toolkit. A KBase Tree object is generated and stored in the Narrative. The newick file and tree images are available for download. Nucleotide or Protein sequence MSAs may be used, and the method is agnostic to whether it is a GeneTree or a SpeciesTree (but tree type must be indicated to set for the output Tree object).</p>
 
+    <p><hr></p>
+    <p><b>Tool Source:</b></p>
+    <p><b>FastTree v2.1.11</b> is installed from <a href="http://www.microbesonline.org/fasttree/">http://www.microbesonline.org/fasttree/</a>.</p>
+
+    <p><hr></p>
     <p><h3>Configuration:</h3></p>
     <p><b><i>Tree Description:</i></b> This is used in the output figure and carried in the Tree object.</p>
     <p><b><i>Input MSA:</i></b> The MSA from which to generate the tree. You must pre-concatenate MSAs if you wish to make a SpeciesTree from concatenated phylogenetic marker MSAs.</p>
@@ -130,21 +135,24 @@ description : |
     <p><b><i>Output Tree Image:</i></b> The Tree is rendered using the ETE3 Toolkit.</p>
     <p><b><i>Downloadable files:</i></b> The Newick formatted output tree, as well as rendered PNG and PDF formats, are available for download.</p>
     
-    <p><a href="http://www.microbesonline.org/fasttree/">FastTree2.1.9 source</a></p>
 
-    <p><strong>Team members who implemented App in KBase:</strong> Dylan Chivian. For questions, please <a href=”http://kbase.us/contact-us/”>contact us</a>.</p>
+    <p><hr></p>
+    <p><strong>Team members who implemented App in KBase:</strong> <a href="https://narrative.kbase.us/#people/dylan">Dylan Chivian</a>. For questions, please <a href=”http://www.kbase.us/support/”>contact us</a>.</p>
+
+
+    <p><strong>Please cite:</strong>
+      <ul>
+        <li>Price MN, Dehal PS, Arkin AP. FastTree 2 – Approximately Maximum-Likelihood Trees for Large Alignments. PLOS ONE. 2010;5: e9490. doi:10.1371/journal.pone.0009490
+      </ul>
+    </p>
+
 
 publications :
     -
-        pmid : 26921390
+        pmid : 20224823
         display-text: |
-            Huerta-Cepas J, Serra F, Bork P. ETE 3: Reconstruction, Analysis, and Visualization of Phylogenomic Data. Mol Biol Evol. 2016;33: 1635–1638. doi:10.1093/molbev/msw046
-        link: https://www.ncbi.nlm.nih.gov/pubmed/26921390
-
-    -
-        display-text: |
-            ETE3 source:
-        link: http://etetoolkit.org
+            Price MN, Dehal PS, Arkin AP. FastTree 2 – Approximately Maximum-Likelihood Trees for Large Alignments. PLOS ONE. 2010;5: e9490. doi:10.1371/journal.pone.0009490
+        link: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0009490
 
     -
         pmid : 19377059
@@ -153,7 +161,18 @@ publications :
         link: https://www.ncbi.nlm.nih.gov/pubmed/19377059
 
     -
-        pmid : 20224823
+        pmid : 26921390
         display-text: |
-            Price MN, Dehal PS, Arkin AP. FastTree 2 – Approximately Maximum-Likelihood Trees for Large Alignments. PLOS ONE. 2010;5: e9490. doi:10.1371/journal.pone.0009490
-        link: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0009490
+            Huerta-Cepas J, Serra F, Bork P. ETE 3: Reconstruction, Analysis, and Visualization of Phylogenomic Data. Mol Biol Evol. 2016;33: 1635–1638. doi:10.1093/molbev/msw046
+        link: https://www.ncbi.nlm.nih.gov/pubmed/26921390
+
+    -
+        display-text: |
+            FastTree-2 source:
+        link: http://www.microbesonline.org/fasttree/
+
+    -
+        display-text: |
+            ETE3 source:
+        link: http://etetoolkit.org
+
