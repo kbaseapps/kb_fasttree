@@ -2,36 +2,45 @@
     "ver": "1.1.0",
     "authors": [
         "dylan",
-	"psdehal"
+        "psdehal"
     ],
     "contact": "http://www.kbase.us/support/",
     "visible": true,
-    "categories": ["active","comparative_genomics"],
+    "categories": [
+        "active",
+        "comparative_genomics"
+    ],
     "widgets": {
         "input": null,
         "output": "no-display"
     },
-    "parameters": [ 
+    "parameters": [
         {
             "id": "desc",
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "text",
-	    "text_options": {
-	        "is_output_name": false
-	    }
+            "text_options": {
+                "is_output_name": false
+            }
         },
         {
             "id": "input_ref",
             "optional": true,
             "advanced": false,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "text",
             "text_options": {
-                "valid_ws_types": [ "KBaseTrees.MSA" ]
+                "valid_ws_types": [
+                    "KBaseTrees.MSA"
+                ]
             }
         },
         {
@@ -39,11 +48,15 @@
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "text",
             "text_options": {
-                "valid_ws_types": [ "KBaseTrees.Tree" ],
-		"is_output_name": true		  
+                "valid_ws_types": [
+                    "KBaseTrees.Tree"
+                ],
+                "is_output_name": true
             }
         },
         {
@@ -51,11 +64,13 @@
             "optional": true,
             "advanced": false,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checked_value": "1",
-		"unchecked_value": "0"
+                "checked_value": "1",
+                "unchecked_value": "0"
             }
         },
         {
@@ -63,10 +78,14 @@
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "text",
             "text_options": {
-                "valid_ws_types": [ "KBaseTrees.Tree" ]
+                "valid_ws_types": [
+                    "KBaseTrees.Tree"
+                ]
             }
         },
         {
@@ -74,11 +93,13 @@
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checked_value": "1",
-		"unchecked_value": "0"
+                "checked_value": "1",
+                "unchecked_value": "0"
             }
         },
         {
@@ -86,11 +107,13 @@
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checked_value": "1",
-		"unchecked_value": "0"
+                "checked_value": "1",
+                "unchecked_value": "0"
             }
         },
         {
@@ -98,11 +121,13 @@
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checked_value": "1",
-		"unchecked_value": "0"
+                "checked_value": "1",
+                "unchecked_value": "0"
             }
         },
         {
@@ -110,11 +135,13 @@
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checked_value": "1",
-		"unchecked_value": "0"
+                "checked_value": "1",
+                "unchecked_value": "0"
             }
         },
         {
@@ -122,11 +149,13 @@
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checked_value": "1",
-		"unchecked_value": "0"
+                "checked_value": "1",
+                "unchecked_value": "0"
             }
         },
         {
@@ -134,11 +163,13 @@
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checked_value": "1",
-		"unchecked_value": "0"
+                "checked_value": "1",
+                "unchecked_value": "0"
             }
         },
         {
@@ -146,11 +177,13 @@
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
-            "default_values": [ "20" ],
+            "default_values": [
+                "20"
+            ],
             "field_type": "text",
             "text_options": {
                 "validate_as": "int",
-		"min_integer" : 1
+                "min_integer": 1
             }
         },
         {
@@ -158,11 +191,13 @@
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checked_value": "1",
-		"unchecked_value": "0"
+                "checked_value": "1",
+                "unchecked_value": "0"
             }
         },
         {
@@ -170,14 +205,15 @@
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [
+                ""
+            ],
             "field_type": "checkbox",
             "checkbox_options": {
-		"checked_value": "1",
-		"unchecked_value": "0"
+                "checked_value": "1",
+                "unchecked_value": "0"
             }
         }
-
     ],
     "behavior": {
         "service-mapping": {
@@ -196,7 +232,7 @@
                 {
                     "input_parameter": "input_ref",
                     "target_property": "input_ref",
-		    "target_type_transform": "resolved-ref"
+                    "target_type_transform": "resolved-ref"
                 },
                 {
                     "input_parameter": "output_name",
@@ -209,7 +245,7 @@
                 {
                     "input_parameter": "intree_ref",
                     "target_property": "intree_ref",
-		    "target_type_transform": "resolved-ref"
+                    "target_type_transform": "resolved-ref"
                 },
                 {
                     "input_parameter": "fastest",
@@ -254,15 +290,24 @@
                     "target_property": "workspace_name"
                 },
                 {
-                    "service_method_output_path": [0, "report_name"],
+                    "service_method_output_path": [
+                        0,
+                        "report_name"
+                    ],
                     "target_property": "report_name"
                 },
                 {
-                    "service_method_output_path": [0, "report_ref"],
+                    "service_method_output_path": [
+                        0,
+                        "report_ref"
+                    ],
                     "target_property": "report_ref"
                 },
                 {
-                    "service_method_output_path": [0, "output_ref"],
+                    "service_method_output_path": [
+                        0,
+                        "output_ref"
+                    ],
                     "target_property": "output_ref"
                 }
             ]

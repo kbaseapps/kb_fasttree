@@ -17,11 +17,10 @@ RUN update-ca-certificates
 
 
 # Install ETE3
-RUN apt-get update && \
-    apt-get -y install xvfb
+RUN apt-get -y install xvfb
 RUN pip install --upgrade pip
 # Note: You must use PyQt5==5.11.3 on debian
-RUN pip install ete3==3.1.2 PyQt5==5.11.3 numpy==1.23.1
+RUN pip install ete3==3.1.2 PyQt5==5.11.3 numpy==1.23.1 pytest coverage pytest-cov
 
 # -----------------------------------------
 
@@ -37,16 +36,11 @@ RUN make all
 #
 RUN mkdir -p /kb/module/FastTree/bin
 WORKDIR /kb/module/FastTree/bin
-RUN curl -o FastTree2.1.11_64 http://www.microbesonline.org/fasttree/FastTree && \
-#RUN \
-#    git clone https://github.com/kbaseapps/kb_fasttree && \
-#    cp kb_fasttree/src/FastTree2.1.11_64 . && \
-    chmod 555 FastTree2.1.11_64 && \
-    ln -s FastTree2.1.11_64 FastTree
+RUN curl -o FastTree http://www.microbesonline.org/fasttree/FastTree && \
+    chmod 555 FastTree
 
 
 WORKDIR /kb/module
 ENTRYPOINT [ "./scripts/entrypoint.sh" ]
 
 CMD [ ]
-
