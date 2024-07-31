@@ -1,13 +1,8 @@
 name: KBase SDK Tests
 
 on:
-    push:
-        branches:
-            - master
-            - main
     pull_request:
         branches:
-            - master
             - main
             - develop
 
@@ -45,7 +40,10 @@ jobs:
                   docker run -i --rm -v $HOME:$HOME -w $(pwd) -v /var/run/docker.sock:/var/run/docker.sock -e DSHELL=$SHELL --group-add $(cat $HOME/.kbsdk.cache) ghcr.io/kbase/kb_sdk_patch-develop:br-0.0.4-rc-1 test --verbose
 
             - name: Upload coverage to Codecov
-              uses: codecov/codecov-action@v3
+              id: send_to_codecov
+              uses: codecov/codecov-action@main
+              continue-on-error: true
               with:
-                  token: ${{ secrets.CODECOV_TOKEN }}
+                  files: ./python-coverage/coverage.xml
                   fail_ci_if_error: true
+                  token: ${{ secrets.CODECOV_TOKEN }}
