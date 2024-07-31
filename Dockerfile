@@ -7,7 +7,6 @@ RUN apt-get update \
     && apt-get upgrade -y \
     && sed -i 's/\(.*DST_Root_CA_X3.crt\)/!\1/' /etc/ca-certificates.conf \
     && update-ca-certificates \
-    # Install ETE3
     && apt-get -y install xvfb \
     && pip install --upgrade pip && \
     # Install FastTree
