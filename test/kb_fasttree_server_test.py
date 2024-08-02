@@ -2,7 +2,6 @@
 
 import json
 import logging
-import sys
 from configparser import ConfigParser  # py3
 from datetime import datetime, timezone
 from os import environ
@@ -15,9 +14,10 @@ from installed_clients.WorkspaceClient import Workspace
 from kb_fasttree.kb_fasttreeImpl import kb_fasttree
 from vcr.unittest import VCRTestCase
 
-# Set a variable to refer to the test directory
+# Set a variable to refer to the `test/` directory
 TEST_BASE_DIR = Path(__file__).resolve().parent
 
+# sample data file
 MSA_JSON_FILE = TEST_BASE_DIR / "data" / "DsrA.MSA.json"
 MSA_NAME = "test_MSA"
 
@@ -88,6 +88,10 @@ class kb_fasttreeTest(VCRTestCase):
             "authenticated": 1,
         }
         config_file = environ.get("KB_DEPLOYMENT_CONFIG", None)
+        if not config_file:
+            err_msg = "No config file found. Please set the KB_DEPLOYMENT_CONFIG env var and rerun the tests."
+            raise RuntimeError(err_msg)
+
         cls.cfg = {}
         config = ConfigParser()
         config.read(config_file)
@@ -95,11 +99,12 @@ class kb_fasttreeTest(VCRTestCase):
             cls.cfg[nameval[0]] = nameval[1]
         cls.ws_client = Workspace(cls.cfg["workspace-url"], token=token)
         cls.service_impl = kb_fasttree(cls.cfg)
+        # corresponds with the data in the saved cassette and the expected output files
+        cls.run_id = "20240801_204739"
+
         # to regenerate the server responses, uncomment this line
         # and delete the `test/cassettes` folder
         # cls.run_id = datetime.now(tz=timezone.utc).strftime("%Y%m%d_%H%M%S")
-        # corresponds with the data in the saved cassette and the expected output files
-        cls.run_id = "20240801_204739"
 
     @classmethod
     def tearDownClass(cls):
@@ -159,8 +164,6 @@ class kb_fasttreeTest(VCRTestCase):
     ##############
 
     def test_kb_fasttree_run_FastTree_01(self):
-        print(sys.path)
-
         obj_out_name = "DsrA.test"
         obj_out_type = "KBaseTrees.Tree"
         msa_ref = self.get_msa_ref()
@@ -216,9 +219,12 @@ class kb_fasttreeTest(VCRTestCase):
                     f"{obj_out_name}{suffix}" for suffix in ["-labels.newick", ".newick", ".pdf"]
                 ],
                 "output_html": [
+                    # n.b. if the tests are run against live servers,
+                    # rather than using recorded responses,
+                    # this dir will also contain `output_html.zip`
                     f"{obj_out_name}.html",
                     f"{obj_out_name}.png",
-                ],  # , "output_html.zip"],
+                ],
             }
             for sub_dir_name in file_list:
                 for f in file_list[sub_dir_name]:

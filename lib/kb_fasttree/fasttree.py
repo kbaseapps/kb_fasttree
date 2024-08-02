@@ -32,8 +32,7 @@ def now_iso() -> str:
     return datetime.now(tz=timezone.utc).strftime("%Y-%m-%d_%H:%M:%S")
 
 
-# def log(target: list[str] | None, message: str) -> None:
-def log(target, message):
+def log(target, message: str) -> None:
     """Simple logger."""
     message = "[" + now_iso() + "] " + message
     if target is not None:
@@ -45,39 +44,17 @@ def log(target, message):
 def run_fasttree(
     config: Dict[str, str], ctx: Dict[str, Any], params: Dict[str, Any]
 ) -> Dict[str, Any]:
-    """ """
+    """Method for Tree building of either DNA or PROTEIN sequences.
 
-    # Method for Tree building of either DNA or PROTEIN sequences
-    # **
-    # **        input_type: MSA
-    # **        output_type: Tree
-    # :param params: instance of type "FastTree_Params" (FastTree Input
-    #     Params) -> structure: parameter "workspace_name" of type
-    #     "workspace_name" (** The workspace object refs are of form: ** **
-    #     objects = ws.get_objects([{'ref':
-    #     params['workspace_id']+'/'+params['obj_name']}]) ** ** "ref" means
-    #     the entire name combining the workspace id and the object name **
-    #     "id" is a numerical identifier of the workspace or object, and
-    #     should just be used for workspace ** "name" is a string identifier
-    #     of a workspace or object.  This is received from Narrative.),
-    #     parameter "desc" of String, parameter "input_ref" of type
-    #     "data_obj_ref", parameter "output_name" of type "data_obj_name",
-    #     parameter "species_tree_flag" of Long, parameter "intree_ref" of
-    #     type "data_obj_ref", parameter "fastest" of Long, parameter
-    #     "pseudo" of Long, parameter "gtr" of Long, parameter "wag" of
-    #     Long, parameter "noml" of Long, parameter "nome" of Long,
-    #     parameter "cat" of Long, parameter "nocat" of Long, parameter
-    #     "gamma" of Long
-    # :returns: instance of type "FastTree_Output" (FastTree Output) ->
-    #     structure: parameter "report_name" of type "data_obj_name",
-    #     parameter "report_ref" of type "data_obj_ref", parameter
-    #     "output_ref" of type "data_obj_ref"
-    # """
-    # ctx is the context object
-    # return variables are: returnVal
-    # BEGIN run_FastTree
-
-    # init
+    :param config: dictionary containing workspace and callback server URLs plus scratch dir.
+    :type config: Dict[str, str]
+    :param ctx: context object
+    :type ctx: Dict[str, Any]
+    :param params: app params, fresh from the KBase interface
+    :type params: Dict[str, Any]
+    :return: KBaseReport output
+    :rtype: Dict[str, Any]
+    """
     # create a directory for all files related to this run to live in
     run_id = generate_run_id()
     run_dir = Path(config["scratch"]) / run_id
@@ -246,41 +223,36 @@ def run_fasttree(
 
         log(console, "BUILDING RETURN OBJECT")
         log(console, "run_FastTree DONE")
-        return [
-            {
-                "report_name": report_name,
-                "report_ref": f"{report_obj_info[6]}/{report_obj_info[0]}/{report_obj_info[4]}",
-                "output_ref": None,
-            }
-        ]
+        return {
+            "report_name": report_name,
+            "report_ref": f"{report_obj_info[6]}/{report_obj_info[0]}/{report_obj_info[4]}",
+            "output_ref": None,
+        }
+
+    # check for necessary files
+    if not Path(FASTTREE_BIN).is_file():
+        err_msg = f"no such file '{FASTTREE_BIN}'"
+        raise ValueError(err_msg)
+    if not input_msa_file_path.is_file():
+        err_msg = f"no such file '{input_msa_file_path}'"
+        raise ValueError(err_msg)
+    if input_msa_file_path.stat().st_size <= 0:
+        err_msg = f"empty file '{input_msa_file_path}'"
+        raise ValueError(err_msg)
+
+    # set the output path
+    output_dir = run_dir / "output"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_newick_file_path = output_dir / f'{params["output_name"]}.newick'
 
     ### Construct the command
     #
     #  e.g. fasttree -in <fasta_in> -out <fasta_out> -maxiters <n> -haxours <h>
     #
-    fasttree_cmd = [FASTTREE_BIN]
-
-    # check for necessary files
-    if not Path(FASTTREE_BIN).is_file():
-        raise ValueError("no such file '" + FASTTREE_BIN + "'")
-    if not input_msa_file_path.is_file():
-        raise ValueError(f"no such file '{input_msa_file_path}'")
-    if input_msa_file_path.stat().st_size <= 0:
-        raise ValueError(f"empty file '{input_msa_file_path}'")
-
-    # set the output path
-    # timestamp = int((datetime.utcnow() - datetime.utcfromtimestamp(0)).total_seconds() * 1000)
-    # output_dir = run_dir / f"output.{timestamp}"
-    output_dir = run_dir / "output"
-    output_dir.mkdir(parents=True, exist_ok=True)
-    output_newick_file_path = output_dir / f'{params["output_name"]}.newick'
-    # This doesn't work for some reason
-    #        fasttree_cmd.append('-out')
-    #        fasttree_cmd.append(output_newick_file_path)
+    fasttree_cmd = [FASTTREE_BIN, "-nopr"]
 
     # options
     # fasttree_cmd.append('-quiet')
-    fasttree_cmd.append("-nopr")
     if "fastest" in params and params["fastest"] is not None and params["fastest"] != 0:
         fasttree_cmd.append("-fastest")
     if "pseudo" in params and params["pseudo"] is not None and params["pseudo"] != 0:
@@ -307,6 +279,10 @@ def run_fasttree(
 
     if all_seqs_nuc:
         fasttree_cmd.append("-nt")
+
+    # This doesn't work for some reason
+    #        fasttree_cmd.append('-out')
+    #        fasttree_cmd.append(output_newick_file_path)
 
     # better (meaning it works) to write MSA to STDIN (below)
     fasttree_cmd.append(">")
@@ -403,12 +379,10 @@ def run_fasttree(
                 ],
             }
         )[0]
-        return [
-            {
-                "report_name": report_name,
-                "report_ref": f"{report_obj_info[6]}/{report_obj_info[0]}/{report_obj_info[4]}",
-            }
-        ]
+        return {
+            "report_name": report_name,
+            "report_ref": f"{report_obj_info[6]}/{report_obj_info[0]}/{report_obj_info[4]}",
+        }
 
     # Upload results
     #
@@ -489,14 +463,8 @@ def run_fasttree(
             }
         )[0]
     except Exception as e:
-        raise ValueError(
-            "Unable to save tree "
-            + params["output_name"]
-            + " object to workspace "
-            + str(params["workspace_name"])
-            + ": "
-            + str(e)
-        )
+        err_msg = f'Unable to save tree {params["output_name"]} object to workspace {params["workspace_name"]}: {e}'
+        raise ValueError(err_msg) from e
         # to get the full stack trace: traceback.format_exc()
 
     log(console, "BUILDING REPORT")  # DEBUG
@@ -539,7 +507,7 @@ def run_fasttree(
             }
         )
     except Exception as e:
-        raise ValueError("error uploading newick file to shock")
+        raise ValueError("error uploading newick file to shock") from e
 
     try:
         newick_labels_upload_ret = dfu.file_to_shock(
@@ -549,8 +517,8 @@ def run_fasttree(
                 "make_handle": 0,
             }
         )
-    except:
-        raise ValueError("error uploading newick labels file to shock")
+    except Exception as e:
+        raise ValueError("error uploading newick labels file to shock") from e
 
     # Create html with tree image
     #
@@ -676,51 +644,47 @@ def run_fasttree(
     #
     report_name = f"blast_report_{run_id}"
     report_obj = {
-        "objects_created": [],
+        "objects_created": [
+            {
+                "ref": str(params["workspace_name"]) + "/" + str(params["output_name"]),
+                "description": params["output_name"] + " Tree",
+            }
+        ],
         "message": "",  # or is it 'text_message'?
         "direct_html": "",
-        "direct_html_link_index": None,
-        "file_links": [],
-        "html_links": [],
+        "direct_html_link_index": 0,
+        "html_links": [
+            {
+                "shock_id": html_upload_ret["shock_id"],
+                "name": html_file,
+                "label": params["output_name"] + " HTML",
+            }
+        ],
+        "file_links": [
+            {
+                "shock_id": newick_upload_ret["shock_id"],
+                "name": params["output_name"] + ".newick",
+                "label": params["output_name"] + " NEWICK",
+            },
+            {
+                "shock_id": newick_labels_upload_ret["shock_id"],
+                "name": params["output_name"] + "-labels.newick",
+                "label": params["output_name"] + " NEWICK (with labels)",
+            },
+            {
+                "shock_id": png_upload_ret["shock_id"],
+                "name": params["output_name"] + ".png",
+                "label": params["output_name"] + " PNG",
+            },
+            {
+                "shock_id": pdf_upload_ret["shock_id"],
+                "name": params["output_name"] + ".pdf",
+                "label": params["output_name"] + " PDF",
+            },
+        ],
         "workspace_name": params["workspace_name"],
         "report_object_name": report_name,
     }
-    report_obj["objects_created"].append(
-        {
-            "ref": str(params["workspace_name"]) + "/" + str(params["output_name"]),
-            "description": params["output_name"] + " Tree",
-        }
-    )
-    report_obj["direct_html_link_index"] = 0
-    report_obj["html_links"] = [
-        {
-            "shock_id": html_upload_ret["shock_id"],
-            "name": html_file,
-            "label": params["output_name"] + " HTML",
-        }
-    ]
-    report_obj["file_links"] = [
-        {
-            "shock_id": newick_upload_ret["shock_id"],
-            "name": params["output_name"] + ".newick",
-            "label": params["output_name"] + " NEWICK",
-        },
-        {
-            "shock_id": newick_labels_upload_ret["shock_id"],
-            "name": params["output_name"] + "-labels.newick",
-            "label": params["output_name"] + " NEWICK (with labels)",
-        },
-        {
-            "shock_id": png_upload_ret["shock_id"],
-            "name": params["output_name"] + ".png",
-            "label": params["output_name"] + " PNG",
-        },
-        {
-            "shock_id": pdf_upload_ret["shock_id"],
-            "name": params["output_name"] + ".pdf",
-            "label": params["output_name"] + " PDF",
-        },
-    ]
 
     report_client = KBaseReport(config["callback_url"], token=ctx["token"], service_ver=SERVICE_VER)
     report_info = report_client.create_extended_report(report_obj)
