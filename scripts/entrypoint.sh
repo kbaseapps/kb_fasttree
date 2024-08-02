@@ -22,7 +22,7 @@ elif [ "${1}" = "bash" ] ; then
   bash
 elif [ "${1}" = "report" ] ; then
   export KB_SDK_COMPILE_REPORT_FILE=./work/compile_report.json
-  make compile
+  echo The compile report is available at /kb/module/work/compile_report.json
 else
   echo Unknown
 fi

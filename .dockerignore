@@ -1,2 +1,11 @@
+.github
+.pytest_cache
+.ruff_cache
+.vscode
+python-coverage
 test_local
 sdk.cfg
+__pycache__
+.coverage
+.dockerignore
+.gitignore
