@@ -1,0 +1,791 @@
+interactions:
+- request:
+    body: '{"method": "Workspace.create_workspace", "params": [{"workspace": "test_kb_fasttree_20240801_204739"}],
+      "version": "1.1", "id": "20604935531491964"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '148'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: https://ci.kbase.us/services/ws
+  response:
+    body:
+      string: '{"version":"1.1","result":[[76213,"test_kb_fasttree_20240801_204739","ialarmedalien","2024-08-01T20:47:40+0000",0,"a","n","unlocked",{}]]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 8ac8af442ff2238f-SJC
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 01 Aug 2024 20:47:40 GMT
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=LU0L6vm_ywhSxOhgCmLOqxnyIOsGkLChz.rtl0DtLvc-1722545260-1.0.1.1-7ec0W21tlJ0RTACDQtdY4tvZuAgxK9BFbbsLwV2crm7OPLVy2kgP3xADczF0tcQ3oIr2xM6WtHA0934SUGQNKQ;
+        path=/; expires=Thu, 01-Aug-24 21:17:40 GMT; domain=.kbase.us; HttpOnly; Secure;
+        SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '138'
+    status:
+      code: 200
+      message: ''
+- request:
+    body: '{"method": "Workspace.save_objects", "params": [{"workspace": "test_kb_fasttree_20240801_204739",
+      "objects": [{"type": "KBaseTrees.MSA", "data": {"alignment": {"21855/2/1.f:DAUD_RS11155":
+      "------------------------------------MALSKERLGRFNPDNHMEGRVTDIG---------------------PRHYWQFFPPVIQNNYGKWAYHEIL-----EPGVLVHVSETGDK------AFTVRCGGM--RFMTVEFLRELCDIADRFADGYVRFT-TRNNIEFIVDSLEKVEALKAELAKHTFAIGGSLKFPVGGTGAGVTNIVHTQGFIHCHTAAVDASSMVKALMDGLFEHFTSMDLPAQVRVSMACCLNMC-GAVHCSDIALLGYHRKPPAIDHEVLHKICE--------------------IPLAIASCPTAAISPGKTEDGLKTVKIKVERCMFCGNCYTMCPALPLADGQGDCVVMMAGGKVSNRISPPTFSKVIIPYLPNNHPRFPEVVEATKQVLNAYAADARKYERIGDWAARIGWEKFFEKCNLPFTEHLIDDYRLAYDTYRTSTQFKYTDAAWAVTRAAEGEE---",
+      "21855/2/1.f:DAUD_RS11160": "MAFEPKRPQKTYTYDDVRLYTDAELKNYTEDEEKNFKIKHDIPLLEQLESGPWPSFVADAKRYALRRRKLGEEGKLLINPDVVEDLLGQVELSFVHGETHWKHGGIVGVIGYGGGVIGRYSDVAEKYPGVAHFHTVRVAQVPSKFYNTAFLRGLADLWEYRGSGLMNLHGSTGDIIFLGTFTEQLEPLFQELTQ-------VLDVDLGGSGSNLRTPECCVGKARCQYALYDTQEMCYEMTMHYQDELHRPAFPYKFKFKFDGCPNGCVASIARADMSFIGTWCDDIRIDQDAVQGYINGEFPPGGGSHSGRDWGKFDIYAEVINRCPTGCMSLEDGK--LVIDNPNCTRCMHCIN--TMPRALKPGKETGVSILI--GGKAP-ILEGAQLSTLIVPFMKAEPP-YDNVKGVIDKVFEWWMEEGKNRERIGETIQRIGLQRFCDIIGVPPAPQMVKEPRTNPYIFWKEEDVP---GGFERDINDYRSRHAR",
+      "21855/3/1.f:DESNIDRAFT_RS0211670": "------------------------------------MAQAR----------------TDIG---------------------PPLYKDMLPPICKENYGKWRYHEII-----KPGVLVHVSETGAK------LYTVRAGSP--RLVSIQFIREICDLADKYCGGYLRFT-SRHNVEFLVSEEANVEPLLAELA--------AKKIPVGGTGNSITNIVHTQGWVHCHTPATDASGIVKSVMDELFEYFTTMKLPAKLRIALACCLNMC-GAVHCSDIAILGIHRTVPKIDHENLHKMCE--------------------IPTLTASCPTAAIRPNPK---LKSIDIKADRCMYCGNCYTMCPSVQIIDPKNDAVSIWVGGKISNSRIGPRFSRLAIPFLPNNPPRWPEVVEAVKHLVEVWAANAQPGERMAEWIERISWEKFFEITGLPFTDKHIDDFTLAQTTFRCTTQFK-----W-------------",
+      "21855/3/1.f:DESNIDRAFT_RS0211675": "-----------------------------------MTEAKKTPLLDELEKGPWPSFVTEIKKAAANSPS-------------AQDLLGQLELSYEDKRGHWKHGGLVGVMGYGGGVIGRYSDIPEQFPNVEMFHTIRLNQPSGWYYNTKALRQICDLWEKYGSGLTNLHGSTGDLVLLGTRTENLQPFFDEVSNLE-----EHPFDLGGSGSNLRTPSCCAGPARCEFALIDTTDLCHDLTNEFQDYLHRPMWPYKSKIKISGCPNDCVASIARSDFSIQGTWRDDIKIDQEAVRAYVAEG---------------FDIQGLVIDKCPTKCMSWDGNE--LTIDNANCTRCMHCIN--KMCKALRPGDDRGATILI--GGKAP-ILQGAMMGWVIIPFMKLEPP-YTELKEFLEKAWEWWDENGKTRERIGELILRLGMRNFLRAVGLEPVPQMVNAPRANPFFFW-----------WPEETVQD------",
+      "21855/4/1.f:DESGI_RS22175": "MPFEPKEPQKEIKYQETRIYTDAELNNYTEEELKNFKIKHEIPDLEELEKGPWPSFVADAKQEALRRRKLADD-KMLIDRDVVEDMLGQLQVSFDEGETHWKHGGIVGVFGYGGGVIGRYSDLPEKYPSIAHFHTIRVNQPASKFYNSDFLRTVCDMWEYRGSGLMNLHGSTGDMVLLGTTTEQLEPIFFELTH-------VMGQDIGGSGSNLRTPSCCIGKARCEFACYDTQDLCYELTQYYQDELHRPAFPYKFKFKFDGCPNGCVASIARSDMSFIGTWRDDIRIDQDAVKAYIAGDVIPNGGAHRGRDWGKFDIQKEVIDLCPTKCMSMVDGE--LVIDNKECTRCMHCIN--VMPKALKPGKDTGISILF--GAKAP-ILEGAQMATLVVPFMKAEPP-YDNIKELIEKVWEFWMEEGKNRERLGEVMQRFGLPKFLEAIGLPPAPQMVKTPRENPYILWKEEDVP---GGWTRDIKEYRARHKR",
+      "21855/5/1.f:BR02_RS0103515": "------------------------------------MAK------------------TDIG---------------------PPYYGDMLPPIIKENYGKWKYHEIL-----KPGVLVHVSESGAE------LYTVRVGSP--RLISIYFIRDICEIADKYCDGYLRFT-SRNNIEFLLSNKDNIEPLIAEVK--------AKGLPVGGTGNSITNMVHTQGWVHCHTPATDASGIVKAVMDELFEYFETMKLPAKMRISLACCLNMC-GAVHCSDIAILGIHRKAPVINHENLKNFCE--------------------IPTVIASCPTAAIRPNPK---LKSVEIKEERCMYCGNCYTMCPSIQIIDPENDAISIWVGGKVSNARSTPMFSRLAIPYLPNNPPRWPEVVDAVKKLVELWAANAKQGERMGEWIERIGWEKFFQLAELPFTDKHIDDFTYAVTTFRSTTQFK-----W-------------",
+      "21855/5/1.f:BR02_RS0103520": "------------------------------------MAESKTPLLDQLETGPWPSFVTEIKRMAPTKPT-------------AQDLLGQLEVSYEEKKGHWKHGGIVGVMGYGGGVIGRYTDLPEQFPNVAEFHTVRLNQPSGWFYTTEALRTVCDIWEKYGSGLTNLHGSTGDIVLLGTKTEYLQTLFDEYS--------DKGFDLGGSGSDLRTPSCCCGMARCEFACIDAMDICHNLTNEYQDELHRPMWPYKFKIKIAGCPNDCVASIARSDFSIQGTWRDELRIDQEAVREYVNNG---------------FDIQELVIDRCPTGCLEWDGNE--LKLDAPECVRCMHCIN--KMPKALRPGLDKGATILI--GGKAT-ILQSAFLGWVIVPFMKMEAP-YQEVKDLLEKIWEWWDEEGKVRERVGETICRLGMRHFLRAVDLEPIPQMVYRPRANPYFFW-----------WPEEVK--------",
+      "21855/6/1.f:DVU0402": "------------------------------------MAKHATPKLDQLESGPWPSFVSDIKQEAAYRAANPKGLDYQVPVDCPEDLLGVLELSYDEGETHWKHGGIVGVFGYGGGVIGRYCDQPEKFPGVAHFHTVRVAQPSGKYYSADYLRQLCDIWDLRGSGLTNMHGSTGDIVLLGTQTPQLEEIFFELTH-------NLNTDLGGSGSNLRTPESCLGKSRCEFACYDSQAACYELTMEYQDELHRPAFPYKFKFKFDACPNGCVASIARSDFSVIGTWKDDIKIDAEAVKAYVAGEFKPNAGAHSGRDWGKFDIEAEVVNRCPSKCMKWDGSK--LSIDNKECVRCMHCIN--TMPRALHIGDERGASILC--GAKAP-ILDGAQMGSLLVPFVAAEEP-FDEIKEVVEKIWDWWMEEGKNRERLGETMKRLSFQKLLEVTEIAPVPQHVKEPRTNPYIFFKEEEVP---GGWDRDITEYRKRHLR",
+      "21855/7/1.f:DEVAL_RS01880": "------------------------------------MAKHATPKLDQLESGPWPSFVSDIKQEAAYRAANPKGLDYQVPVDCPEDLLGVLELSYDEGETHWKHGGIVGVFGYGGGVIGRYCDQPEKFPGVAHFHTVRVAQPSGKYYSADYLRQLCDIWDLRGSGLTNMHGSTGDIVLLGTQTPQLEEIFFELTH-------NLNTDLGGSGSNLRTPESCLGKSRCEFACYDSQAACYELTMEYQDELHRPAFPYKFKFKFDACPNGCVASIARSDFSVIGTWKDDIKIDAEAVKAYVAGEFKPNAGAHSGRDWGKFDIEAEVVNRCPSKCMKWDGSK--LSIDNKECVRCMHCIN--TMPRALHIGDERGASILC--GAKAP-ILDGAQMGSLLVPFVAAEEP-FDEIKEVVEKIWDWWMEEGKNRERLGETMKRLSFQKLLEVTEIAPVPQHVKEPRTNPYIFFKEEEVP---GGWDRDITEYRKRHLR",
+      "21855/8/1.f:DVUL_RS12960": "------------------------------------MAKHATPKLDQLESGPWPSFVSDIKQEAAYRAANPKGLDYQVPVDCPEDLLGVLELSYDEGETHWKHGGIVGVFGYGGGVIGRYCDQPEKFPGVAHFHTVRVAQPSGKYYSADYLRQLCDIWDLRGSGLTNMHGSTGDIVLLGTQTPQLEEIFFELTH-------NLNTDLGGSGSNLRTPESCLGKSRCEFACYDSQAACYELTMEYQDELHRPAFPYKFKFKFDACPNGCVASIARSDFSVIGTWKDDIKIDAEAVKAYVAGEFKPNAGAHSGRDWGKFDIEAEVVNRCPSKCMKWDGSK--LSIDNKECVRCMHCIN--TMPRALHIGDERGASILC--GAKAP-ILDGAQMGSLLVPFVAAEEP-FDEIKEVVEKIWDWWMEEGKNRERLGETMKRLSFQKLLEVTEIAPVPQHVKEPRTNPYIFFKEEEVP---GGWDRDITEYRKRHLR",
+      "21855/9/1.f:DVMF_RS07895": "------------------------------------MAKHATPKLDQLESGPWPSFVSDIKQEAAYRAANPKGLDYQIPVDCPEDLLGVLELSYNEGETHWKHGGIVGVFGYGGGVIGRYCDQPEQFPGVAHFHTVRVNQPAAKYYHTDYLRQLCDLWDLRGSGLTNMHGSTGDIVLLGTQTPQLEELFFELTH-------KMNTDLGGSGSNLRTPESCLGMSRCEYACYDTQACCYALTMEYQDELHRPAFPYKFKFKFDGCPNGCVASIARSDFSVIGTWKDDIKIDQAAVKAYVGGELKPNAGAHSGRDWGKFDIMAEVVERCPSKCISWNGSA--LSIKTSECVRCMHCIN--TMPRALRIGDERGASILV--GAKAP-VLDGAQMGSLLVPFVDASEP-FDEIKGVVEKIWDWWMEEGKNRERLGETIKRLSFQKLLEVTEIDPVAQHVKEPRSNPYIFFKEEEVP---GGWDRDITEYRKRHQR"},
+      "alignment_length": 491, "default_row_labels": {"21855/2/1.f:DAUD_RS11155":
+      "Candidatus Desulforudis audaxviator MP104C - DAUD_RS11155", "21855/2/1.f:DAUD_RS11160":
+      "Candidatus Desulforudis audaxviator MP104C - DAUD_RS11160", "21855/3/1.f:DESNIDRAFT_RS0211670":
+      "Desulfotomaculum nigrificans DSM 574 - DESNIDRAFT_RS0211670", "21855/3/1.f:DESNIDRAFT_RS0211675":
+      "Desulfotomaculum nigrificans DSM 574 - DESNIDRAFT_RS0211675", "21855/4/1.f:DESGI_RS22175":
+      "Desulfotomaculum gibsoniae DSM 7213 - DESGI_RS22175", "21855/5/1.f:BR02_RS0103515":
+      "Desulfotomaculum alkaliphilum DSM 12257 - BR02_RS0103515", "21855/5/1.f:BR02_RS0103520":
+      "Desulfotomaculum alkaliphilum DSM 12257 - BR02_RS0103520", "21855/6/1.f:DVU0402":
+      "Desulfovibrio vulgaris str. Hildenborough - DVU0402", "21855/7/1.f:DEVAL_RS01880":
+      "Desulfovibrio vulgaris RCH1 - DEVAL_RS01880", "21855/8/1.f:DVUL_RS12960": "Desulfovibrio
+      vulgaris DP4 - DVUL_RS12960", "21855/9/1.f:DVMF_RS07895": "Desulfovibrio vulgaris
+      str. ''Miyazaki F'' - DVMF_RS07895"}, "description": "DsrA MSA", "name": "DsrA.MSA",
+      "row_order": ["21855/3/1.f:DESNIDRAFT_RS0211675", "21855/5/1.f:BR02_RS0103520",
+      "21855/8/1.f:DVUL_RS12960", "21855/6/1.f:DVU0402", "21855/7/1.f:DEVAL_RS01880",
+      "21855/9/1.f:DVMF_RS07895", "21855/4/1.f:DESGI_RS22175", "21855/2/1.f:DAUD_RS11160",
+      "21855/2/1.f:DAUD_RS11155", "21855/3/1.f:DESNIDRAFT_RS0211670", "21855/5/1.f:BR02_RS0103515"],
+      "sequence_type": "protein"}, "name": "test_MSA", "meta": {}, "provenance": [{}]}]}],
+      "version": "1.1", "id": "2802145234458179"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '7449'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: https://ci.kbase.us/services/ws
+  response:
+    body:
+      string: '{"version":"1.1","result":[[[1,"test_MSA","KBaseTrees.MSA-1.2","2024-08-01T20:47:40+0000",1,"ialarmedalien",76213,"test_kb_fasttree_20240801_204739","91d2b1a65d289e875f3e7b0831972a27",7138,{}]]]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 8ac8af44eeff9834-SJC
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 01 Aug 2024 20:47:40 GMT
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=eiIj61stLdnGvMRtYHeIYvb3a8xA9ObuiWe5jSDi5kU-1722545260-1.0.1.1-v.7YCJvqxROsVWtkvkf5S_4VZmrldqRyXdiFugI3i07ttmeRvdnfIpSRADaKWziL3LVJmmg_gq4NM9zrUCpRMA;
+        path=/; expires=Thu, 01-Aug-24 21:17:40 GMT; domain=.kbase.us; HttpOnly; Secure;
+        SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '195'
+    status:
+      code: 200
+      message: ''
+- request:
+    body: '{"method": "Workspace.get_objects", "params": [[{"ref": "76213/1/1"}]],
+      "version": "1.1", "id": "9623229803933299"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '115'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: https://ci.kbase.us/services/ws
+  response:
+    body:
+      string: '{"version":"1.1","result":[[{"data":{"alignment":{"21855/2/1.f:DAUD_RS11155":"------------------------------------MALSKERLGRFNPDNHMEGRVTDIG---------------------PRHYWQFFPPVIQNNYGKWAYHEIL-----EPGVLVHVSETGDK------AFTVRCGGM--RFMTVEFLRELCDIADRFADGYVRFT-TRNNIEFIVDSLEKVEALKAELAKHTFAIGGSLKFPVGGTGAGVTNIVHTQGFIHCHTAAVDASSMVKALMDGLFEHFTSMDLPAQVRVSMACCLNMC-GAVHCSDIALLGYHRKPPAIDHEVLHKICE--------------------IPLAIASCPTAAISPGKTEDGLKTVKIKVERCMFCGNCYTMCPALPLADGQGDCVVMMAGGKVSNRISPPTFSKVIIPYLPNNHPRFPEVVEATKQVLNAYAADARKYERIGDWAARIGWEKFFEKCNLPFTEHLIDDYRLAYDTYRTSTQFKYTDAAWAVTRAAEGEE---","21855/2/1.f:DAUD_RS11160":"MAFEPKRPQKTYTYDDVRLYTDAELKNYTEDEEKNFKIKHDIPLLEQLESGPWPSFVADAKRYALRRRKLGEEGKLLINPDVVEDLLGQVELSFVHGETHWKHGGIVGVIGYGGGVIGRYSDVAEKYPGVAHFHTVRVAQVPSKFYNTAFLRGLADLWEYRGSGLMNLHGSTGDIIFLGTFTEQLEPLFQELTQ-------VLDVDLGGSGSNLRTPECCVGKARCQYALYDTQEMCYEMTMHYQDELHRPAFPYKFKFKFDGCPNGCVASIARADMSFIGTWCDDIRIDQDAVQGYINGEFPPGGGSHSGRDWGKFDIYAEVINRCPTGCMSLEDGK--LVIDNPNCTRCMHCIN--TMPRALKPGKETGVSILI--GGKAP-ILEGAQLSTLIVPFMKAEPP-YDNVKGVIDKVFEWWMEEGKNRERIGETIQRIGLQRFCDIIGVPPAPQMVKEPRTNPYIFWKEEDVP---GGFERDINDYRSRHAR","21855/3/1.f:DESNIDRAFT_RS0211670":"------------------------------------MAQAR----------------TDIG---------------------PPLYKDMLPPICKENYGKWRYHEII-----KPGVLVHVSETGAK------LYTVRAGSP--RLVSIQFIREICDLADKYCGGYLRFT-SRHNVEFLVSEEANVEPLLAELA--------AKKIPVGGTGNSITNIVHTQGWVHCHTPATDASGIVKSVMDELFEYFTTMKLPAKLRIALACCLNMC-GAVHCSDIAILGIHRTVPKIDHENLHKMCE--------------------IPTLTASCPTAAIRPNPK---LKSIDIKADRCMYCGNCYTMCPSVQIIDPKNDAVSIWVGGKISNSRIGPRFSRLAIPFLPNNPPRWPEVVEAVKHLVEVWAANAQPGERMAEWIERISWEKFFEITGLPFTDKHIDDFTLAQTTFRCTTQFK-----W-------------","21855/3/1.f:DESNIDRAFT_RS0211675":"-----------------------------------MTEAKKTPLLDELEKGPWPSFVTEIKKAAANSPS-------------AQDLLGQLELSYEDKRGHWKHGGLVGVMGYGGGVIGRYSDIPEQFPNVEMFHTIRLNQPSGWYYNTKALRQICDLWEKYGSGLTNLHGSTGDLVLLGTRTENLQPFFDEVSNLE-----EHPFDLGGSGSNLRTPSCCAGPARCEFALIDTTDLCHDLTNEFQDYLHRPMWPYKSKIKISGCPNDCVASIARSDFSIQGTWRDDIKIDQEAVRAYVAEG---------------FDIQGLVIDKCPTKCMSWDGNE--LTIDNANCTRCMHCIN--KMCKALRPGDDRGATILI--GGKAP-ILQGAMMGWVIIPFMKLEPP-YTELKEFLEKAWEWWDENGKTRERIGELILRLGMRNFLRAVGLEPVPQMVNAPRANPFFFW-----------WPEETVQD------","21855/4/1.f:DESGI_RS22175":"MPFEPKEPQKEIKYQETRIYTDAELNNYTEEELKNFKIKHEIPDLEELEKGPWPSFVADAKQEALRRRKLADD-KMLIDRDVVEDMLGQLQVSFDEGETHWKHGGIVGVFGYGGGVIGRYSDLPEKYPSIAHFHTIRVNQPASKFYNSDFLRTVCDMWEYRGSGLMNLHGSTGDMVLLGTTTEQLEPIFFELTH-------VMGQDIGGSGSNLRTPSCCIGKARCEFACYDTQDLCYELTQYYQDELHRPAFPYKFKFKFDGCPNGCVASIARSDMSFIGTWRDDIRIDQDAVKAYIAGDVIPNGGAHRGRDWGKFDIQKEVIDLCPTKCMSMVDGE--LVIDNKECTRCMHCIN--VMPKALKPGKDTGISILF--GAKAP-ILEGAQMATLVVPFMKAEPP-YDNIKELIEKVWEFWMEEGKNRERLGEVMQRFGLPKFLEAIGLPPAPQMVKTPRENPYILWKEEDVP---GGWTRDIKEYRARHKR","21855/5/1.f:BR02_RS0103515":"------------------------------------MAK------------------TDIG---------------------PPYYGDMLPPIIKENYGKWKYHEIL-----KPGVLVHVSESGAE------LYTVRVGSP--RLISIYFIRDICEIADKYCDGYLRFT-SRNNIEFLLSNKDNIEPLIAEVK--------AKGLPVGGTGNSITNMVHTQGWVHCHTPATDASGIVKAVMDELFEYFETMKLPAKMRISLACCLNMC-GAVHCSDIAILGIHRKAPVINHENLKNFCE--------------------IPTVIASCPTAAIRPNPK---LKSVEIKEERCMYCGNCYTMCPSIQIIDPENDAISIWVGGKVSNARSTPMFSRLAIPYLPNNPPRWPEVVDAVKKLVELWAANAKQGERMGEWIERIGWEKFFQLAELPFTDKHIDDFTYAVTTFRSTTQFK-----W-------------","21855/5/1.f:BR02_RS0103520":"------------------------------------MAESKTPLLDQLETGPWPSFVTEIKRMAPTKPT-------------AQDLLGQLEVSYEEKKGHWKHGGIVGVMGYGGGVIGRYTDLPEQFPNVAEFHTVRLNQPSGWFYTTEALRTVCDIWEKYGSGLTNLHGSTGDIVLLGTKTEYLQTLFDEYS--------DKGFDLGGSGSDLRTPSCCCGMARCEFACIDAMDICHNLTNEYQDELHRPMWPYKFKIKIAGCPNDCVASIARSDFSIQGTWRDELRIDQEAVREYVNNG---------------FDIQELVIDRCPTGCLEWDGNE--LKLDAPECVRCMHCIN--KMPKALRPGLDKGATILI--GGKAT-ILQSAFLGWVIVPFMKMEAP-YQEVKDLLEKIWEWWDEEGKVRERVGETICRLGMRHFLRAVDLEPIPQMVYRPRANPYFFW-----------WPEEVK--------","21855/6/1.f:DVU0402":"------------------------------------MAKHATPKLDQLESGPWPSFVSDIKQEAAYRAANPKGLDYQVPVDCPEDLLGVLELSYDEGETHWKHGGIVGVFGYGGGVIGRYCDQPEKFPGVAHFHTVRVAQPSGKYYSADYLRQLCDIWDLRGSGLTNMHGSTGDIVLLGTQTPQLEEIFFELTH-------NLNTDLGGSGSNLRTPESCLGKSRCEFACYDSQAACYELTMEYQDELHRPAFPYKFKFKFDACPNGCVASIARSDFSVIGTWKDDIKIDAEAVKAYVAGEFKPNAGAHSGRDWGKFDIEAEVVNRCPSKCMKWDGSK--LSIDNKECVRCMHCIN--TMPRALHIGDERGASILC--GAKAP-ILDGAQMGSLLVPFVAAEEP-FDEIKEVVEKIWDWWMEEGKNRERLGETMKRLSFQKLLEVTEIAPVPQHVKEPRTNPYIFFKEEEVP---GGWDRDITEYRKRHLR","21855/7/1.f:DEVAL_RS01880":"------------------------------------MAKHATPKLDQLESGPWPSFVSDIKQEAAYRAANPKGLDYQVPVDCPEDLLGVLELSYDEGETHWKHGGIVGVFGYGGGVIGRYCDQPEKFPGVAHFHTVRVAQPSGKYYSADYLRQLCDIWDLRGSGLTNMHGSTGDIVLLGTQTPQLEEIFFELTH-------NLNTDLGGSGSNLRTPESCLGKSRCEFACYDSQAACYELTMEYQDELHRPAFPYKFKFKFDACPNGCVASIARSDFSVIGTWKDDIKIDAEAVKAYVAGEFKPNAGAHSGRDWGKFDIEAEVVNRCPSKCMKWDGSK--LSIDNKECVRCMHCIN--TMPRALHIGDERGASILC--GAKAP-ILDGAQMGSLLVPFVAAEEP-FDEIKEVVEKIWDWWMEEGKNRERLGETMKRLSFQKLLEVTEIAPVPQHVKEPRTNPYIFFKEEEVP---GGWDRDITEYRKRHLR","21855/8/1.f:DVUL_RS12960":"------------------------------------MAKHATPKLDQLESGPWPSFVSDIKQEAAYRAANPKGLDYQVPVDCPEDLLGVLELSYDEGETHWKHGGIVGVFGYGGGVIGRYCDQPEKFPGVAHFHTVRVAQPSGKYYSADYLRQLCDIWDLRGSGLTNMHGSTGDIVLLGTQTPQLEEIFFELTH-------NLNTDLGGSGSNLRTPESCLGKSRCEFACYDSQAACYELTMEYQDELHRPAFPYKFKFKFDACPNGCVASIARSDFSVIGTWKDDIKIDAEAVKAYVAGEFKPNAGAHSGRDWGKFDIEAEVVNRCPSKCMKWDGSK--LSIDNKECVRCMHCIN--TMPRALHIGDERGASILC--GAKAP-ILDGAQMGSLLVPFVAAEEP-FDEIKEVVEKIWDWWMEEGKNRERLGETMKRLSFQKLLEVTEIAPVPQHVKEPRTNPYIFFKEEEVP---GGWDRDITEYRKRHLR","21855/9/1.f:DVMF_RS07895":"------------------------------------MAKHATPKLDQLESGPWPSFVSDIKQEAAYRAANPKGLDYQIPVDCPEDLLGVLELSYNEGETHWKHGGIVGVFGYGGGVIGRYCDQPEQFPGVAHFHTVRVNQPAAKYYHTDYLRQLCDLWDLRGSGLTNMHGSTGDIVLLGTQTPQLEELFFELTH-------KMNTDLGGSGSNLRTPESCLGMSRCEYACYDTQACCYALTMEYQDELHRPAFPYKFKFKFDGCPNGCVASIARSDFSVIGTWKDDIKIDQAAVKAYVGGELKPNAGAHSGRDWGKFDIMAEVVERCPSKCISWNGSA--LSIKTSECVRCMHCIN--TMPRALRIGDERGASILV--GAKAP-VLDGAQMGSLLVPFVDASEP-FDEIKGVVEKIWDWWMEEGKNRERLGETIKRLSFQKLLEVTEIDPVAQHVKEPRSNPYIFFKEEEVP---GGWDRDITEYRKRHQR"},"alignment_length":491,"default_row_labels":{"21855/2/1.f:DAUD_RS11155":"Candidatus
+        Desulforudis audaxviator MP104C - DAUD_RS11155","21855/2/1.f:DAUD_RS11160":"Candidatus
+        Desulforudis audaxviator MP104C - DAUD_RS11160","21855/3/1.f:DESNIDRAFT_RS0211670":"Desulfotomaculum
+        nigrificans DSM 574 - DESNIDRAFT_RS0211670","21855/3/1.f:DESNIDRAFT_RS0211675":"Desulfotomaculum
+        nigrificans DSM 574 - DESNIDRAFT_RS0211675","21855/4/1.f:DESGI_RS22175":"Desulfotomaculum
+        gibsoniae DSM 7213 - DESGI_RS22175","21855/5/1.f:BR02_RS0103515":"Desulfotomaculum
+        alkaliphilum DSM 12257 - BR02_RS0103515","21855/5/1.f:BR02_RS0103520":"Desulfotomaculum
+        alkaliphilum DSM 12257 - BR02_RS0103520","21855/6/1.f:DVU0402":"Desulfovibrio
+        vulgaris str. Hildenborough - DVU0402","21855/7/1.f:DEVAL_RS01880":"Desulfovibrio
+        vulgaris RCH1 - DEVAL_RS01880","21855/8/1.f:DVUL_RS12960":"Desulfovibrio vulgaris
+        DP4 - DVUL_RS12960","21855/9/1.f:DVMF_RS07895":"Desulfovibrio vulgaris str.
+        ''Miyazaki F'' - DVMF_RS07895"},"description":"DsrA MSA","name":"DsrA.MSA","row_order":["21855/3/1.f:DESNIDRAFT_RS0211675","21855/5/1.f:BR02_RS0103520","21855/8/1.f:DVUL_RS12960","21855/6/1.f:DVU0402","21855/7/1.f:DEVAL_RS01880","21855/9/1.f:DVMF_RS07895","21855/4/1.f:DESGI_RS22175","21855/2/1.f:DAUD_RS11160","21855/2/1.f:DAUD_RS11155","21855/3/1.f:DESNIDRAFT_RS0211670","21855/5/1.f:BR02_RS0103515"],"sequence_type":"protein"},"info":[1,"test_MSA","KBaseTrees.MSA-1.2","2024-08-01T20:47:40+0000",1,"ialarmedalien",76213,"test_kb_fasttree_20240801_204739","91d2b1a65d289e875f3e7b0831972a27",7138,{}],"path":["76213/1/1"],"provenance":[],"creator":"ialarmedalien","orig_wsid":76213,"created":"2024-08-01T20:47:40+0000","epoch":1722545260347,"refs":[],"copy_source_inaccessible":0,"extracted_ids":{}}]]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 8ac8af45fb1e235b-SJC
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 01 Aug 2024 20:47:40 GMT
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=g7plhC6CKC_hAcx9QYPhVrGoZwcgHU1GCNL51Bh95dk-1722545260-1.0.1.1-W6z3.096LLMLilp2QUMvi7BiSENdFresW_F0.sHpadbiY6KE6I1jsHgG_0QWJx4dQDMFeNkgWNhw3JIZje3fqw;
+        path=/; expires=Thu, 01-Aug-24 21:17:40 GMT; domain=.kbase.us; HttpOnly; Secure;
+        SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '7548'
+    status:
+      code: 200
+      message: ''
+- request:
+    body: '{"method": "Workspace.save_objects", "params": [{"workspace": "test_kb_fasttree_20240801_204739",
+      "objects": [{"type": "KBaseTrees.Tree", "data": {"name": "DsrA.test", "description":
+      "test_FastTree", "type": "SpeciesTree", "tree": "(21855%2f4%2f1.f%3aDESGI_RS22175:0.12153,21855%2f2%2f1.f%3aDAUD_RS11160:0.15587,(((21855%2f8%2f1.f%3aDVUL_RS12960:0.0,21855%2f6%2f1.f%3aDVU0402:0.0,21855%2f7%2f1.f%3aDEVAL_RS01880:0.0):0.04805,21855%2f9%2f1.f%3aDVMF_RS07895:0.05673)1.000:0.14274,((21855%2f2%2f1.f%3aDAUD_RS11155:0.30486,(21855%2f3%2f1.f%3aDESNIDRAFT_RS0211670:0.11266,21855%2f5%2f1.f%3aBR02_RS0103515:0.08482)0.953:0.08154)1.000:1.05608,(21855%2f3%2f1.f%3aDESNIDRAFT_RS0211675:0.13918,21855%2f5%2f1.f%3aBR02_RS0103520:0.12923)0.971:0.07526)0.995:0.11388)1.000:0.08045);",
+      "default_node_labels": {"21855%2f3%2f1.f%3aDESNIDRAFT_RS0211675": "Desulfotomaculum
+      nigrificans DSM 574 - DESNIDRAFT_RS0211675", "21855%2f5%2f1.f%3aBR02_RS0103520":
+      "Desulfotomaculum alkaliphilum DSM 12257 - BR02_RS0103520", "21855%2f8%2f1.f%3aDVUL_RS12960":
+      "Desulfovibrio vulgaris DP4 - DVUL_RS12960", "21855%2f6%2f1.f%3aDVU0402": "Desulfovibrio
+      vulgaris str. Hildenborough - DVU0402", "21855%2f7%2f1.f%3aDEVAL_RS01880": "Desulfovibrio
+      vulgaris RCH1 - DEVAL_RS01880", "21855%2f9%2f1.f%3aDVMF_RS07895": "Desulfovibrio
+      vulgaris str. ''Miyazaki F'' - DVMF_RS07895", "21855%2f4%2f1.f%3aDESGI_RS22175":
+      "Desulfotomaculum gibsoniae DSM 7213 - DESGI_RS22175", "21855%2f2%2f1.f%3aDAUD_RS11160":
+      "Candidatus Desulforudis audaxviator MP104C - DAUD_RS11160", "21855%2f2%2f1.f%3aDAUD_RS11155":
+      "Candidatus Desulforudis audaxviator MP104C - DAUD_RS11155", "21855%2f3%2f1.f%3aDESNIDRAFT_RS0211670":
+      "Desulfotomaculum nigrificans DSM 574 - DESNIDRAFT_RS0211670", "21855%2f5%2f1.f%3aBR02_RS0103515":
+      "Desulfotomaculum alkaliphilum DSM 12257 - BR02_RS0103515"}, "leaf_list": ["21855%2f3%2f1.f%3aDESNIDRAFT_RS0211675",
+      "21855%2f5%2f1.f%3aBR02_RS0103520", "21855%2f8%2f1.f%3aDVUL_RS12960", "21855%2f6%2f1.f%3aDVU0402",
+      "21855%2f7%2f1.f%3aDEVAL_RS01880", "21855%2f9%2f1.f%3aDVMF_RS07895", "21855%2f4%2f1.f%3aDESGI_RS22175",
+      "21855%2f2%2f1.f%3aDAUD_RS11160", "21855%2f2%2f1.f%3aDAUD_RS11155", "21855%2f3%2f1.f%3aDESNIDRAFT_RS0211670",
+      "21855%2f5%2f1.f%3aBR02_RS0103515"]}, "name": "DsrA.test", "meta": {}, "provenance":
+      [{"service": "kb_fasttree", "method": "run_FastTree", "method_params": [], "input_ws_objects":
+      ["76213/1/1"]}]}]}], "version": "1.1", "id": "6138308506138858"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2429'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: https://ci.kbase.us/services/ws
+  response:
+    body:
+      string: '{"version":"1.1","result":[[[2,"DsrA.test","KBaseTrees.Tree-1.2","2024-08-01T20:47:40+0000",1,"ialarmedalien",76213,"test_kb_fasttree_20240801_204739","79b3b138a032f398801ff79f8eb4940e",2033,{}]]]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 8ac8af4769ca9e62-SJC
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 01 Aug 2024 20:47:40 GMT
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=0OopI_XLEPCkpNRqsIdqMfcsG1aJ8YWPK_MSW9bCSYc-1722545260-1.0.1.1-HU8y74BD7UeoTEZIk1WxhsiHPQQM3CrtcDpchepJxRes4pyJkx2Jr4Pv9NlTP8YsRp.Xs7MVj5kG0xtaJ0sGFw;
+        path=/; expires=Thu, 01-Aug-24 21:17:40 GMT; domain=.kbase.us; HttpOnly; Secure;
+        SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '197'
+    status:
+      code: 200
+      message: ''
+- request:
+    body: '{"method": "DataFileUtil._file_to_shock_submit", "params": [{"file_path":
+      "/kb/module/work/tmp/20240801_204739/output/DsrA.test.newick", "make_handle":
+      0}], "version": "1.1", "id": "3680250741042257", "context": {"service_ver":
+      "release"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '239'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.0.0.87:53316/
+  response:
+    body:
+      string: '{"result":["b434def0-d40e-43a3-827f-5692c880cac2"],"id":"3680250741042257","version":"1.1"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '91'
+      Content-Type:
+      - application/json
+      Server:
+      - Jetty(7.0.0.v20091005)
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"method": "DataFileUtil._check_job", "params": ["b434def0-d40e-43a3-827f-5692c880cac2"],
+      "version": "1.1", "id": "12246182159010399"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '134'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.0.0.87:53316/
+  response:
+    body:
+      string: '{"result":[{"result":[{"shock_id":"99ba0c69-648d-479c-8214-83f6bec5670f","handle":null,"node_file_name":"DsrA.test.newick","size":537}],"finished":1}],"id":"3680250741042257","version":"1.1"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '191'
+      Content-Type:
+      - application/json
+      Server:
+      - Jetty(7.0.0.v20091005)
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"method": "DataFileUtil._file_to_shock_submit", "params": [{"file_path":
+      "/kb/module/work/tmp/20240801_204739/output/DsrA.test-labels.newick", "make_handle":
+      0}], "version": "1.1", "id": "29310110991395055", "context": {"service_ver":
+      "release"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '247'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.0.0.87:53316/
+  response:
+    body:
+      string: '{"result":["00d4f7b0-2e4a-4ae1-bca4-886e4600e735"],"id":"29310110991395055","version":"1.1"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '92'
+      Content-Type:
+      - application/json
+      Server:
+      - Jetty(7.0.0.v20091005)
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"method": "DataFileUtil._check_job", "params": ["00d4f7b0-2e4a-4ae1-bca4-886e4600e735"],
+      "version": "1.1", "id": "1686204040455611"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '133'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.0.0.87:53316/
+  response:
+    body:
+      string: '{"result":[{"result":[{"shock_id":"8bae4311-fbca-4e64-bc0e-6a886949403b","handle":null,"node_file_name":"DsrA.test-labels.newick","size":774}],"finished":1}],"id":"29310110991395055","version":"1.1"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '199'
+      Content-Type:
+      - application/json
+      Server:
+      - Jetty(7.0.0.v20091005)
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"method": "DataFileUtil._file_to_shock_submit", "params": [{"file_path":
+      "/kb/module/work/tmp/20240801_204739/output_html/DsrA.test.png", "make_handle":
+      0}], "version": "1.1", "id": "5458284666331215", "context": {"service_ver":
+      "release"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '241'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.0.0.87:53316/
+  response:
+    body:
+      string: '{"result":["ffc5547f-b515-4004-bdbf-3d1be2019e33"],"id":"5458284666331215","version":"1.1"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '91'
+      Content-Type:
+      - application/json
+      Server:
+      - Jetty(7.0.0.v20091005)
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"method": "DataFileUtil._check_job", "params": ["ffc5547f-b515-4004-bdbf-3d1be2019e33"],
+      "version": "1.1", "id": "587140274391313"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '132'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.0.0.87:53316/
+  response:
+    body:
+      string: '{"result":[{"result":[{"shock_id":"320d5ee5-f94d-4931-8b36-f1e2b37c1aca","handle":null,"node_file_name":"DsrA.test.png","size":144184}],"finished":1}],"id":"5458284666331215","version":"1.1"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '191'
+      Content-Type:
+      - application/json
+      Server:
+      - Jetty(7.0.0.v20091005)
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"method": "DataFileUtil._file_to_shock_submit", "params": [{"file_path":
+      "/kb/module/work/tmp/20240801_204739/output/DsrA.test.pdf", "make_handle": 0}],
+      "version": "1.1", "id": "7614340402552046", "context": {"service_ver": "release"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '236'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.0.0.87:53316/
+  response:
+    body:
+      string: '{"result":["71ee0787-3ebf-4998-b74e-b45598b2a9a2"],"id":"7614340402552046","version":"1.1"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '91'
+      Content-Type:
+      - application/json
+      Server:
+      - Jetty(7.0.0.v20091005)
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"method": "DataFileUtil._check_job", "params": ["71ee0787-3ebf-4998-b74e-b45598b2a9a2"],
+      "version": "1.1", "id": "06999889012776506"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '134'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.0.0.87:53316/
+  response:
+    body:
+      string: '{"result":[{"result":[{"shock_id":"fca20e72-da80-47f2-88cc-a3dff97a1300","handle":null,"node_file_name":"DsrA.test.pdf","size":14702}],"finished":1}],"id":"7614340402552046","version":"1.1"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '190'
+      Content-Type:
+      - application/json
+      Server:
+      - Jetty(7.0.0.v20091005)
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"method": "DataFileUtil._file_to_shock_submit", "params": [{"file_path":
+      "/kb/module/work/tmp/20240801_204739/output_html", "make_handle": 0, "pack":
+      "zip"}], "version": "1.1", "id": "02987731357593537", "context": {"service_ver":
+      "release"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '243'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.0.0.87:53316/
+  response:
+    body:
+      string: '{"result":["b1a6f733-0b9d-4169-9b5f-e5426ccfa924"],"id":"02987731357593537","version":"1.1"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '92'
+      Content-Type:
+      - application/json
+      Server:
+      - Jetty(7.0.0.v20091005)
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"method": "DataFileUtil._check_job", "params": ["b1a6f733-0b9d-4169-9b5f-e5426ccfa924"],
+      "version": "1.1", "id": "36096032992553073"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '134'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.0.0.87:53316/
+  response:
+    body:
+      string: '{"result":[{"result":[{"shock_id":"700bafb7-a5a2-4d28-b554-f0ada3c3bf22","handle":null,"node_file_name":"output_html.zip","size":129493}],"finished":1}],"id":"02987731357593537","version":"1.1"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '194'
+      Content-Type:
+      - application/json
+      Server:
+      - Jetty(7.0.0.v20091005)
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"method": "KBaseReport._create_extended_report_submit", "params": [{"objects_created":
+      [{"ref": "test_kb_fasttree_20240801_204739/DsrA.test", "description": "DsrA.test
+      Tree"}], "message": "", "direct_html": "", "direct_html_link_index": 0, "file_links":
+      [{"shock_id": "99ba0c69-648d-479c-8214-83f6bec5670f", "name": "DsrA.test.newick",
+      "label": "DsrA.test NEWICK"}, {"shock_id": "8bae4311-fbca-4e64-bc0e-6a886949403b",
+      "name": "DsrA.test-labels.newick", "label": "DsrA.test NEWICK (with labels)"},
+      {"shock_id": "320d5ee5-f94d-4931-8b36-f1e2b37c1aca", "name": "DsrA.test.png",
+      "label": "DsrA.test PNG"}, {"shock_id": "fca20e72-da80-47f2-88cc-a3dff97a1300",
+      "name": "DsrA.test.pdf", "label": "DsrA.test PDF"}], "html_links": [{"shock_id":
+      "700bafb7-a5a2-4d28-b554-f0ada3c3bf22", "name": "DsrA.test.html", "label": "DsrA.test
+      HTML"}], "workspace_name": "test_kb_fasttree_20240801_204739", "report_object_name":
+      "blast_report_20240801_204739"}], "version": "1.1", "id": "7678344637684613",
+      "context": {"service_ver": "release"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1025'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.0.0.87:53316/
+  response:
+    body:
+      string: '{"result":["6da15d28-1c84-465e-9189-3474445240ee"],"id":"7678344637684613","version":"1.1"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '91'
+      Content-Type:
+      - application/json
+      Server:
+      - Jetty(7.0.0.v20091005)
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"method": "KBaseReport._check_job", "params": ["6da15d28-1c84-465e-9189-3474445240ee"],
+      "version": "1.1", "id": "8195215116457798"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '132'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.0.0.87:53316/
+  response:
+    body:
+      string: '{"result":[{"result":[{"ref":"76213/3/1","name":"blast_report_20240801_204739"}],"finished":1}],"id":"7678344637684613","version":"1.1"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '136'
+      Content-Type:
+      - application/json
+      Server:
+      - Jetty(7.0.0.v20091005)
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"method": "Workspace.get_objects", "params": [[{"ref": "76213/3/1"}]],
+      "version": "1.1", "id": "37695047564903605"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '116'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: https://ci.kbase.us/services/ws
+  response:
+    body:
+      string: '{"version":"1.1","result":[[{"data":{"direct_html":"","direct_html_link_index":0,"file_links":[{"URL":"https://ci.kbase.us/services/shock-api/node/99ba0c69-648d-479c-8214-83f6bec5670f","description":null,"handle":"KBH_734281","label":"DsrA.test
+        NEWICK","name":"DsrA.test.newick"},{"URL":"https://ci.kbase.us/services/shock-api/node/8bae4311-fbca-4e64-bc0e-6a886949403b","description":null,"handle":"KBH_734282","label":"DsrA.test
+        NEWICK (with labels)","name":"DsrA.test-labels.newick"},{"URL":"https://ci.kbase.us/services/shock-api/node/320d5ee5-f94d-4931-8b36-f1e2b37c1aca","description":null,"handle":"KBH_734283","label":"DsrA.test
+        PNG","name":"DsrA.test.png"},{"URL":"https://ci.kbase.us/services/shock-api/node/fca20e72-da80-47f2-88cc-a3dff97a1300","description":null,"handle":"KBH_734284","label":"DsrA.test
+        PDF","name":"DsrA.test.pdf"}],"html_links":[{"URL":"https://ci.kbase.us/services/shock-api/node/700bafb7-a5a2-4d28-b554-f0ada3c3bf22","description":null,"handle":"KBH_734285","label":"DsrA.test
+        HTML","name":"DsrA.test.html"}],"html_window_height":null,"objects_created":[{"description":"DsrA.test
+        Tree","ref":"76213/2/1"}],"summary_window_height":null,"text_message":"","warnings":[]},"info":[3,"blast_report_20240801_204739","KBaseReport.Report-3.0","2024-08-01T20:48:16+0000",1,"ialarmedalien",76213,"test_kb_fasttree_20240801_204739","a62d03c152a3735b47496533071b0d41",1163,{"Size(characters)":"0","Objects
+        Created":"1","Warnings":"0"}],"path":["76213/3/1"],"provenance":[{"time":"2024-08-01T20:47:38+0000","epoch":1722545258000,"service":"kb_fasttree","service_ver":"local-dev","method":"run_local_tests","method_params":[],"input_ws_objects":[],"resolved_ws_objects":[],"intermediate_incoming":[],"intermediate_outgoing":[],"external_data":[],"subactions":[{"name":"kb_fasttree","ver":"local-dev","code_url":"https://localhost","commit":"local-docker-image"},{"name":"DataFileUtil","ver":"0.2.1-release","code_url":"https://github.com/kbaseapps/DataFileUtil","commit":"0d855560a37f8787ab3bb67e464b9c94b299764e"},{"name":"KBaseReport","ver":"3.2.1-release","code_url":"https://github.com/kbaseapps/KBaseReport","commit":"b8bb470a4c88d65230e525db48d6a3730069185d"}],"custom":{},"description":"KBase
+        SDK method run via the KBase Execution Engine"}],"creator":"ialarmedalien","orig_wsid":76213,"created":"2024-08-01T20:48:15+0000","epoch":1722545295978,"refs":["76213/2/1"],"copy_source_inaccessible":0,"extracted_ids":{"handle":["KBH_734284","KBH_734285","KBH_734282","KBH_734283","KBH_734281"]}}]]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 8ac8b0415dfacecd-SJC
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 01 Aug 2024 20:48:20 GMT
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=HDwrcF0YjEV5cSXJuGF2gAjzbk9KPLJAp_WZuKNdW7o-1722545300-1.0.1.1-eHJfhXVRQV1BeX.6H.MYgdE_gb.eC3a3NFMF6MtJ1Ub.Cheh.8fEUYbGuVhjfP5wE4EwV7QXsNxwJF9PRqqilA;
+        path=/; expires=Thu, 01-Aug-24 21:18:20 GMT; domain=.kbase.us; HttpOnly; Secure;
+        SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '2516'
+    status:
+      code: 200
+      message: ''
+- request:
+    body: '{"method": "Workspace.get_object_info_new", "params": [{"objects": [{"ref":
+      "76213/2/1"}]}], "version": "1.1", "id": "0210972314640665"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '136'
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: https://ci.kbase.us/services/ws
+  response:
+    body:
+      string: '{"version":"1.1","result":[[[2,"DsrA.test","KBaseTrees.Tree-1.2","2024-08-01T20:47:40+0000",1,"ialarmedalien",76213,"test_kb_fasttree_20240801_204739","79b3b138a032f398801ff79f8eb4940e",2033,null]]]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - authorization
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 8ac8b043390ece90-SJC
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 01 Aug 2024 20:48:21 GMT
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=YNdEDqIS77aSQMkXVRzymB0DDCiopg0LHbYVg_l84fk-1722545301-1.0.1.1-heEKfnvKxmpHQLgjSL2tKA4PeKt4o8mfagJb1gv_v.gkcgew6KZaMFCTGulRZazjD0Vjcb0WV5XtDPZzZOjVkw;
+        path=/; expires=Thu, 01-Aug-24 21:18:21 GMT; domain=.kbase.us; HttpOnly; Secure;
+        SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '199'
+    status:
+      code: 200
+      message: ''
+version: 1
