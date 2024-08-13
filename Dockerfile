@@ -1,4 +1,3 @@
-# FROM kbase/sdkpython:3.8.10
 FROM python:3.12-bookworm
 LABEL maintainer="KBase Developers [engage@kbase.us]"
 
