@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. /kb/deployment/user-env.sh
-
 python ./scripts/prepare_deploy_cfg.py ./deploy.cfg ./work/config.properties
 
 if [ -f ./work/token ] ; then
@@ -16,13 +14,11 @@ elif [ "${1}" = "test" ] ; then
 elif [ "${1}" = "async" ] ; then
 #  sh ./scripts/run_async.sh
   xvfb-run bash ./scripts/run_async.sh
-elif [ "${1}" = "init" ] ; then
-  echo "Initialize module"
 elif [ "${1}" = "bash" ] ; then
   bash
 elif [ "${1}" = "report" ] ; then
   export KB_SDK_COMPILE_REPORT_FILE=./work/compile_report.json
   echo The compile report is available at /kb/module/work/compile_report.json
 else
-  echo Unknown
+  echo Unknown command
 fi

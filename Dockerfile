@@ -1,25 +1,26 @@
-FROM kbase/sdkpython:3.8.10
+# FROM kbase/sdkpython:3.8.10
+FROM python:3.12-bookworm
 LABEL maintainer="KBase Developers [engage@kbase.us]"
 
 WORKDIR /kb/module
-# Update
 RUN apt-get update \
     && apt-get upgrade -y && \
     update-ca-certificates && \
     apt-get -y install xvfb curl && \
+    # these are all needed by PyQt5
+    apt-get -y install libdbus-1-3 libxcb-keysyms1 libxcb-image0 libxkbcommon-x11-0 libxkbcommon0 libxcb-icccm4 libxcb-image0 libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 && \
+    apt-get clean && \
     # Install FastTree
     mkdir -p /kb/module/FastTree/bin && \
     cd /kb/module/FastTree/bin && \
     curl -o FastTree http://www.microbesonline.org/fasttree/FastTree && \
     chmod 555 FastTree && \
-    pip install --upgrade pip && \
-    # install the python requirements
-    # Note: You must use PyQt5==5.11.3 on debian
-    pip install ete3==3.1.2 PyQt5==5.11.3 numpy==1.23.1 pytest coverage pytest-cov vcrpy
+    pip install --upgrade pip
 
 COPY ./ /kb/module
-
-RUN mkdir -p /kb/module/work && \
+# install the python requirements
+RUN pip install -r requirements.txt && \
+    mkdir -p /kb/module/work && \
     chmod -R a+rw /kb/module && \
     mv /kb/module/compile_report.json /kb/module/work/compile_report.json
 
