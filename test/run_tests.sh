@@ -16,5 +16,3 @@ pytest \
     --cov=/kb/module/lib \
     -vv \
     test
-
-echo "Finished tests!"
