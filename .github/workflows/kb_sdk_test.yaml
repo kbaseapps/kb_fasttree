@@ -18,7 +18,6 @@ jobs:
                     docker run -i -v /var/run/docker.sock:/var/run/docker.sock --entrypoint ls ghcr.io/kbase/kb_sdk_patch-develop:br-0.0.4-rc-1 -l /var/run/docker.sock|awk '{print $4}' > $HOME/.kbsdk.cache
                   fi
 
-
                   # ignore the exit code
                   docker run -i --rm -v $HOME:$HOME -u $(id -u) -w $(pwd) -v /var/run/docker.sock:/var/run/docker.sock  -e DUSER=$USER -e DSHELL=$SHELL --group-add $(cat $HOME/.kbsdk.cache) ghcr.io/kbase/kb_sdk_patch-develop:br-0.0.4-rc-1 test || true
 

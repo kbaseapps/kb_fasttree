@@ -10,11 +10,9 @@ export PYTHONPATH=$PYTHON_LIB_DIR:$PYTHONPATH
 
 # collect coverage data
 pytest \
-    -vv
-    --cov=$PYTHON_LIB_DIR \
     --cov-config=.coveragerc \
     --cov-report=html \
     --cov-report=xml \
+    --cov=/kb/module/lib \
+    -vv \
     test
-
-echo "Finished tests!"
