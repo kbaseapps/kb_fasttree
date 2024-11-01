@@ -10,5 +10,5 @@ pytest-recording==0.13.2
 requests==2.32.3
 ruff==0.5.7
 six==1.16.0
-vcrpy==6.0.1
+vcrpy==6.0.2
 uwsgi==2.0.26
