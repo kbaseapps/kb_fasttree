@@ -1,4 +1,4 @@
-FROM python:3.12-bookworm
+FROM python:3.13-bookworm
 LABEL maintainer="KBase Developers [engage@kbase.us]"
 
 WORKDIR /kb/module
